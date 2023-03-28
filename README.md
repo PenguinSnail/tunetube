@@ -1,4 +1,4 @@
-# TuneTube
+# TuneTube [![tests](https://github.com/PenguinSnail/tunetube/actions/workflows/tests.yml/badge.svg)](https://github.com/PenguinSnail/tunetube/actions/workflows/tests.yml)
 
 A music sharing forum developed for ITSC 3155 Software Engineering
 
