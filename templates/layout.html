@@ -4,28 +4,43 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <title>{% block title %}{% endblock %}</title>
+
         <link rel="stylesheet" href="static/css/styles.css" />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer" />
+
+        {% block head %}{% endblock %}
     </head>
 
     <body>
         <header>
             <h1>TuneTube</h1>
             <nav>
-                <ul>
-                    <li>
+                <div class="row-links">
+                    <div>
                         <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <a class="{% if editor_active %}active{% endif %}" href="/editor">Tune Editor</a>
-                    </li>
-                    <li>
+                    </div>
+                    <div>
                         <a class="{% if library_active %}active{% endif %}" href="/library">Tune Library</a>
-                    </li>
-                    <li id="account-link">
+                    </div>
+                    <span class="spacer"></span>
+                    <div class="account-link">
                         <a class="{% if account_active %}active{% endif %}" href="/account">Account</a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
+                <div class="menu-button">
+                    <i class="fa-solid fa-bars fa-lg"></i>
+                </div>
             </nav>
         </header>
 

@@ -8,8 +8,8 @@ html,
 body {
     margin: 0;
     padding: 0;
-    height: 100%;
 
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -19,9 +19,9 @@ body {
 :root {
     --eerie-color: #172121;
     --charcoal-color: #444544;
-    --gray-color: #7f7b82;
+    --gray1-color: #7f7b82;
     --coral-color: #ff7e47;
-    --lgray-color: #bfacb5;
+    --gray2-color: #bfacb5;
     --beige-color: #e5d0cc;
     --white-color: #f1f1f1;
     --purple-color: #7f7b82;
@@ -42,29 +42,49 @@ header {
     padding: 0.25rem 1rem;
 
     display: flex;
-    gap: 2rem;
     align-items: center;
+    gap: 2rem;
 }
 
 header h1 {
     margin: 0;
 }
 
-header nav ul {
-    list-style: none;
-    width: 100%;
+header nav,
+.row-links {
     display: flex;
+    align-items: center;
+    flex-grow: 1;
     gap: 1rem;
-
-    margin: 0;
-    padding: 0;
 }
 
-/*
-header nav #account-link {
-    justify-self: flex-end;
+.spacer {
+    flex-grow: 1;
 }
-*/
+
+/* Burger Button */
+
+nav .menu-button {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 750px) {
+    .row-links * {
+        display: none;
+    }
+
+    .row-links .spacer {
+        flex-grow: 0;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    nav .menu-button {
+        display: none;
+    }
+}
+
+/* Nav Link Colors */
 
 header nav a {
     color: white;
