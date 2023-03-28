@@ -1,4 +1,4 @@
-name: CI
+name: tests
 
 on:
   # Triggers on push to any branch and on pull requests for the "master" branch
@@ -11,7 +11,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
+  pytest:
     runs-on: ubuntu-latest
 
     steps:
