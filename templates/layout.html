@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="static/css/styles.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="static/styles.css">
-</head>
+    <body>
+        <header>
+            <h1>TuneTube</h1>
+            <nav>
+                <ul>
+                    <li>
+                        <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
+                    </li>
+                    <li>
+                        <a class="{% if editor_active %}active{% endif %}" href="/editor">Tune Editor</a>
+                    </li>
+                    <li>
+                        <a class="{% if library_active %}active{% endif %}" href="/library">Tune Library</a>
+                    </li>
+                    <li id="account-link">
+                        <a class="{% if account_active %}active{% endif %}" href="/account">Account</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-<body>
-    <header>
-        <h1>TuneTube</h1>
-        <nav>
-            <ul>
-                <li>
-                    <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
-                </li>
-                <li>
-                    <a class="{% if editor_active %}active{% endif %}" href="/editor">Tune Editor</a>
-                </li>
-                <li>
-                    <a class="{% if library_active %}active{% endif %}" href="/library">Tune Library</a>
-                </li>
-                <li id="account-link">
-                    <a class="{% if account_active %}active{% endif %}" href="/account">Account</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+        <main>
+            {% block body %}{% endblock %}
+        </main>
 
-    <main>
-        {% block body %}{% endblock %}
-    </main>
-
-    <footer>
-        <p>© TuneTube <span id="copy-year">2023</span></p>
-        <script>document.querySelector('#copy-year').textContent = (new Date()).getFullYear()</script>
-    </footer>
-</body>
-
+        <footer>
+            <p>© TuneTube <span id="copy-year">2023</span></p>
+            <script>
+                document.querySelector("#copy-year").textContent = new Date().getFullYear();
+            </script>
+        </footer>
+    </body>
 </html>

@@ -1,0 +1,15 @@
+semi: true
+singleQuote: false
+printWidth: 120
+bracketSameLine: true
+
+overrides:
+  - files:
+      - "*.html"
+    options:
+      parser: "jinja-template"
+  - files:
+      - "*.html"
+      - "*.css"
+    options:
+      tabWidth: 4
