@@ -109,3 +109,31 @@ footer {
     text-align: center;
     font-size: 0.8em;
 }
+
+.left-div {
+    width: 25%;
+    background: red;
+    height: 501px;
+    position: fixed;
+    left: 0;
+    top: 20;
+}
+
+.center-div {
+    background: yellow;
+    height: 501px;
+    margin-left: 25%;
+    margin-right: 25%;
+    top: 20;
+    position: absolute;
+}
+
+.right-div {
+    top: 20;
+    position: relative;
+    width: 25%;
+    background: green;
+    height: 501px;
+    position: fixed;
+    right: 0;
+}

@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block title %}TuneTube{% endblock %}
+{% block body %}
+    <!-- Container for user feed -->
+    <div id="master">
+        <div class="left-div"></div>
+        <div class="center-div">
+            {% for i in range(100) %}
+                {{ i }}
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet delectus dignissimos eligendi soluta
+                neque, saepe est id officia voluptas architecto, quia quos beatae? Nam sint a totam qui placeat.
+                Possimus?
+            {% endfor %}
+        </div>
+        <div class="right-div"></div>
+    </div>
+{% endblock %}
