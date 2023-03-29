@@ -1,0 +1,111 @@
+/* Reset ---------------------------- */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Colors --------------------------- */
+
+:root {
+    --eerie-color: #172121;
+    --charcoal-color: #444544;
+    --gray1-color: #7f7b82;
+    --coral-color: #ff7e47;
+    --gray2-color: #bfacb5;
+    --beige-color: #e5d0cc;
+    --white-color: #f1f1f1;
+    --purple-color: #7f7b82;
+}
+
+/* Fonts ---------------------------- */
+
+body {
+    font-family: sans-serif;
+}
+
+/* Header --------------------------- */
+
+header {
+    background-color: var(--charcoal-color);
+    color: white;
+
+    padding: 0.25rem 1rem;
+
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header nav,
+.row-links {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    gap: 1rem;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+/* Burger Button */
+
+nav .menu-button {
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 750px) {
+    .row-links * {
+        display: none;
+    }
+
+    .row-links .spacer {
+        flex-grow: 0;
+    }
+}
+
+@media only screen and (min-width: 750px) {
+    nav .menu-button {
+        display: none;
+    }
+}
+
+/* Nav Link Colors */
+
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+
+header nav a:hover,
+header nav a.active {
+    color: var(--coral-color);
+}
+
+/* Main ----------------------------- */
+
+main {
+    padding: 1rem;
+    flex: 1 0 auto;
+}
+
+/* Footer --------------------------- */
+
+footer {
+    text-align: center;
+    font-size: 0.8em;
+}
