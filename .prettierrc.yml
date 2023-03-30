@@ -11,5 +11,6 @@ overrides:
   - files:
       - "*.html"
       - "*.css"
+      - "*.js"
     options:
       tabWidth: 4
