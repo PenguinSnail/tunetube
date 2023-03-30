@@ -12,3 +12,8 @@ def index():
 @app.get("/landing_page")
 def landing_page():
     return render_template("landing_page.html")
+
+
+@app.get("/account")
+def account_page():
+    return render_template("account.html", account_active=True)
