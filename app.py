@@ -12,4 +12,3 @@ def index():
 @app.get("/account")
 def account_page():
     return render_template("account.html", account_active=True)
-
