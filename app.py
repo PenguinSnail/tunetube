@@ -14,12 +14,12 @@ def home_page():
     return render_template("pages/home_page.html", home_active=True)
 
 
-@app.get("/editor")
-def editor_page():
-    return render_template("pages/editor_page.html", editor_active=True)
+@app.get("/tunes/new")
+def new_page():
+    return render_template("pages/new_page.html", new_active=True)
 
 
-@app.get("/library")
+@app.get("/tunes")
 def library_page():
     return render_template("pages/library_page.html", library_active=True)
 
