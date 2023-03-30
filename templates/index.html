@@ -1,5 +1,18 @@
 {% extends 'layout.html' %}
 {% block title %}TuneTube{% endblock %}
 {% block body %}
-    <h1>Hello World!</h1>
+    <!-- Container for user feed -->
+    <div id="master">
+        <div class="left-div"></div>
+        <div class="center-div">
+            {% for i in range(100) %}
+                <div class="card">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet delectus dignissimos eligendi
+                    soluta neque, saepe est id officia voluptas architecto, quia quos beatae? Nam sint a totam qui
+                    placeat. Possimus?
+                </div>
+            {% endfor %}
+        </div>
+        <div class="right-div"></div>
+    </div>
 {% endblock %}
