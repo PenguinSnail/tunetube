@@ -19,6 +19,11 @@ def note_creation():
     return render_template("note_creation.html")
 
 
+@app.get("/library")
+def library():
+    return render_template("tune_library.html", home_active=True)
+
+
 @app.get("/account")
 def account_page():
     return render_template("account.html", account_active=True)
