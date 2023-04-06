@@ -8,5 +8,13 @@
     --gray2-color: #bfacb5;
     --beige-color: #e5d0cc;
     --white-color: #f1f1f1;
-    --purple-color: #7f7b82;
+    --purple-color: #674174;
 }
+
+/* ---------------------------------- */
+
+:root {
+    --header-height: 3.5rem;
+}
+
+/* ---------------------------------- */

@@ -8,7 +8,7 @@
         <title>{% block title %}{% endblock %}</title>
 
         <link rel="stylesheet" href="static/css/styles.css" />
-        <link rel="stylesheet" href="static/css/header.css" />
+        <link rel="stylesheet" href="static/css/layout.css" />
 
         <link
             rel="stylesheet"
@@ -31,10 +31,10 @@
                         <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
                     </div>
                     <div class="nav-link">
-                        <a class="{% if editor_active %}active{% endif %}" href="/editor">Tune Editor</a>
+                        <a class="{% if library_active %}active{% endif %}" href="/tunes">My Tunes</a>
                     </div>
                     <div class="nav-link">
-                        <a class="{% if library_active %}active{% endif %}" href="/library">Tune Library</a>
+                        <a class="{% if new_active %}active{% endif %}" href="/tunes/new">New Tune</a>
                     </div>
                     <span class="spacer"></span>
                     <div class="nav-link account-link">
