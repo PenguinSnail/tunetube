@@ -2,29 +2,30 @@
 .left-div {
     width: 25%;
     background: red;
+    opacity: 10%;
     height: 501px;
     position: fixed;
     left: 0;
-    top: 20;
+    top: 0;
 }
 
 .center-div {
-    /* background: yellow; */
-    height: 501px;
+    background: yellow;
+    width: 50%;
+    max-height: 100vh;
     margin-left: 25%;
     margin-right: 25%;
     top: 20;
-    position: absolute;
+    position: relative;
 }
 
 .right-div {
-    top: 20;
-    position: relative;
     width: 25%;
-    background: green;
+    opacity: 10%;
     height: 501px;
     position: fixed;
     right: 0;
+    top: 0;
 }
 
 /* card for each post on the home page */
