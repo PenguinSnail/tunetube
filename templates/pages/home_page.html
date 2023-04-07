@@ -2,17 +2,24 @@
 {% block title %}TuneTube{% endblock %}
 {% block body %}
     <!-- Container for user feed -->
-    <div id="master">
-        <div class="left-div"></div>
-        <div class="center-div">
-            {% for i in range(100) %}
-                <div class="card">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet delectus dignissimos eligendi
-                    soluta neque, saepe est id officia voluptas architecto, quia quos beatae? Nam sint a totam qui
-                    placeat. Possimus?
-                </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>name</th>
+                <th>song</th>
+                <th>creator</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in post %}
+                <tr>
+                    <td>{{ post.post_id }}</td>
+                    <td>{{ post.post_name }}</td>
+                    <td>{{ post.song }}</td>
+                    <td>{{ post.creator }}</td>
+                </tr>
             {% endfor %}
-        </div>
-        <div class="right-div"></div>
-    </div>
+        </tbody>
+    </table>
 {% endblock %}
