@@ -2,24 +2,4 @@
 {% block title %}TuneTube{% endblock %}
 {% block body %}
     <!-- Container for user feed -->
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>name</th>
-                <th>song</th>
-                <th>creator</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for post in post %}
-                <tr>
-                    <td>{{ post.post_id }}</td>
-                    <td>{{ post.post_name }}</td>
-                    <td>{{ post.song }}</td>
-                    <td>{{ post.creator }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 {% endblock %}
