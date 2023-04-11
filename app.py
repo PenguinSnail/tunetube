@@ -16,7 +16,22 @@ def home_page():
 
 @app.get("/tunes/new")
 def new_page():
-    return render_template("pages/new_page.html", new_active=True)
+    keys = [
+        {"frequency": 261.63, "type": "white"},
+        {"frequency": 277.18, "type": "black"},
+        {"frequency": 293.66, "type": "white"},
+        {"frequency": 311.13, "type": "black"},
+        {"frequency": 329.63, "type": "white"},
+        {"frequency": 349.23, "type": "white"},
+        {"frequency": 369.99, "type": "black"},
+        {"frequency": 392.00, "type": "white"},
+        {"frequency": 415.30, "type": "black"},
+        {"frequency": 440.00, "type": "white"},
+        {"frequency": 466.16, "type": "black"},
+        {"frequency": 493.88, "type": "white"},
+        {"frequency": 523.26, "type": "white"},
+    ]
+    return render_template("pages/new_page.html", new_active=True, keys=keys)
 
 
 @app.get("/tunes")

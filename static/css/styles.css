@@ -34,6 +34,15 @@ body {
     display: none;
 }
 
+.prevent-select {
+    /* Safari */
+    -webkit-user-select: none;
+    /* IE 10 and IE 11 */
+    -ms-user-select: none;
+    /* Standard syntax */
+    user-select: none;
+}
+
 /* Fonts ---------------------------- */
 
 body {
