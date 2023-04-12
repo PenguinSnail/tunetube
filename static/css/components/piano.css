@@ -1,0 +1,49 @@
+@import url("/static/css/vars.css");
+
+#keyboard {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+}
+
+#keyboard .key:first-child {
+    border-bottom-left-radius: 15px;
+}
+#keyboard .key:last-child {
+    border-bottom-right-radius: 15px;
+}
+
+.key {
+    border: 1px solid black;
+}
+
+.key.clickable {
+    cursor: pointer;
+}
+
+.key.white {
+    background-color: var(--white-color);
+    height: 100%;
+    width: 12.5%;
+    z-index: 0;
+}
+
+.key.black {
+    background-color: var(--eerie-color);
+    height: 60%;
+    width: 8%;
+    margin-inline: -4%;
+    z-index: 1;
+
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.key.white.active {
+    background-color: rgb(215, 215, 215);
+}
+.key.black.active {
+    background-color: rgb(71, 71, 71);
+}
