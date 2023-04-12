@@ -1,19 +1,38 @@
 {% extends 'layout.html' %}
 {% block title %}TuneTube{% endblock %}
 {% block body %}
+    <link rel="stylesheet" href="static/css/home-page.css" />
+
     <!-- Container for user feed -->
     <div id="master">
+        <!-- Empty Column -->
         <div class="left-div"></div>
+
+        <!-- Feed Column -->
         <div class="center-div">
-            {% for i in range(100) %}
-                <div class="card">
-                    <h1>Name of Song</h1>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet delectus dignissimos eligendi
-                    soluta neque, saepe est id officia voluptas architecto, quia quos beatae? Nam sint a totam qui
-                    placeat. Possimus?
-                </div>
+            {% for i in range(20) %}
+                <!-- Link to the Post -->
+                <a>
+                    <div class="card">
+                        <h1>Friend Song Title</h1>
+                        <h4>Friend Name</h4>
+                        <div></div>
+                        <p>Music player thingy</p>
+                        <p>&#128151;</p>
+                        <a href="" class="underline small-font">View more comments</a>
+                        <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
+                    </div>
+                </a>
             {% endfor %}
         </div>
-        <div class="right-div"></div>
+        <!-- Profile Column -->
+        <div class="right-div">
+            <!-- Link to your profile -->
+            <a>
+                <div>
+                    <h1>UserName!</h1>
+                </div>
+            </a>
+        </div>
     </div>
 {% endblock %}
