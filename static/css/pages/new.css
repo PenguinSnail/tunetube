@@ -1,0 +1,8 @@
+@import url("/static/css/vars.css");
+@import url("/static/css/components/piano.css");
+
+.keyboard-container {
+    padding: 2rem;
+    width: 80%;
+    height: 80%;
+}
