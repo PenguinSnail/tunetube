@@ -1,46 +1,47 @@
-CREATE TABLE IF NOT EXISTS PHOTOS(
-	photoID SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS photos(
+	id SERIAL PRIMARY KEY,
 	photo bytea
 );
 
 
-CREATE TABLE IF NOT EXISTS USERS(
-	userID SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users(
+ 	id SERIAL PRIMARY KEY,
 	username VARCHAR(15) NOT NULL,
 	pass VARCHAR(15) NOT NULL,
-	photoID int,
-	FOREIGN KEY (photoID) REFERENCES PHOTOS,
+	photo_id int,
+	FOREIGN KEY (photo_id) REFERENCES photos(id),
 	UNIQUE(username)
 );
 
 
-CREATE TABLE IF NOT EXISTS POSTS(
-	postID SERIAL PRIMARY KEY,
-	postName VARCHAR(15),
+CREATE TABLE IF NOT EXISTS posts(
+	id SERIAL PRIMARY KEY,
+	title VARCHAR(15),
 	song jsonb,
-	userID int,
-	FOREIGN KEY(userID) REFERENCES USERS
+	user_id int,
+	FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS POSTCOMMENTS(
-	postID int PRIMARY KEY REFERENCES POSTS,
-	userID int,
-	postedTime timestamp,
-	commentString VARCHAR(255),
-	FOREIGN KEY(userID) REFERENCES USERS
+CREATE TABLE IF NOT EXISTS postcomments(
+	id int,
+	posted_time timestamp,
+	comment_string VARCHAR(255),
+	post_id int,
+	FOREIGN KEY(post_id) REFERENCES posts(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS LIKES(
-	postID int PRIMARY KEY REFERENCES POSTS,
-	userID int,
-	FOREIGN KEY(userID) REFERENCES USERS
+CREATE TABLE IF NOT EXISTS likes(
+	post_id int,
+	user_id int,
+	FOREIGN KEY(post_id) REFERENCES posts(id),
+	FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-
-CREATE TABLE IF NOT EXISTS FOLLOWERS(
-	userID int PRIMARY KEY REFERENCES USERS,
-	follerID int,
-	FOREIGN KEY(follerID) REFERENCES USERS
+CREATE TABLE IF NOT EXISTS followers(
+	user_id int,
+	follower_id int,
+	FOREIGN KEY(user_id) REFERENCES users(id),
+	FOREIGN KEY(follower_id) REFERENCES users(id)
 );
