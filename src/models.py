@@ -11,7 +11,6 @@ class Posts(db.Model):
 
 
 class Users(db.Model):
-    user_id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15), nullable=False)
-    password = db.Column(db.String(15), nullable=False)
-    photoID = db.Column(db.Integer, db.ForeignKey("photoID"))
+    photo_id = db.Column(db.Integer, db.ForeignKey("photo_id"))

@@ -7,7 +7,6 @@ CREATE TABLE IF NOT EXISTS photos(
 CREATE TABLE IF NOT EXISTS users(
  	id SERIAL PRIMARY KEY,
 	username VARCHAR(15) NOT NULL,
-	pass VARCHAR(15) NOT NULL,
 	photo_id int,
 	FOREIGN KEY (photo_id) REFERENCES photos(id),
 	UNIQUE(username)
