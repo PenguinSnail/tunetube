@@ -25,7 +25,7 @@ db.init_app(app)
 
 @app.get("/landing")
 def landing_page():
-    return render_template("pages/landing_page.html")
+    return render_template("pages/landing_page.html", no_layout=True)
 
 
 @app.get("/")

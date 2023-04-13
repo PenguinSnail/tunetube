@@ -1,5 +1,47 @@
 {% extends 'layout.html' %}
 {% block title %}TuneTube{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/pages/landing.css" />
+{% endblock %}
 {% block body %}
-    <h1>Landing Page!</h1>
+    <div class="keyboard-container">
+        <div id="keyboard">
+            <div class="key white"></div>
+            <div class="key black"></div>
+            <div class="key white"></div>
+            <div class="key black"></div>
+            <div class="key white"></div>
+
+            <div class="key white"></div>
+            <div class="key black"></div>
+            <div class="key white"></div>
+            <div class="key black"></div>
+            <div class="key white"></div>
+            <div class="key black"></div>
+            <div class="key white"></div>
+            <div class="key white"></div>
+            <!-- 
+        <div class="key white can-hide"></div>
+        <div class="key black can-hide"></div>
+        <div class="key white can-hide"></div>
+        <div class="key black can-hide"></div>
+        <div class="key white can-hide"></div>
+
+        <div class="key white can-hide"></div>
+        <div class="key black can-hide"></div>
+        <div class="key white can-hide"></div>
+        <div class="key black can-hide"></div>
+        <div class="key white can-hide"></div>
+        <div class="key black can-hide"></div>
+        <div class="key white can-hide"></div>
+        <div class="key white can-hide"></div> -->
+        </div>
+        <div class="gradients">
+            
+        </div>
+    </div>
+    <div class="button-container">
+        <button type="button" class="btn btn-secondary">Login</button>
+        <button type="button" class="btn btn-success">Sign Up</button>
+    </div>
 {% endblock %}
