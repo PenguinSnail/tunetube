@@ -1,0 +1,20 @@
+/* Colors --------------------------- */
+
+:root {
+    --eerie-color: #172121;
+    --charcoal-color: #444544;
+    --gray1-color: #7f7b82;
+    --coral-color: #ff7e47;
+    --gray2-color: #bfacb5;
+    --beige-color: #e5d0cc;
+    --white-color: #f1f1f1;
+    --purple-color: #674174;
+}
+
+/* ---------------------------------- */
+
+:root {
+    --header-height: 3.5rem;
+}
+
+/* ---------------------------------- */
