@@ -1,0 +1,33 @@
+@import url("/static/css/vars.css");
+@import url("/static/css/components/piano.css");
+
+.keyboard-container {
+    position:relative;
+    width: 100%;
+    height: 30vh;
+}
+
+@media screen and (max-width: 500px) {
+    .keyboard-container div.can-hide {
+        display: none;
+    }
+}
+
+.gradients {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0,0,0,1));
+    height:100%;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    z-index: 2;
+}
+
+.button-container {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 70vh;
+    background-color: black;
+}

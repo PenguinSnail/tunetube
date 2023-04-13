@@ -1,8 +1,8 @@
-from src.models import db, Posts
-from flask import Flask, render_template
-
 import os
 from dotenv import load_dotenv
+
+from src.models import db, Posts
+from flask import Flask, render_template
 
 load_dotenv()
 
@@ -25,7 +25,7 @@ db.init_app(app)
 
 @app.get("/landing")
 def landing_page():
-    return render_template("pages/landing_page.html")
+    return render_template("pages/landing_page.html", no_layout=True)
 
 
 @app.get("/")
@@ -36,7 +36,22 @@ def home_page():
 
 @app.get("/tunes/new")
 def new_page():
-    return render_template("pages/new_page.html", new_active=True)
+    keys = [
+        {"frequency": 261.63, "type": "white"},
+        {"frequency": 277.18, "type": "black"},
+        {"frequency": 293.66, "type": "white"},
+        {"frequency": 311.13, "type": "black"},
+        {"frequency": 329.63, "type": "white"},
+        {"frequency": 349.23, "type": "white"},
+        {"frequency": 369.99, "type": "black"},
+        {"frequency": 392.00, "type": "white"},
+        {"frequency": 415.30, "type": "black"},
+        {"frequency": 440.00, "type": "white"},
+        {"frequency": 466.16, "type": "black"},
+        {"frequency": 493.88, "type": "white"},
+        {"frequency": 523.26, "type": "white"},
+    ]
+    return render_template("pages/new_page.html", new_active=True, keys=keys)
 
 
 @app.get("/tunes")
