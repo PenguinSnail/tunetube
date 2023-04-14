@@ -20,7 +20,10 @@ app.config[
 ] = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 app.config["SQLALCHEMY_ECHO"] = True
 
+
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 
 @app.get("/landing")
