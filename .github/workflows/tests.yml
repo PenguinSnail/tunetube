@@ -31,6 +31,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        ports:
+          - 5432:5432
 
     steps:
       - name: Checkout Repository
@@ -57,7 +59,7 @@ jobs:
         env:
           DB_USER: postgres
           DB_PASS: postgres
-          DB_HOST: postgres
+          DB_HOST: localhost
           DB_PORT: 5432
           DB_NAME: pytest
         run: pytest
