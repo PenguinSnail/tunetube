@@ -2,7 +2,7 @@
 @import url("/static/css/components/piano.css");
 
 .keyboard-container {
-    position:relative;
+    position: relative;
     width: 100%;
     height: 30vh;
 }
@@ -13,18 +13,18 @@
     }
 }
 
-.gradients {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0,0,0,1));
-    height:100%;
-    width:100%;
-    position:absolute;
-    bottom:0;
-    left:0;
+.gradient {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     z-index: 2;
 }
 
 .button-container {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 2rem;
