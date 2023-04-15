@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Posts
+from src.models import db, Post
 from flask import Flask, render_template
 
 load_dotenv()
@@ -20,7 +20,10 @@ app.config[
 ] = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 app.config["SQLALCHEMY_ECHO"] = True
 
+
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 
 @app.get("/landing")
@@ -30,8 +33,8 @@ def landing_page():
 
 @app.get("/")
 def home_page():
-    post = Posts.query.all()
-    return render_template("pages/home_page.html", home_active=True, post=post)
+    all_posts = Post.query.all()
+    return render_template("pages/home_page.html", home_active=True, posts=all_posts)
 
 
 @app.get("/tunes/new")
