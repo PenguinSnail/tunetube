@@ -32,20 +32,6 @@ def landing_page():
     return render_template("pages/landing_page.html", no_layout=True)
 
 
-<<<<<<< HEAD
-# get's usuer ID to create feed
-@app.get("/user_ID")
-def index(user_ID):
-    feed = post_repository_singleton.get_user_feed(user_ID)
-    return render_template("index.html", home_active=True, feed=feed)
-
-
-# gets a specific post from the feed
-@app.get("/post/<int:post_id>")
-def get_single_post(post_id):
-    single_post = post_repository_singleton.get_post_by_id(post_id)
-    return render_template("post.html", home_active=True, post=single_post)
-=======
 @app.get("/")
 def home_page():
     all_posts = Post.query.all()
@@ -80,4 +66,8 @@ def library_page():
 @app.get("/account")
 def account_page():
     return render_template("pages/account_page.html", account_active=True)
->>>>>>> 1905a9c46985776c1a6b007625d7562db3aad749
+
+@app.get("/post/<int:post_id>")
+def post_page(post_id):
+    post = post_repository_singleton.get_post(post_id)
+    return render_template("post.html", account_active=True, post=post)

@@ -18,15 +18,10 @@ packaging==23.0
 platformdirs==3.2.0
 pluggy==1.0.0
 pre-commit==3.2.1
-<<<<<<< HEAD
-pytest==7.2.2
-pytest-flask==1.2.0
-=======
 psycopg2==2.9.6
 pytest==7.2.2
 pytest-flask==1.2.0
 python-dotenv==1.0.0
->>>>>>> 1905a9c46985776c1a6b007625d7562db3aad749
 PyYAML==6.0
 SQLAlchemy==2.0.9
 tomli==2.0.1
