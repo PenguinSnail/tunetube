@@ -1,5 +1,20 @@
 {% extends 'layout.html' %}
 {% block title %}TuneTube{% endblock %}
-{% block body %}
+<!--Block to add css for home-page -->
+{% block head %}
     <link rel="stylesheet" href="static/css/home-page.css" />
+{% endblock %}
+{% block body %}
+    <h1>{{ post.getTitle() }}</h1>
+    <h4>{{ post.getUserID() }}</h4>
+    <div>
+        <p>Music player thingy</p>
+    </div>
+    <p>&#128151;</p>
+
+    {% for comment in comments %}
+        <h4>{{ comment.getUserID() }}</h4>
+        <h4>{{ comment.getComment() }}</h4>
+    {% endfor %}
+    <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
 {% endblock %}
