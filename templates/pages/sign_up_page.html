@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+{% block title %}TuneTube - Account{% endblock %}
+{% block body %}
+    <h1>Create Account</h1>
+
+    <!--TODO add profile image (maybe)-->
+
+    <h2>Sign-Up Below</h2>
+
+    <form>
+        <label for="name">Display name:</label><br />
+        <input type="text" id="name" name="name" placeholder="Your display name" /><br />
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" placeholder="Your email" /><br />
+        <input type="submit" value="Submit" />
+        <label for="password">Password</label><br />
+        <input type="password" id="password" name="password" placeholder="Create a strong password" /><br />
+        <label for="confirm_password">Confirm Password</label><br />
+        <input
+            type="password"
+            id="confirm_password"
+            name="confirm_password"
+            placeholder="Make sure the passwords match!" /><br />
+    </form>
+{% endblock %}

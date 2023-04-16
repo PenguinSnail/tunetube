@@ -1,8 +1,7 @@
 import os
 from dotenv import load_dotenv
-
 from src.models import db, Post
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, request
 
 load_dotenv()
 
@@ -65,3 +64,15 @@ def library_page():
 @app.get("/account")
 def account_page():
     return render_template("pages/account_page.html", account_active=True)
+
+
+@app.route("/account/register", methods=["GET", "POST"])
+def sign_up():
+    if request.method == "POST":  # actually making account
+        print(request.form.get("email"))
+        print(request.form.get("name"))
+        print(request.form.get("password"))
+        # for testing, remove above once done TODO please!
+        return redirect("/")
+    # get request
+    return render_template("pages/sign_up_page.html")
