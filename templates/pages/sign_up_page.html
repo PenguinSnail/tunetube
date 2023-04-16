@@ -7,12 +7,11 @@
 
     <h2>Sign-Up Below</h2>
 
-    <form>
+    <form action="/account/register" method="post">
         <label for="name">Display name:</label><br />
         <input type="text" id="name" name="name" placeholder="Your display name" /><br />
         <label for="email">Email:</label><br />
         <input type="email" id="email" name="email" placeholder="Your email" /><br />
-        <input type="submit" value="Submit" />
         <label for="password">Password</label><br />
         <input type="password" id="password" name="password" placeholder="Create a strong password" /><br />
         <label for="confirm_password">Confirm Password</label><br />
@@ -21,5 +20,6 @@
             id="confirm_password"
             name="confirm_password"
             placeholder="Make sure the passwords match!" /><br />
+        <input type="submit" value="Submit" />
     </form>
 {% endblock %}
