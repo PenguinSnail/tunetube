@@ -13,11 +13,11 @@
 
         <!-- Feed Column -->
         <div class="center-div">
-            {% for i in range(20) %}
+            {% for post in feed_list %}
                 <!-- Link to the Post -->
                 <a>
                     <div class="card">
-                        <h1>Friend Song Title</h1>
+                        <h1>{{ post.getDirector() }}</h1>
                         <h4>Friend Name</h4>
                         <div></div>
                         <p>Music player thingy</p>
