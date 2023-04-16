@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block title %}TuneTube · New Tune{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/pages/new.css" />
+{% endblock %}
+{% block body %}
+    <h1>New Tune</h1>
+    <div>
+        <label for="title">Tune Title</label>
+        <input id="title" name="title" type="text" placeholder="Tune Title" />
+    </div>
+    <div class="keyboard-container">
+        <div id="keyboard">
+            {% for key in keys %}
+                <div id="{{ key.frequency }}" class="key {{ key.type }} clickable"></div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

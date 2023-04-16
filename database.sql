@@ -1,47 +1,55 @@
-CREATE TABLE IF NOT EXISTS photos(
-	id SERIAL PRIMARY KEY,
-	photo bytea
+CREATE TABLE IF NOT EXISTS "photo" (
+    id    SERIAL PRIMARY KEY,
+    photo BYTEA
 );
 
 
-CREATE TABLE IF NOT EXISTS users(
- 	id SERIAL PRIMARY KEY,
-	username VARCHAR(15) NOT NULL,
-	pass VARCHAR(15) NOT NULL,
-	photo_id int,
-	FOREIGN KEY (photo_id) REFERENCES photos(id),
-	UNIQUE(username)
+CREATE TABLE IF NOT EXISTS "user" (
+    id       SERIAL      PRIMARY KEY,
+    username VARCHAR(20) NOT NULL UNIQUE,
+    photo_id INTEGER,
+
+    FOREIGN KEY (photo_id) REFERENCES "photo"(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS posts(
-	id SERIAL PRIMARY KEY,
-	title VARCHAR(15),
-	song jsonb,
-	user_id int,
-	FOREIGN KEY(user_id) REFERENCES users(id)
+CREATE TABLE IF NOT EXISTS "post" (
+    id      SERIAL       PRIMARY KEY,
+    title   VARCHAR(100) NOT NULL,
+    song    JSONB        NOT NULL,
+    user_id INTEGER      NOT NULL,
+
+    FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS postcomments(
-	id int,
-	posted_time timestamp,
-	comment_string VARCHAR(255),
-	post_id int,
-	FOREIGN KEY(post_id) REFERENCES posts(id)
+CREATE TABLE IF NOT EXISTS "comment" (
+    id        SERIAL    PRIMARY KEY,
+    post_time TIMESTAMP NOT NULL,
+    comment   TEXT      NOT NULL,
+    post_id   INTEGER   NOT NULL,
+    user_id   INTEGER   NOT NULL,
+
+    FOREIGN KEY (post_id) REFERENCES "post"(id),
+    FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
 
-CREATE TABLE IF NOT EXISTS likes(
-	post_id int,
-	user_id int,
-	FOREIGN KEY(post_id) REFERENCES posts(id),
-	FOREIGN KEY(user_id) REFERENCES users(id)
+CREATE TABLE IF NOT EXISTS "liked_by" (
+    post_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+
+    PRIMARY KEY (post_id, user_id),
+    FOREIGN KEY (post_id) REFERENCES "post"(id),
+    FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
-CREATE TABLE IF NOT EXISTS followers(
-	user_id int,
-	follower_id int,
-	FOREIGN KEY(user_id) REFERENCES users(id),
-	FOREIGN KEY(follower_id) REFERENCES users(id)
+
+CREATE TABLE IF NOT EXISTS "followed_by" (
+    user_id     INTEGER NOT NULL,
+    follower_id INTEGER NOT NULL,
+
+    PRIMARY KEY (user_id, follower_id),
+    FOREIGN KEY (user_id)     REFERENCES "user"(id),
+    FOREIGN KEY (follower_id) REFERENCES "user"(id)
 );

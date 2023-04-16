@@ -8,6 +8,9 @@
         <title>{% block title %}{% endblock %}</title>
 
         <link rel="stylesheet" href="static/css/styles.css" />
+        {% if not no_layout %}
+            <link rel="stylesheet" href="static/css/layout.css" />
+        {% endif %}
 
         <link
             rel="stylesheet"
@@ -17,42 +20,49 @@
             referrerpolicy="no-referrer" />
 
         {% block head %}{% endblock %}
+
+        <script src="/static/js/mobile-nav.js" defer></script>
     </head>
 
-    <body>
-        <header>
-            <h1>TuneTube</h1>
-            <nav>
-                <div class="row-links">
-                    <div>
-                        <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
-                    </div>
-                    <div>
-                        <a class="{% if editor_active %}active{% endif %}" href="/editor">Tune Editor</a>
-                    </div>
-                    <div>
-                        <a class="{% if library_active %}active{% endif %}" href="/library">Tune Library</a>
+    <body class="flex-column">
+        {% if not no_layout %}
+            <header class="flex-row">
+                <h1>TuneTube</h1>
+                <nav class="flex-row">
+                    <div class="flex-row nav-links-container">
+                        <div class="nav-link">
+                            <a class="{% if home_active %}active{% endif %}" href="/">Home</a>
+                        </div>
+                        <div class="nav-link">
+                            <a class="{% if library_active %}active{% endif %}" href="/tunes">My Tunes</a>
+                        </div>
+                        <div class="nav-link">
+                            <a class="{% if new_active %}active{% endif %}" href="/tunes/new">New Tune</a>
+                        </div>
+                        <span class="spacer"></span>
+                        <div class="nav-link account-link">
+                            <a class="{% if account_active %}active{% endif %}" href="/account">Account</a>
+                        </div>
                     </div>
                     <span class="spacer"></span>
-                    <div class="account-link">
-                        <a class="{% if account_active %}active{% endif %}" href="/account">Account</a>
+                    <div class="menu-button">
+                        <i class="fa-solid fa-bars fa-lg"></i>
                     </div>
-                </div>
-                <div class="menu-button">
-                    <i class="fa-solid fa-bars fa-lg"></i>
-                </div>
-            </nav>
-        </header>
+                </nav>
+            </header>
+        {% endif %}
 
         <main>
             {% block body %}{% endblock %}
         </main>
 
-        <footer>
-            <p>© TuneTube <span id="copy-year">2023</span></p>
-            <script>
-                document.querySelector("#copy-year").textContent = new Date().getFullYear();
-            </script>
-        </footer>
+        {% if not no_layout %}
+            <footer>
+                <p>© TuneTube <span id="copy-year">2023</span></p>
+                <script>
+                    document.querySelector("#copy-year").textContent = new Date().getFullYear();
+                </script>
+            </footer>
+        {% endif %}
     </body>
 </html>
