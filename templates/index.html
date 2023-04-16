@@ -13,9 +13,9 @@
 
         <!-- Feed Column -->
         <div class="center-div">
-            {% for post in feed_list %}
+            {% for post in feed %}
                 <!-- Link to the Post -->
-                <a>
+                <a href="/post/{{ post.post_id }}">
                     <div class="card">
                         <h1>{{ post.getTitle() }}</h1>
                         <h4>{{ post.getUserID() }}</h4>
