@@ -23,7 +23,7 @@
     position: fixed;
     right: 0;
     top: 0;
-    background-color: aquamarine;
+
 }
 
 /* card for each post on the home page */
@@ -33,7 +33,7 @@ div.card {
     padding: 5%;
     background: #f1f1f1;
     border-radius: 10px;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
 }
 
 .comment-box {

@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post
+from src.models import db, Post,User
 from flask import Flask, render_template
 from src.repositories.post_repository import post_repository_singleton
 
@@ -34,8 +34,9 @@ def landing_page():
 
 @app.get("/")
 def home_page():
-    all_posts = Post.query.all()
-    return render_template("pages/home_page.html", home_active=True, posts=all_posts)
+    posts = Post.query.all()
+    users = User.query.all()
+    return render_template("pages/home_page.html", home_active=True, posts=posts,users=users)
 
 
 @app.get("/tunes/new")

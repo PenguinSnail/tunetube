@@ -21,13 +21,56 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(VARCHAR(20), nullable=False)
     photo_id = db.Column(INTEGER, db.ForeignKey("photo.id"))
+    
+     # Constructor
+    def __init__(self,username,photo_id) -> None:
+        self.username = username
+        self.photo_id = photo_id
 
+    # Getters and Setters
+    def getUsername(self):
+        return self.username
+    
+    def getPhotoID(self):
+        return self.photo_id
+    
+    def setUsername(self,username):
+        self.username = username
+    
+    def setUsername(self,photo_id):
+        self.photo_id = photo_id
+    
 
 class Post(db.Model):
     id = db.Column(INTEGER, primary_key=True)
     title = db.Column(VARCHAR(100), nullable=False)
     song = db.Column(JSONB, nullable=False)
     user_id = db.Column(INTEGER, db.ForeignKey("user.id"), nullable=False)
+    
+    # Constructor
+    def __init__(self,title,song,user_id) -> None:
+        self.title = title
+        self.song = song
+        self.user_id = user_id
+
+    # Getters and Setters
+    def getTitle(self):
+        return self.title
+    
+    def getSong(self):
+        return self.song
+    
+    def getUserID(self):
+        return self.user_id
+
+    def setTitle(self, title):
+        self.tile = title
+    
+    def setSong(self,song):
+        self.song = song
+    
+    def setUserID(self,user_id):
+        self.user_id = user_id
 
 
 class Comment(db.Model):
