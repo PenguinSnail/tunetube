@@ -6,7 +6,8 @@
 {% endblock %}
 {% block body %}
     <h1>{{ post.getTitle() }}</h1>
-    <h4>{{ post.getUserID() }}</h4>
+    <!--Link to the account page of the owner of post-->
+    <a href="/post/{{ post.post_id }}"><h4>{{ post.getUserID() }}</h4></a>
     <div>
         <p>Music player thingy</p>
     </div>

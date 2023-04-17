@@ -70,4 +70,5 @@ def account_page():
 @app.get("/post/<int:post_id>")
 def post_page(post_id):
     post = post_repository_singleton.get_post(post_id)
-    return render_template("post.html", account_active=True, post=post)
+    comments = post_repository_singleton.get_comments(post_id)
+    return render_template("post.html", account_active=True, post=post, comments=comments)
