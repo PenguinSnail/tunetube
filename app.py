@@ -1,11 +1,13 @@
 import os
 from dotenv import load_dotenv
 from src.models import db, Post
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, abort
+from flask_bcrypt import Bcrypt
 
 load_dotenv()
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 db_user = os.getenv("DB_USER")
 db_pass = os.getenv("DB_PASS")
@@ -69,10 +71,21 @@ def account_page():
 @app.route("/account/register", methods=["GET", "POST"])
 def sign_up():
     if request.method == "POST":  # actually making account
-        print(request.form.get("email"))
-        print(request.form.get("name"))
-        print(request.form.get("password"))
-        # for testing, remove above once done TODO please!
+        name = request.form.get("name")
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        if not password or not email or not name or not confirm_password:
+            abort(400)
+
+        if password != confirm_password:
+            abort(400)
+        # all fields filled out
+
+        hashed_password = bcrypt.generate_password_hash(password).decode()
+        print(hashed_password)
+        # I have to print it or one of the git hooks freaks out since it's unused for now
         return redirect("/")
     # get request
     return render_template("pages/sign_up_page.html")
