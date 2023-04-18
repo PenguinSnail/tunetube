@@ -44,3 +44,22 @@ div.card {
 .small-font {
     font-size: 12px;
 }
+
+/* code for button format */
+
+.like-btn {
+    background-color: transparent;
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    cursor: pointer;
+    user-select: none;
+}
+
+
+.liked::after{
+    content: "💖" !important;
+}
+.unliked::after{
+    content: "💔" !important;
+}

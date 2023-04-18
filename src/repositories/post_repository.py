@@ -1,15 +1,30 @@
-from src.models import Post,Comment, db
+from src.models import Post,Comment,User, LikedBy, db
 
-
-class PostRepository:
-    def get_post(self,id):
-        post = Post.query.filer(Post.id.contains(id))
-        return post
+class SingularPostInfo:
+    def __init__(self, post, comments, likes) -> None:
+        self.post = post
+        self.comments = comments
+        self.likes = likes
+        
+    def getTitle(self):
+        return self.post.getTitle()
     
-    def get_comments(self,post_id):
-        comments = Comment.query.filer(Comment.post_id.contains(post_id))
-        comments.sort()
-        return comments
+    def getUsername(self):
+        return self.post.getUsername()
+    
+    def getComments(self):
+        return self.comments
+    
+class PostRepository:
+    def get_post_info(self,post_id):
+        post =  Post.query.filter_by(id = post_id).first()
+        comments =  Comment.query.filter_by(post_id = post_id)
+        likes =  LikedBy.query.filter_by(post_id=post_id)
+        likeCount = likes.count()
+        
+        return SingularPostInfo(post, comments, likeCount)
+
+
 
 # Singleton to be used in other modules
 post_repository_singleton = PostRepository()

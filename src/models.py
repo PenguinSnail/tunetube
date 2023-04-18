@@ -11,7 +11,11 @@ from sqlalchemy.dialects.postgresql import (
 
 db = SQLAlchemy()
 
+class sharedMethods():
+    def getUsername(self):
+        return User.query.filter_by(id = self.user_id).first()
 
+    
 class Photo(db.Model):
     id = db.Column(INTEGER, primary_key=True)
     photo = db.Column(BYTEA, nullable=False)
@@ -41,7 +45,7 @@ class User(db.Model):
         self.photo_id = photo_id
     
 
-class Post(db.Model):
+class Post(db.Model,sharedMethods):
     id = db.Column(INTEGER, primary_key=True)
     title = db.Column(VARCHAR(100), nullable=False)
     song = db.Column(JSONB, nullable=False)
@@ -54,6 +58,9 @@ class Post(db.Model):
         self.user_id = user_id
 
     # Getters and Setters
+    def getID(self):
+        return self.id
+    
     def getTitle(self):
         return self.title
     
@@ -62,7 +69,7 @@ class Post(db.Model):
     
     def getUserID(self):
         return self.user_id
-
+    
     def setTitle(self, title):
         self.tile = title
     
@@ -73,13 +80,39 @@ class Post(db.Model):
         self.user_id = user_id
 
 
-class Comment(db.Model):
+class Comment(db.Model,sharedMethods):
     id = db.Column(INTEGER, primary_key=True)
     post_time = db.Column(TIMESTAMP, nullable=False)
     comment = db.Column(TEXT, nullable=False)
     post_id = db.Column(INTEGER, db.ForeignKey("post.id"), nullable=False)
     user_id = db.Column(INTEGER, db.ForeignKey("user.id"), nullable=False)
-
+    
+    def getID(self):
+        return self.id
+    
+    def getPost_Time(self):
+        return self.post_time 
+    
+    def setPost_Time(self, time):
+        self.post_time = time
+        
+    def getComment(self):
+        return self.comment
+    
+    def setComment(self, comment):
+        self.comment = comment
+    
+    def getPostID(self):
+        return self.post_id
+    
+    def setPostID(self, id):
+        self.post_id = id
+    
+    def getUserID(self):
+        return self.post_id
+    
+    def setUserID(self, id):
+        self.user_id = id
 
 class LikedBy(db.Model):
     user_id = db.Column(

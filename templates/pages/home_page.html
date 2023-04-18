@@ -2,10 +2,13 @@
 {% block title %}
     TuneTube
 {% endblock %}
+
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
 {% endblock %}
+
 {% block body %}
+
     <!-- Container for user feed -->
     <div id="master">
         <!-- Empty Column -->
@@ -16,16 +19,21 @@
             {% for post in posts %}
                 <!-- Link to the Post -->
                 <div class="card">
-                    <h2>{{ post.getTitle() }}</h2>
-                    </a>
-                    <h4>{{post.getUserID()}}</h4>
+                    <!-- Post Title -->
+                    <h2>{{post.getTitle()}}</h2>
+                    <!-- Post Creator -->
+                    <h4>{{ post.getUsername()}}</h4>
+                    <!-- Music Player -->
                     <div>
                         <p>Music player thingy</p>
+
+                        <!-- Shows if the user likes the post -->
+                        <div class = "like-btn unliked liked"></div>
+
                     </div>
-                    <p>&#128151;</p>
-                    <a href="/post/{{ post.post_id }}" class ="underline small-font">View more comments</a>
+                   
+                    <a href="/post/{{ post.getID() }}" class ="underline small-font">View more comments</a>
                     <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
-                    </a>
                 </div>
 
             {% endfor %}
