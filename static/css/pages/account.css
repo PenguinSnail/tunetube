@@ -2,17 +2,21 @@
 .user-container {
     display: flex;
     background-color: var(--gray1-color);
+    border-radius: 6px;
     width: 25%;
+    box-shadow: 5px 5px 5px var(--charcoal-color);
 }
 
 .account-name {
     color: var(--white-color);
     margin-left: 10px;
+    text-shadow: 2px 2px 2px;
 }
 .profile-photo {
     height: 100px;
     width: 100px;
 
-    margin-left: 10px;
+    margin: 10px;
+    padding-bottom: 10px;
     object-fit: contain;
 }
