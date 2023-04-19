@@ -21,6 +21,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(VARCHAR(20), nullable=False)
     photo_id = db.Column(INTEGER, db.ForeignKey("photo.id"))
+    password = db.Column(VARCHAR(127), nullable=False)
 
 
 class Post(db.Model):

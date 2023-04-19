@@ -3,12 +3,14 @@ CREATE TABLE IF NOT EXISTS "photo" (
     photo BYTEA
 );
 
+ALTER TABLE IF EXISTS "user"
+ADD COLUMN IF NOT EXISTS password VARCHAR(127) NOT NULL;
 
 CREATE TABLE IF NOT EXISTS "user" (
     id       SERIAL      PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
     photo_id INTEGER,
-
+    password VARCHAR(127) NOT NULL,
     FOREIGN KEY (photo_id) REFERENCES "photo"(id)
 );
 
