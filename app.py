@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post
+from src.models import db, Post, User
 from flask import Flask, render_template
 
 load_dotenv()
@@ -18,7 +18,7 @@ db_name = os.getenv("DB_NAME")
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
-app.config["SQLALCHEMY_ECHO"] = True
+# app.config["SQLALCHEMY_ECHO"] = True
 
 
 db.init_app(app)
@@ -64,4 +64,9 @@ def library_page():
 
 @app.get("/account")
 def account_page():
-    return render_template("pages/account_page.html", account_active=True)
+    test_user = User.query.filter_by(id=1).first()
+    test_user = test_user.username
+
+    return render_template(
+        "pages/account_page.html", account_active=True, test_user=test_user
+    )
