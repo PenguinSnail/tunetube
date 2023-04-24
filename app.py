@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from src.models import db, Post, User
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
 
 load_dotenv()
 
@@ -70,3 +70,8 @@ def account_page():
     return render_template(
         "pages/account_page.html", account_active=True, test_user=test_user
     )
+
+
+@app.post("/update_account")
+def update_account_page():
+    return redirect("/account")
