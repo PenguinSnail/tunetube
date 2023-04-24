@@ -4,11 +4,9 @@ from src.models import db, Post, User
 from flask import Flask, render_template, redirect, request, abort
 from flask_bcrypt import Bcrypt
 
+
+# Environment variables
 load_dotenv()
-
-app = Flask(__name__)
-bcrypt = Bcrypt(app)
-
 db_user = os.getenv("DB_USER")
 db_pass = os.getenv("DB_PASS")
 db_host = os.getenv("DB_HOST")
@@ -16,14 +14,22 @@ db_port = os.getenv("DB_PORT")
 db_name = os.getenv("DB_NAME")
 
 
+# App initialization
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+
+# Database connection
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
 app.config["SQLALCHEMY_ECHO"] = True
 
 
+# Database initialization
 db.init_app(app)
 with app.app_context():
+    # create tables if they don't already exist
     db.create_all()
 
 
