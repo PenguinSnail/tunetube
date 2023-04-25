@@ -1,15 +1,13 @@
 import Note from "./classes/Note.js";
 import Key from "./classes/Key.js";
 import Recorder from "./classes/Recorder.js";
-import MouseState from "./classes/MouseState.js";
 
 const context = new AudioContext();
 const recorder = new Recorder();
-const mouse = new MouseState();
 
 // Get all our key elements and attach new Key objects
 Array.from(document.querySelectorAll(".key")).forEach(
-    (element) => new Key(element, new Note(context, Number(element.id)), mouse, recorder)
+    (element) => new Key(element, new Note(context, Number(element.id)), recorder)
 );
 
 /*

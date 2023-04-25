@@ -2,13 +2,11 @@ export default class Key {
     /**
      * @param {HTMLElement} element HTML element for the key
      * @param {Note} note Note object for the key
-     * @param {MouseState} mouse MouseState object to track mouse clicks even when not on the keyboard
      * @param {Recorder} recorder Recorder object to record notes to
      */
-    constructor(element, note, mouse, recorder) {
+    constructor(element, note, recorder) {
         this.element = element;
         this.note = note;
-        this.mouse = mouse;
         this.recorder = recorder;
 
         this.pressed = false;
@@ -39,12 +37,6 @@ export default class Key {
         }
     }
 
-    enter() {
-        // if the mouse button is held down, play the note
-        console.log(this.mouse.buttonState);
-        if (this.mouse.buttonState) this.press();
-    }
-
     /**
      * Create event listeners on each key element
      */
@@ -55,8 +47,7 @@ export default class Key {
         // listeners for releasing the key
         this.element.addEventListener("mouseup", this.release.bind(this));
         this.element.addEventListener("touchend", this.release.bind(this));
-        // listen for entering and leaving a key
-        this.element.addEventListener("mouseenter", this.enter.bind(this));
+        // listen for leaving a key
         this.element.addEventListener("mouseleave", this.release.bind(this));
     }
 }
