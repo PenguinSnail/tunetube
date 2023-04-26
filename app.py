@@ -2,9 +2,7 @@ import os
 from dotenv import load_dotenv
 
 from src.models import db, Post, User
-
 from flask import Flask, render_template, redirect, request, abort, session
-
 from flask_bcrypt import Bcrypt
 
 load_dotenv()
