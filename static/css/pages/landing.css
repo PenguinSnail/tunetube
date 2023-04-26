@@ -14,7 +14,7 @@
 }
 
 .gradient {
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(0, 0, 0, 1));
+    background-image: linear-gradient(to bottom, rgba(21, 21, 21, 0), #151515);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -29,5 +29,29 @@
     align-items: center;
     gap: 2rem;
     height: 70vh;
-    background-color: black;
+    background-color: #151515;
+}
+
+.button {
+    /* background-color: #2C8A3B; */
+    border: none;
+    /* color: white; */
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.button-signup {
+    background-color: #2c8a3b;
+    color: white;
+}
+
+.button-login {
+    background-color: #7f7b82;
+    color: white;
 }
