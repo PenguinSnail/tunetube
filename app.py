@@ -2,11 +2,14 @@ import os
 from dotenv import load_dotenv
 
 from src.models import db, Post, User
-from flask import Flask, render_template, redirect
+
+from flask import Flask, render_template, redirect, request, abort
+from flask_bcrypt import Bcrypt
 
 load_dotenv()
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 
 db_user = os.getenv("DB_USER")
 db_pass = os.getenv("DB_PASS")
@@ -64,14 +67,65 @@ def library_page():
 
 @app.get("/account")
 def account_page():
-    test_user = User.query.filter_by(id=1).first()
-    test_user = test_user.username
-
     return render_template(
-        "pages/account_page.html", account_active=True, test_user=test_user
-    )
+        "pages/account_page.html")
 
 
 @app.post("/update_account")
 def update_account_page():
     return redirect("/account")
+=======
+    return render_template("pages/account_page.html", account_active=True)
+
+@app.route("/account/register", methods=["GET", "POST"])
+def sign_up():
+    if request.method == "POST":  # actually making account
+        name = request.form.get("name")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        if not password or not name or not confirm_password:
+            abort(400)
+            # TODO change these aborts to proper error messages
+
+        if password != confirm_password:
+            abort(400)
+        
+        if User.query.filter(User.username.ilike(name)).first() is not None:
+            abort(400)
+
+        # all fields filled out
+
+        hashed_password = bcrypt.generate_password_hash(password).decode()
+
+        user = User(username=name, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/")
+    # get request
+    return render_template("pages/sign_up_page.html")
+
+# @app.route("/login", methods=["GET", "POST"])
+@app.post("/login")
+def login_info():
+    name = request.form.get("name")
+    password = request.form.get("password")
+
+    if not password or not name:
+        return redirect("/login")
+
+    confirm_user = User.query.filter(User.username.ilike(name)).first()
+
+    if not confirm_user:
+        return redirect("/login")
+    
+    if not bcrypt.check_password_hash(confirm_user.password, password):
+        return redirect("/login")
+
+    return redirect('/')  
+    # rediret tot he correct page if everything checks out.
+
+@app.get("/login")
+def login_page():
+    return render_template("pages/login.html")
+
