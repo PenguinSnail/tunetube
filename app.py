@@ -135,7 +135,6 @@ def login_info():
         return redirect("/login")
 
     session["user"] = {"username": name}
-
     return redirect("/")
     # rediret tot he correct page if everything checks out.
 
