@@ -3,10 +3,7 @@ CREATE TABLE IF NOT EXISTS "photo" (
     photo BYTEA
 );
 
-ALTER TABLE IF EXISTS "individual_user"
-ADD COLUMN IF NOT EXISTS password VARCHAR(127) NOT NULL;
-
-CREATE TABLE IF NOT EXISTS "individual_user" (
+CREATE TABLE IF NOT EXISTS "user" (
     id       SERIAL      PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
     photo_id INTEGER,
