@@ -1,8 +1,52 @@
 @import url("/static/css/vars.css");
 @import url("/static/css/components/piano.css");
 
-.keyboard-container {
+form {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
     padding: 2rem;
-    width: 80%;
-    height: 80%;
+    align-items: center;
+}
+
+.form-element {
+    max-width: 500px;
+}
+
+.form-element input {
+    border: none;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.25);
+    padding: 0.5rem;
+    font-size: medium;
+}
+
+form button {
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    color: var(--white-color);
+    font-size: large;
+}
+
+#record-button {
+    background-color: var(--coral-color);
+}
+#record-button:hover {
+    background-color: #ce6437;
+}
+
+#submit-button {
+    background-color: var(--purple-color);
+}
+#submit-button:hover {
+    background-color: #4d3056;
+}
+#submit-button:disabled,
+#submit-button:hover:disabled {
+    background-color: var(--gray1-color);
+}
+
+.keyboard-container {
+    width: 100%;
+    height: 60%;
 }
