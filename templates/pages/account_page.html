@@ -1,11 +1,18 @@
 {% extends "layout.html" %}
 {% block title %}TuneTube - Account{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="static/css/pages/account.css" />
+{% endblock %}
 {% block body %}
-    <h1>Edit Profile</h1>
+    <div class="user-container">
+        <div class="account-name">
+            <h1>{{ test_user }}</h1>
+        </div>
 
-    <!--TODO add profile image (maybe)-->
-
-    <h2>[Profile Name]</h2>
+        <div class="profile-photo">
+            <img class="profile-photo" src="static/css/components/profile pic.png" />
+        </div>
+    </div>
 
     <form>
         <label for="name">Display name:</label><br />

@@ -1,0 +1,22 @@
+@import url("/static/css/vars.css");
+.user-container {
+    display: flex;
+    background-color: var(--gray1-color);
+    border-radius: 6px;
+    width: 25%;
+    box-shadow: 3px 3px 3px var(--charcoal-color);
+}
+
+.account-name {
+    color: var(--white-color);
+    margin-left: 10px;
+    text-shadow: 1px 1px 1px;
+}
+.profile-photo {
+    height: 100px;
+    width: 100px;
+
+    margin: 10px;
+    padding-bottom: 10px;
+    object-fit: contain;
+}
