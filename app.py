@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, Individual_user
+from src.models import db, Post, User
 from flask import Flask, render_template, redirect, request, abort
 from flask_bcrypt import Bcrypt
 
@@ -82,14 +82,14 @@ def sign_up():
         if password != confirm_password:
             abort(400)
         
-        if Individual_user.query.filter(Individual_user.username.ilike(name)).first() is not None:
+        if User.query.filter(User.username.ilike(name)).first() is not None:
             abort(400)
 
         # all fields filled out
 
         hashed_password = bcrypt.generate_password_hash(password).decode()
 
-        user = Individual_user(username=name, password=hashed_password)
+        user = User(username=name, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         return redirect("/")
@@ -105,7 +105,7 @@ def login_info():
     if not password or not name:
         return redirect("/login")
 
-    confirm_user = Individual_user.query.filter(Individual_user.username.ilike(name)).first()
+    confirm_user = User.query.filter(User.username.ilike(name)).first()
 
     if not confirm_user:
         return redirect("/login")

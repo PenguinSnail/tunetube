@@ -17,7 +17,7 @@ class Photo(db.Model):
     photo = db.Column(BYTEA, nullable=False)
 
 
-class Individual_user(db.Model):
+class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(VARCHAR(20), nullable=False)
     photo_id = db.Column(INTEGER, db.ForeignKey("photo.id"))
