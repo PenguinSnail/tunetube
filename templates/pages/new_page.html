@@ -6,10 +6,14 @@
 {% endblock %}
 {% block body %}
     <h1>New Tune</h1>
-    <div>
-        <label for="title">Tune Title</label>
-        <input id="title" name="title" type="text" placeholder="Tune Title" />
-    </div>
+    <form method="POST" action="/tunes">
+        <div class="form-element flex-column">
+            <label for="title">Tune Title</label>
+            <input id="title" name="title" type="text" placeholder="Tune Title" required />
+        </div>
+        <button id="record-button">Record</button>
+        <button type="submit" id="submit-button" disabled>Submit</button>
+    </form>
     <div class="keyboard-container">
         <div id="keyboard">
             {% for key in keys %}

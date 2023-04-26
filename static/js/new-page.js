@@ -1,6 +1,4 @@
-import Note from "./classes/Note.js";
-import Key from "./classes/Key.js";
-import Recorder from "./classes/Recorder.js";
+import { Note, Key, Recorder } from "./classes.js";
 
 const context = new AudioContext();
 const recorder = new Recorder();
@@ -10,16 +8,36 @@ Array.from(document.querySelectorAll(".key")).forEach(
     (element) => new Key(element, new Note(context, Number(element.id)), recorder)
 );
 
-/*
-const recordBtn = document.querySelector('#output-section button');
-recordBtn.addEventListener('click', () => {
+const form = document.querySelector("form");
+const recordBtn = document.querySelector("#record-button");
+const submitBtn = document.querySelector("#submit-button");
+
+recordBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     if (!recorder.recording) {
         recorder.start();
-        recordBtn.textContent = "STOP RECORDING";
+        recordBtn.textContent = "Stop Recording";
+        submitBtn.setAttribute("disabled", "true");
     } else {
         recorder.stop();
-        document.querySelector('#output').textContent = JSON.stringify(recorder.data, undefined, 2);
-        recordBtn.textContent = "RECORD";
+        console.log(recorder.data);
+        recordBtn.textContent = "Record";
+        if (recorder.data.length > 0) {
+            submitBtn.removeAttribute("disabled");
+        }
     }
 });
-*/
+
+submitBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (form.reportValidity()) {
+        if (recorder.data.length > 0) {
+            const dataElem = document.createElement("input");
+            dataElem.type = "hidden";
+            dataElem.name = "data";
+            dataElem.value = JSON.stringify(recorder.data);
+            form.appendChild(dataElem);
+            form.submit();
+        }
+    }
+});

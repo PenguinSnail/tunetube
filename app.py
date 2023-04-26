@@ -69,6 +69,11 @@ def library_page():
     return render_template("pages/library_page.html", library_active=True)
 
 
+@app.post("/tunes")
+def create_tune():
+    return redirect("/tunes")
+
+
 @app.get("/account")
 def account_page():
     return render_template("pages/account_page.html", account_active=True)
