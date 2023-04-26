@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post,User,LikedBy
+from src.models import db, Post,User, LikedBy
 from flask import Flask, render_template
 from src.repositories.post_repository import post_repository_singleton
 
@@ -36,8 +36,10 @@ def landing_page():
 def home_page():
     posts = Post.query.all()
     users = User.query.all()
-    # gets the liked filtered by the current user
-    return render_template("pages/home_page.html", home_active=True, posts=posts,users=users)
+    # Assuming user is ID = 1
+    likes = LikedBy.query.filter_by(user_id= 1)
+    # get the post liked by the user
+    return render_template("pages/home_page.html", home_active=True, posts=posts,users=users, likes=likes)
 
 
 @app.get("/tunes/new")
@@ -71,5 +73,11 @@ def account_page():
 
 @app.get("/post/<int:post_id>")
 def post_page(post_id):
+    post_info= post_repository_singleton.get_post_info(post_id)
+    return render_template("pages/post.html", account_active=True, post_info = post_info)
+
+
+@app.get("/post/create-comment")
+def comment_post(post_id, comment):
     post_info= post_repository_singleton.get_post_info(post_id)
     return render_template("pages/post.html", account_active=True, post_info = post_info)

@@ -5,6 +5,8 @@
 
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
+    <script src="/static/js/funct.js" defer></script>
+
 {% endblock %}
 
 {% block body %}
@@ -19,6 +21,7 @@
             {% for post in posts %}
                 <!-- Link to the Post -->
                 <div class="card">
+                    
                     <!-- Post Title -->
                     <h2>{{post.getTitle()}}</h2>
                     <!-- Post Creator -->
@@ -28,12 +31,14 @@
                         <p>Music player thingy</p>
 
                         <!-- Shows if the user likes the post -->
-                        <div class = "like-btn unliked liked"></div>
+                        <a class = "like-btn liked"></a>
 
                     </div>
-                   
+                    
                     <a href="/post/{{ post.getID() }}" class ="underline small-font">View more comments</a>
-                    <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
+                    <form action = "/post/{{ post.getID() }}">
+                        <input type="text" id="comment" placeholder="Leave a comment" class="comment-box"/>
+                    </form>
                 </div>
 
             {% endfor %}

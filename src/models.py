@@ -121,8 +121,12 @@ class LikedBy(db.Model):
     post_id = db.Column(
         INTEGER, db.ForeignKey("post.id"), primary_key=True, nullable=False
     )
-
-
+    
+    def __init__(self,user_id,post_id) -> None:
+        self.post_id = post_id
+        self.user_id = user_id
+        
+    
 class FollowedBy(db.Model):
     user_id = db.Column(
         INTEGER, db.ForeignKey("user.id"), primary_key=True, nullable=False

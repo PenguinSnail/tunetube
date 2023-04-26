@@ -23,6 +23,11 @@ class PostRepository:
         likeCount = likes.count()
         
         return SingularPostInfo(post, comments, likeCount)
+    
+    def create_like(self,user_id,post_id):
+        new_like = LikedBy(user_id,post_id)
+        db.session.add(new_like)
+        db.session.commit()
 
 
 

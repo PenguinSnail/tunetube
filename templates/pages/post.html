@@ -1,12 +1,16 @@
-<!--Link to the account page of the owner of post-->
-
 {% extends 'layout.html' %}
-{% block title %}TuneTube{% endblock %}
-<!--Block to add css for home-page -->
-{% block head %}
-    <link rel="stylesheet" href="static/css/home-page.css" />
+{% block title %}
+    TuneTube
 {% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="static/css/pages/home.css" />
+    <script src="/static/js/funct.js" defer></script>
+
+{% endblock %}
+
 {% block body %}
+<div class = "card">
     <h1>{{post_info.getTitle() }}</h1>
     <h4>{{post_info.getUsername()}}</h4>
     
@@ -15,12 +19,11 @@
     </div>
 
     <p>{{post_info.likes}}</p><a class ="like-button">&#10084;</a>
-
+</div>
     {% for comment in post_info.getComments() %}
-        <h4>{{ comment.getUsername() }}</h4>
+        <h4>{{ comment.getUsername()}}</h4>
+        <h4>{{comment.getPost_Time() }}</h4>
         <h4>{{ comment.getComment() }}</h4>
-        <h4>{{ comment.getPost_Time() }}</h4>
-
     {% endfor %}
 
     <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
