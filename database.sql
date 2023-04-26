@@ -3,9 +3,6 @@ CREATE TABLE IF NOT EXISTS "photo" (
     photo BYTEA
 );
 
-ALTER TABLE IF EXISTS "user"
-ADD COLUMN IF NOT EXISTS password VARCHAR(127) NOT NULL;
-
 CREATE TABLE IF NOT EXISTS "user" (
     id       SERIAL      PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
@@ -21,7 +18,7 @@ CREATE TABLE IF NOT EXISTS "post" (
     song    JSONB        NOT NULL,
     user_id INTEGER      NOT NULL,
 
-    FOREIGN KEY (user_id) REFERENCES "user"(id)
+    FOREIGN KEY (user_id) REFERENCES "individual_user"(id)
 );
 
 
@@ -33,7 +30,7 @@ CREATE TABLE IF NOT EXISTS "comment" (
     user_id   INTEGER   NOT NULL,
 
     FOREIGN KEY (post_id) REFERENCES "post"(id),
-    FOREIGN KEY (user_id) REFERENCES "user"(id)
+    FOREIGN KEY (user_id) REFERENCES "individual_user"(id)
 );
 
 
@@ -43,7 +40,7 @@ CREATE TABLE IF NOT EXISTS "liked_by" (
 
     PRIMARY KEY (post_id, user_id),
     FOREIGN KEY (post_id) REFERENCES "post"(id),
-    FOREIGN KEY (user_id) REFERENCES "user"(id)
+    FOREIGN KEY (user_id) REFERENCES "individual_user"(id)
 );
 
 
@@ -52,6 +49,6 @@ CREATE TABLE IF NOT EXISTS "followed_by" (
     follower_id INTEGER NOT NULL,
 
     PRIMARY KEY (user_id, follower_id),
-    FOREIGN KEY (user_id)     REFERENCES "user"(id),
-    FOREIGN KEY (follower_id) REFERENCES "user"(id)
+    FOREIGN KEY (user_id)     REFERENCES "individual_user"(id),
+    FOREIGN KEY (follower_id) REFERENCES "individual_user"(id)
 );
