@@ -67,15 +67,15 @@ def library_page():
 
 @app.get("/account")
 def account_page():
-    return render_template(
-        "pages/account_page.html")
+    return render_template("pages/account_page.html")
 
 
 @app.post("/update_account")
 def update_account_page():
     return redirect("/account")
-=======
+
     return render_template("pages/account_page.html", account_active=True)
+
 
 @app.route("/account/register", methods=["GET", "POST"])
 def sign_up():
@@ -90,7 +90,7 @@ def sign_up():
 
         if password != confirm_password:
             abort(400)
-        
+
         if User.query.filter(User.username.ilike(name)).first() is not None:
             abort(400)
 
@@ -105,6 +105,7 @@ def sign_up():
     # get request
     return render_template("pages/sign_up_page.html")
 
+
 # @app.route("/login", methods=["GET", "POST"])
 @app.post("/login")
 def login_info():
@@ -118,14 +119,14 @@ def login_info():
 
     if not confirm_user:
         return redirect("/login")
-    
+
     if not bcrypt.check_password_hash(confirm_user.password, password):
         return redirect("/login")
 
-    return redirect('/')  
+    return redirect("/")
     # rediret tot he correct page if everything checks out.
+
 
 @app.get("/login")
 def login_page():
     return render_template("pages/login.html")
-
