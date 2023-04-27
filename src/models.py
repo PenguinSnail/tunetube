@@ -25,15 +25,14 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(VARCHAR(20), nullable=False)
     photo_id = db.Column(INTEGER, db.ForeignKey("photo.id"))
-<<<<<<< HEAD
+    password = db.Column(VARCHAR(127), nullable=False)
+
     
      # Constructor
-    def __init__(self,username,photo_id) -> None:
+    def __init__(self,username,password) -> None:
         self.username = username
-        self.photo_id = photo_id
-=======
-    password = db.Column(VARCHAR(127), nullable=False)
->>>>>>> master
+        self.password = password
+
 
     # Getters and Setters
     def getUsername(self):
@@ -91,7 +90,7 @@ class Comment(db.Model,sharedMethods):
     post_id = db.Column(INTEGER, db.ForeignKey("post.id"), nullable=False)
     user_id = db.Column(INTEGER, db.ForeignKey("user.id"), nullable=False)
     
-    def __init__(self,title,song,user_id) -> None:
+    # def __init__(self,title,song,user_id) -> None:
         
     def getID(self):
         return self.id

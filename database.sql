@@ -1,20 +1,17 @@
 CREATE TABLE IF NOT EXISTS "photo" (
     id    SERIAL PRIMARY KEY,
-    photo BYTEA
+    photo varChar(255)
 );
 
-<<<<<<< HEAD
 INSERT INTO "photo"
 VALUES
-    (1),
-    (2),
-    (3),
-    (4),
-    (5)
-	ON CONFLICT DO NOTHING;
+    (1, 'src\static\images\cheese.png'),
+    (2,	'src\static\images\coffee.png'),
+    (3,	'src\static\images\default.png'),
+    (4,	'src\static\images\dinosaur.png'),
+    (5,	'src\static\images\hand.png')
+    ON CONFLICT DO NOTHING;
 
-=======
->>>>>>> master
 CREATE TABLE IF NOT EXISTS "user" (
     id       SERIAL      PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
