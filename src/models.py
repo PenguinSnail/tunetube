@@ -25,11 +25,15 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(VARCHAR(20), nullable=False)
     photo_id = db.Column(INTEGER, db.ForeignKey("photo.id"))
+<<<<<<< HEAD
     
      # Constructor
     def __init__(self,username,photo_id) -> None:
         self.username = username
         self.photo_id = photo_id
+=======
+    password = db.Column(VARCHAR(127), nullable=False)
+>>>>>>> master
 
     # Getters and Setters
     def getUsername(self):

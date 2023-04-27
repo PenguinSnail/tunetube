@@ -1,14 +1,13 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post,User, LikedBy
-from flask import Flask, render_template
-from src.repositories.post_repository import post_repository_singleton
+from src.models import db, Post, User
+from flask import Flask, render_template, redirect, request, abort, session
+from flask_bcrypt import Bcrypt
 
+
+# Environment variables
 load_dotenv()
-
-app = Flask(__name__)
-
 db_user = os.getenv("DB_USER")
 db_pass = os.getenv("DB_PASS")
 db_host = os.getenv("DB_HOST")
@@ -16,14 +15,23 @@ db_port = os.getenv("DB_PORT")
 db_name = os.getenv("DB_NAME")
 
 
+# App initialization
+app = Flask(__name__)
+bcrypt = Bcrypt(app)
+
+
+# Database connection
 app.config[
     "SQLALCHEMY_DATABASE_URI"
 ] = f"postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}"
-app.config["SQLALCHEMY_ECHO"] = True
+# app.config["SQLALCHEMY_ECHO"] = True
 
+app.secret_key = os.getenv("APP_SECRET")
 
+# Database initialization
 db.init_app(app)
 with app.app_context():
+    # create tables if they don't already exist
     db.create_all()
 
 
@@ -34,16 +42,20 @@ def landing_page():
 
 @app.get("/")
 def home_page():
-    posts = Post.query.all()
-    users = User.query.all()
-    # Assuming user is ID = 1
-    likes = LikedBy.query.filter_by(user_id= 1)
-    # get the post liked by the user
-    return render_template("pages/home_page.html", home_active=True, posts=posts,users=users, likes=likes)
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
+    all_posts = Post.query.all()
+    return render_template("pages/home_page.html", home_active=True, posts=all_posts)
 
 
 @app.get("/tunes/new")
 def new_page():
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
     keys = [
         {"frequency": 261.63, "type": "white"},
         {"frequency": 277.18, "type": "black"},
@@ -64,14 +76,78 @@ def new_page():
 
 @app.get("/tunes")
 def library_page():
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
     return render_template("pages/library_page.html", library_active=True)
+
+
+@app.post("/tunes")
+def create_tune():
+    return redirect("/tunes")
 
 
 @app.get("/account")
 def account_page():
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
     return render_template("pages/account_page.html", account_active=True)
 
-@app.get("/post/<int:post_id>")
-def post_page(post_id):
-    post_info= post_repository_singleton.get_post_info(post_id)
-    return render_template("pages/post.html", account_active=True, post_info = post_info)
+
+@app.route("/account/register", methods=["GET", "POST"])
+def sign_up():
+    if request.method == "POST":  # actually making account
+        name = request.form.get("name")
+        password = request.form.get("password")
+        confirm_password = request.form.get("confirm_password")
+
+        if not password or not name or not confirm_password:
+            abort(400)
+            # TODO change these aborts to proper error messages
+
+        if password != confirm_password:
+            abort(400)
+
+        if User.query.filter(User.username.ilike(name)).first() is not None:
+            abort(400)
+
+        # all fields filled out
+
+        hashed_password = bcrypt.generate_password_hash(password).decode()
+
+        user = User(username=name, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        return redirect("/")
+    # get request
+    return render_template("pages/sign_up_page.html")
+
+
+# @app.route("/login", methods=["GET", "POST"])
+@app.post("/login")
+def login_info():
+    name = request.form.get("name")
+    password = request.form.get("password")
+
+    if not password or not name:
+        return redirect("/login")
+
+    confirm_user = User.query.filter(User.username.ilike(name)).first()
+
+    if not confirm_user:
+        return redirect("/login")
+
+    if not bcrypt.check_password_hash(confirm_user.password, password):
+        return redirect("/login")
+
+    session["user"] = {"username": name}
+    return redirect("/")
+    # rediret tot he correct page if everything checks out.
+
+
+@app.get("/login")
+def login_page():
+    return render_template("pages/login.html")

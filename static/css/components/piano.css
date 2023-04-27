@@ -1,11 +1,11 @@
 @import url("/static/css/vars.css");
 
 #keyboard {
+    height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    height: 100%;
 }
 
 #keyboard .key:first-child {

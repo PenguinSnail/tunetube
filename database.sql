@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS "photo" (
     photo BYTEA
 );
 
+<<<<<<< HEAD
 INSERT INTO "photo"
 VALUES
     (1),
@@ -12,11 +13,13 @@ VALUES
     (5)
 	ON CONFLICT DO NOTHING;
 
+=======
+>>>>>>> master
 CREATE TABLE IF NOT EXISTS "user" (
     id       SERIAL      PRIMARY KEY,
     username VARCHAR(20) NOT NULL UNIQUE,
     photo_id INTEGER,
-
+    password VARCHAR(127) NOT NULL,
     FOREIGN KEY (photo_id) REFERENCES "photo"(id)
 );
 
