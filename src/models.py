@@ -87,6 +87,8 @@ class Comment(db.Model,sharedMethods):
     post_id = db.Column(INTEGER, db.ForeignKey("post.id"), nullable=False)
     user_id = db.Column(INTEGER, db.ForeignKey("user.id"), nullable=False)
     
+    def __init__(self,title,song,user_id) -> None:
+        
     def getID(self):
         return self.id
     

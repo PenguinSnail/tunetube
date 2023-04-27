@@ -75,9 +75,3 @@ def account_page():
 def post_page(post_id):
     post_info= post_repository_singleton.get_post_info(post_id)
     return render_template("pages/post.html", account_active=True, post_info = post_info)
-
-
-@app.get("/post/create-comment")
-def comment_post(post_id, comment):
-    post_info= post_repository_singleton.get_post_info(post_id)
-    return render_template("pages/post.html", account_active=True, post_info = post_info)
