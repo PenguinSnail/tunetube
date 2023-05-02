@@ -21,10 +21,12 @@
     <p>{{post_info.likes}}</p><a class ="like-button">&#10084;</a>
 </div>
     {% for comment in post_info.getComments() %}
+    <div class = "comment-box">
         <h4>{{ comment.getUsername()}}</h4>
         <h4>{{comment.getPost_Time() }}</h4>
         <h4>{{ comment.getComment() }}</h4>
+    </div>
     {% endfor %}
-
+        
     <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
 {% endblock %}
