@@ -1,5 +1,6 @@
-.comment-box{
+div.comment-box{
     background-color: #F5F5F5;
-    
+    border-radius: 10px;
+    padding:5%    
 
 }

@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from src.models import db, Post, User
 from flask import Flask, render_template, redirect, request, abort, session
 from flask_bcrypt import Bcrypt
+from src.repositories.post_repository import post_repository_singleton
 
 
 # Environment variables
@@ -48,6 +49,12 @@ def home_page():
 
     all_posts = Post.query.all()
     return render_template("pages/home_page.html", home_active=True, posts=all_posts)
+
+
+@app.get('/post/<int:movie_id>')
+def get_single_movie(post_id: int):
+    post = post_repository_singleton.get_post_info(post_id)
+    return render_template('post.html', post=post)
 
 
 @app.get("/tunes/new")

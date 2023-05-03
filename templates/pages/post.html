@@ -20,6 +20,9 @@
 
     <p>{{post_info.likes}}</p><a class ="like-button">&#10084;</a>
 </div>
+
+<input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
+
     {% for comment in post_info.getComments() %}
     <div class = "comment-box">
         <h4>{{ comment.getUsername()}}</h4>
@@ -28,5 +31,4 @@
     </div>
     {% endfor %}
         
-    <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
 {% endblock %}
