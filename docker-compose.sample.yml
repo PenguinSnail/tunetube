@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  caddy:
+    image: caddy:2.6.4
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+  tunetube:
+    image: tunetube:latest
+    restart: unless-stopped
+    environment:
+      DB_HOST: postgresql
+      DB_PORT: 5432
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+      APP_SECRET: ${APP_SECRET}
+  postgresql:
+    image: postgres:15.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+
+volumes:
+  caddy_data:
+  caddy_config:
+  postgresql_data:

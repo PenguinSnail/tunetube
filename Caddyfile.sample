@@ -1,0 +1,13 @@
+{
+	email <your_email@domain.tld>
+	acme_ca https://acme-v02.api.letsencrypt.org/directory
+#	acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+www.<your_domain> {
+	reverse_proxy tunetube:8080
+}
+
+<your_domain> {
+	redir https://<your_domain>{uri}
+}
