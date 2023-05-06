@@ -4,5 +4,24 @@
     <link rel="stylesheet" href="static/css/pages/account.css" />
 {% endblock %}
 {% block body %}
-    <h1>this makes no damn sensce</h1>
+    <div class="leftbox">
+        <div class="user-container">
+            <div class="account-name">
+                <h1>{{ name }}</h1>
+            </div>
+
+            <div class="profile-photo">
+                <img class="profile-photo" src="static/css/components/profile pic.png" />
+            </div>
+        </div>
+
+        <div class="settings-box">
+            <form action="/account/logout" method="post">
+                <label for="">Log out:</label>
+                <input type="submit" class="logout-button" value="log out" />
+            </form>
+        </div>
+    </div>
+
+    <div class="rightbox"></div>
 {% endblock %}

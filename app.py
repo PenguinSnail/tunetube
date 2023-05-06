@@ -93,8 +93,16 @@ def account_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
+    name = session["user"].get("username")
+    return render_template("pages/account_page.html", account_active=True, name=name)
 
-    return render_template("pages/account_page.html", account_active=True)
+
+@app.post("/account/logout")
+def log_out():
+    if "user" not in session:
+        return redirect("/landing")
+    session.clear()
+    return redirect("/landing")
 
 
 @app.route("/account/register", methods=["GET", "POST"])
