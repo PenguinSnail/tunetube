@@ -53,8 +53,8 @@ def home_page():
 
 @app.get('/post/<int:movie_id>')
 def get_single_movie(post_id: int):
-    post = post_repository_singleton.get_post_info(post_id)
-    return render_template('post.html', post=post)
+    post_info = post_repository_singleton.get_post_info(post_id)
+    return render_template('pages/post.html', post_info=post_info)
 
 
 @app.get("/tunes/new")
