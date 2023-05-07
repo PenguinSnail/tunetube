@@ -1,4 +1,4 @@
-from src.models import Post,Comment, User, LikedBy, db
+from src.models import Post,Comment, LikedBy, db
 
 class SingularPostInfo:
     def __init__(self, post, comments, likes) -> None:

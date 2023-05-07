@@ -1,10 +1,11 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, User, Comment
+from src.models import db, Post, User, Comment, LikedBy
 from flask import Flask, render_template, redirect, request, abort, session
 from flask_bcrypt import Bcrypt
 from src.repositories.post_repository import post_repository_singleton
+from src.repositories.user_repository import user_repository_singleton
 
 
 # Environment variables
@@ -48,21 +49,29 @@ def home_page():
         return redirect("/landing")
 
     all_posts = Post.query.all()
-    return render_template("pages/home_page.html", home_active=True, posts=all_posts)
+    all_likes = LikedBy.query.all()
+    current_user = session["user"]["username"]
+    print(f'Current User: {current_user}')
+
+    user_info = user_repository_singleton.get_user_info(current_user)
+    return render_template("pages/home_page.html", home_active=True, posts=all_posts, likes = all_likes, user_info = user_info)
 
 
 @app.route('/post/<int:post_id>', methods = ["GET", "POST"])
 def single_post(post_id: int):
-    if request.method == "POST":
+    if request.method == "POST" :
         comment = request.form.get("create-comment","")
         
-        print(f'Comment: {comment}')
         if comment == '':
-            abort(400)
-            
-        new_comment = Comment(1,post_id, comment)
+           pass
+        
+        # current_user = User.query.filter_by(username = "user")
+        current_user = User.query.filter_by(username = session["user"]['username'])
+        
+        new_comment = Comment(current_user,post_id, comment)
         db.session.add(new_comment)
         db.session.commit()
+
 
     post_info = post_repository_singleton.get_post_info(post_id)
     return render_template('pages/post.html', post_info = post_info)

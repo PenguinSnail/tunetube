@@ -47,7 +47,9 @@ class User(db.Model):
     
     def setUsername(self,photo_id):
         self.photo_id = photo_id
-    
+        
+    def getID(self):
+        return self.id
 
 class Post(db.Model,sharedMethods):
     id = db.Column(INTEGER, primary_key=True)
