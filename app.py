@@ -50,6 +50,10 @@ def home_page():
 
     all_posts = Post.query.all()
     
+    # new_like = LikedBy(1,1)
+    # db.session.add(new_like)
+    # db.session.commit()
+            
     # gets the current user and their info
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)

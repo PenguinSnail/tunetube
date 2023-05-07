@@ -4,32 +4,36 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="static/css/pages/post.css" />
+    <link rel="stylesheet" href="static/css/pages/post.css"/>
 
 {% endblock %}
 
 {% block body %}
-<div class = "card">
-    <h1>{{post_info.getTitle() }}</h1>
-    <p class = "creator">{{post_info.getUsername()}}</p>
-    
+    <!-- Post Title -->
+    <div class = "card-title"><href="/post/{{ post_info.getID()}}">{{post_info.getTitle()}}</div>
+        
+    <!-- Post Creator -->
+    <div class = "creator">{{ post_info.getUsername()}}</div>
+        
+    <p></p>
+
+    <!-- Music Player -->
     <div>
         <span>Music player</span>
         
         <!-- Shows if the user likes the post -->
         {%if user_info.isLiked(post_info.getID()) == True: %}
-        <span><button type = "button" onclick = "/like/{{post_info.getID()}}/unlike"> 💖 </button></span>
+        <span><button class = "like-btn"> 💖 </button></span>
         {%else%}
-        <span> <button type = "button" formaction = "/like/{{post_info.getID()}}/like"> 💔 </button></span>
+        <span> <button class = "like-btn"> 💔 </button></span>
         {% endif %}
     </div>
 
-    <div>
-</div>
+    <p></p>
 
-<form action = "/post/{{ post_info.getID()}}" method = "POST">
-    <input type = "text" name = "create-comment" placeholder="Leave a comment" />
-</form>
+    <form action = "/post/{{ post_info.getID()}}" method = "POST">
+        <input type = "text" name = "create-comment" placeholder="Leave a comment" />
+    </form>
 
     {% for comment in post_info.getComments()|reverse %}
     <div class = "comment">
@@ -37,5 +41,5 @@
         <p>{{ comment.getComment() }}</p>
     </div>
     {% endfor %}
-        
+    
 {% endblock %}

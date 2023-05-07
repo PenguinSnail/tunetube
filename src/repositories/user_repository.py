@@ -13,7 +13,7 @@ class UserInfo:
     
     def isLiked(self, post_id):
         for post in self.likes:
-            if post.getPost_id == post_id:
+            if post.getPost_ID() == post_id:
                 return True
         return False               
     

@@ -51,12 +51,15 @@
     font-size: small;
 }
 
-
 /* code for button format */
-
 .like-btn {
     background-color: none; /* Blue background */
     border: none; /* Remove borders */
     font-size: 16px; /* Set a font size */
     cursor: pointer; /* Mouse pointer on hover */
+}
+
+.userName{
+    text-align: right;
+    padding-top: 40px;
 }
