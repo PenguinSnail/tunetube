@@ -28,12 +28,12 @@
 
 /* card for each post on the home page */
 
-div.card {
-    outline: 2px solid black;
+.card {
     padding: 5%;
     background: #f1f1f1;
     border-radius: 10px;
     margin-bottom: 5%;
+    filter: drop-shadow(5px 10px 3px #808080)
 }
 
 .comment-box {
@@ -43,4 +43,8 @@ div.card {
 
 .small-font {
     font-size: 12px;
+}
+
+.playback {
+    margin: 0;
 }
