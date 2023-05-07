@@ -45,7 +45,7 @@ class User(db.Model):
     def setUsername(self,username):
         self.username = username
     
-    def setUsername(self,photo_id):
+    def setPhotoID(self,photo_id):
         self.photo_id = photo_id
         
     def getID(self):

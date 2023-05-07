@@ -51,32 +51,30 @@ def home_page():
     all_posts = Post.query.all()
     
     # gets the current user and their info
-    current_user = session["user"]["username"]
+    current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-    
     return render_template("pages/home_page.html", home_active=True, posts=all_posts, user_info = user_info)
-
+    # def __init__(self,title,song,user_id) -> None:
+    #     self.title = title
+    #     self.song = song
+    #     self.user_id = user_id
+    
 
 @app.route('/post/<int:post_id>', methods = ["GET", "POST"])
 def single_post(post_id: int):
+    current_user = session["user"]["user_id"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    
     if request.method == "POST" :
         comment = request.form.get("create-comment","")
         
         if comment == '':
            pass
         
-        # current_user = User.query.filter_by(username = "user")
-        
-        current_user = session["user"]["username"]
-        user_info = user_repository_singleton.get_user_info(current_user).getID()
-        
-        new_comment = Comment(user_info,post_id, comment)
+        new_comment = Comment(current_user,post_id, comment)
         db.session.add(new_comment)
         db.session.commit()
         pass
-
-    current_user = session["user"]["username"]
-    user_info = user_repository_singleton.get_user_info(current_user)
     
     post_info = post_repository_singleton.get_post_info(post_id)
     return render_template('pages/post.html', post_info = post_info, user_info = user_info)
