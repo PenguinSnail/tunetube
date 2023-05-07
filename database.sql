@@ -61,20 +61,6 @@ CREATE TABLE IF NOT EXISTS "comment" (
     FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
 
-INSERT INTO "comment"
-VALUES
-    (1,'2013-03-21 04:05:06.789','comment1', 1,1),
-	(2,'2013-04-21 05:05:06.789','comment2', 2,2),
-    (3,'2013-04-21 06:05:06.789','comment3', 1,3),
-    (4,'2013-04-21 07:05:06.789','comment4', 4,4),
-    (5,'2013-04-21 08:05:06.789','comment5', 5,5),
-	(6,'2013-04-21 03:05:06.789','comment6', 2,1),
-	(7,'2013-04-21 02:05:06.789','comment7', 3,2),
-    (8,'2013-04-21 01:05:06.789','comment8', 4,3),
-    (9,'2013-04-21 00:05:06.789','comment9', 5,4),
-    (10,'2013-04-21 09:05:06.789','comment10',3,5)
-    ON CONFLICT DO NOTHING;
-
 
 CREATE TABLE IF NOT EXISTS "liked_by" (
     post_id INTEGER NOT NULL,

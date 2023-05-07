@@ -1,3 +1,4 @@
+from datetime import datetime , timezone 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import (
     BYTEA,
@@ -13,7 +14,7 @@ db = SQLAlchemy()
 
 class sharedMethods():
     def getUsername(self):
-        return User.query.filter_by(id = self.user_id).first()
+        return User.query.filter_by(id = self.user_id).first().getUsername()
 
     
 class Photo(db.Model):
@@ -72,7 +73,7 @@ class Post(db.Model,sharedMethods):
     
     def getUserID(self):
         return self.user_id
-    
+        
     def setTitle(self, title):
         self.tile = title
     
@@ -90,12 +91,19 @@ class Comment(db.Model,sharedMethods):
     post_id = db.Column(INTEGER, db.ForeignKey("post.id"), nullable=False)
     user_id = db.Column(INTEGER, db.ForeignKey("user.id"), nullable=False)
     
-    # def __init__(self,title,song,user_id) -> None:
+    def __init__(self,user_id,post_id,comment) -> None:
+        self.user_id = user_id
+        self.post_id = post_id
+        self.comment = comment
+        self.post_time = datetime.now(timezone.utc)
         
     def getID(self):
         return self.id
     
     def getPost_Time(self):
+        return self.post_time 
+    
+    def show_Time(self):
         return self.post_time 
     
     def setPost_Time(self, time):
@@ -131,7 +139,7 @@ class LikedBy(db.Model):
         self.post_id = post_id
         self.user_id = user_id
         
-    
+        
 class FollowedBy(db.Model):
     user_id = db.Column(
         INTEGER, db.ForeignKey("user.id"), primary_key=True, nullable=False

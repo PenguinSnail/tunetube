@@ -1,4 +1,4 @@
-from src.models import Post,Comment,User, LikedBy, db
+from src.models import Post,Comment, User, LikedBy, db
 
 class SingularPostInfo:
     def __init__(self, post, comments, likes) -> None:
@@ -15,21 +15,19 @@ class SingularPostInfo:
     def getComments(self):
         return self.comments
     
+    def getID(self):
+        return self.post.getID()
+    
+    def likeCount(self):
+        return self.likes.count()
+    
 class PostRepository:
     def get_post_info(self,post_id):
         post =  Post.query.filter_by(id = post_id).first()
         comments =  Comment.query.filter_by(post_id = post_id)
         likes =  LikedBy.query.filter_by(post_id=post_id)
-        likeCount = likes.count()
         
-        return SingularPostInfo(post, comments, likeCount)
+        return SingularPostInfo(post, comments, likes)
     
-    def create_like(self,user_id,post_id):
-        new_like = LikedBy(user_id,post_id)
-        db.session.add(new_like)
-        db.session.commit()
-
-
-
 # Singleton to be used in other modules
 post_repository_singleton = PostRepository()

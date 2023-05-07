@@ -17,16 +17,18 @@
         <p>Music player thingy</p>
     </div>
 
-    <p>{{post_info.likes}}</p><a class ="like-button">&#10084;</a>
+    <button type = "button"> 💖 {{post_info.likeCount()}}</button>
+
 </div>
 
-<input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
+<form action = "/post/{{ post_info.getID()}}" method = "POST">
+    <input type = "text" name = "create-comment" placeholder="Leave a comment" />
+</form>
 
-    {% for comment in post_info.getComments() %}
-    <div class = "comment-box">
+    {% for comment in post_info.getComments()|reverse %}
+    <div class = "comment">
         <h4>{{ comment.getUsername()}}</h4>
-        <h4>{{comment.getPost_Time() }}</h4>
-        <h4>{{ comment.getComment() }}</h4>
+        <p>{{ comment.getComment() }}</p>
     </div>
     {% endfor %}
         

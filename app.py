@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, User
+from src.models import db, Post, User, Comment
 from flask import Flask, render_template, redirect, request, abort, session
 from flask_bcrypt import Bcrypt
 from src.repositories.post_repository import post_repository_singleton
@@ -51,11 +51,21 @@ def home_page():
     return render_template("pages/home_page.html", home_active=True, posts=all_posts)
 
 
-@app.get('/post/<int:movie_id>')
-def get_single_movie(post_id: int):
-    post_info = post_repository_singleton.get_post_info(post_id)
-    return render_template('pages/post.html', post_info=post_info)
+@app.route('/post/<int:post_id>', methods = ["GET", "POST"])
+def single_post(post_id: int):
+    if request.method == "POST":
+        comment = request.form.get("create-comment","")
+        
+        print(f'Comment: {comment}')
+        if comment == '':
+            abort(400)
+            
+        new_comment = Comment(1,post_id, comment)
+        db.session.add(new_comment)
+        db.session.commit()
 
+    post_info = post_repository_singleton.get_post_info(post_id)
+    return render_template('pages/post.html', post_info = post_info)
 
 @app.get("/tunes/new")
 def new_page():
