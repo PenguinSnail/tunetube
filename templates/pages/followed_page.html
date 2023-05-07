@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block title %}TuneTube - Account{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="static/css/pages/account.css" />
+{% endblock %}
+{% block body %}
+    <div class="leftbox">
+        {{ user.id }}
+        {{ user.username }}
+    </div>
+{% endblock %}

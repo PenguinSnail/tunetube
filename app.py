@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, User
+from src.models import db, Post, User, FollowedBy
 from flask import Flask, render_template, redirect, request, abort, session
 from flask_bcrypt import Bcrypt
 
@@ -93,8 +93,34 @@ def account_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
+
+    # get username of curent session user
     name = session["user"].get("username")
-    return render_template("pages/account_page.html", account_active=True, name=name)
+
+    # get session user id
+    current_userid = User.query.filter_by(
+        username=session["user"].get("username")
+    ).first()
+    current_userid = current_userid.id
+
+    # get list of all followers for user id
+    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+
+    # get users for all followed accounts
+    followed = []
+    for follower in followers_list:
+        followed += User.query.filter_by(id=follower.follower_id).all()
+
+    return render_template(
+        "pages/account_page.html", account_active=True, name=name, followed=followed
+    )
+
+
+@app.get("/account/<int:user_id>")
+def get_followed_page(user_id):
+    user = User.query.filter_by(id=user_id).first()
+
+    return render_template("pages/followed_page.html", user=user)
 
 
 @app.post("/account/logout")

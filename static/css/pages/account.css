@@ -4,11 +4,34 @@
     border-radius: 5px;
     width: 100%;
     height: 120px;
-    box-shadow: 3px 3px 3px var(--charcoal-color);
+    box-shadow: 2px 2px 2px var(--charcoal-color);
+    margin-bottom: 5px;
+}
+.followed-header {
+    background-color: var(--gray1-color);
+    border-radius: 5px;
+    width: 100%;
+    height: 80px;
+    box-shadow: 2px 2px 2px var(--charcoal-color);
+    margin-bottom: 5px;
+}
+.followed-cards {
+    background-color: var(--gray1-color);
+    border-radius: 5px;
+    width: 75%;
+    float: left;
+    height: 80px;
+    box-shadow: 2px 2px 2px var(--charcoal-color);
     margin-bottom: 5px;
 }
 
 .account-name {
+    color: var(--white-color);
+    margin-left: 10px;
+    text-shadow: 1px 1px 1px;
+    float: left;
+}
+.followed-text {
     color: var(--white-color);
     margin-left: 10px;
     text-shadow: 1px 1px 1px;
@@ -26,10 +49,20 @@
     background-color: var(--coral-color);
     border-color: var(--gray1-color);
     width: 100%;
-    height: 75%;
+    flex-grow: 1;
     border-radius: 5px;
     border-width: 2px;
     padding: 5px;
+}
+.followed-box {
+    background-color: var(--coral-color);
+    border-color: var(--gray1-color);
+    width: 100%;
+    height: 500px;
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 5px;
+    overflow: auto;
 }
 .leftbox {
     float: left;
@@ -38,6 +71,8 @@
     padding: 10px; /* if you want space between the images */
     background-color: var(--gray2-color);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
 .rightbox {
     float: right;
@@ -46,6 +81,8 @@
     padding: 10px; /* if you want space between the images */
     background-color: var(--gray2-color);
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 .logout-button {

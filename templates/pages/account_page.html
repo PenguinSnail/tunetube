@@ -23,5 +23,19 @@
         </div>
     </div>
 
-    <div class="rightbox"></div>
+    <div class="rightbox">
+        <div class="followed-header">
+            <h2 class="account-name">followed</h2>
+        </div>
+
+        <div class="followed-box">
+            {% for follow in followed %}
+                <div class="followed-cards">
+                    <div class="followed-text">
+                        <a href="/account/{{ follow.id }}">{{ follow.username }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
