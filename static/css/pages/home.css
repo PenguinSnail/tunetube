@@ -55,18 +55,8 @@
 /* code for button format */
 
 .like-btn {
-    background-color: transparent !important;
-    display: block !important;
-    height: fit-content;
-    width: fit-content;
-    cursor: pointer;
-    user-select: none;
-    border: 0;
-    font-size: medium;
-}
-
-.userName {
-    text-align: right;
-    padding-top: 50px;
-
+    background-color: none; /* Blue background */
+    border: none; /* Remove borders */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
 }

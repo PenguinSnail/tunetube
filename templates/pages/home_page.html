@@ -5,7 +5,7 @@
 
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
-    <script src="/static/js/home-page.js" defer></script>
+    <script src="/static/js/like-btn.js" defer></script>
 
 {% endblock %}
 
@@ -35,9 +35,9 @@
                         
                         <!-- Shows if the user likes the post -->
                         {%if user_info.isLiked(post.getID()) == True: %}
-                        <span><button type = "button" onclick = "/like/{{post.getID()}}/unlike"> 💖 </button></span>
+                        <span><button class = "like-btn"> 💖 </button></span>
                         {%else%}
-                        <span> <button type = "button" formaction = "/like/{{post.getID()}}/like"> 💔 </button></span>
+                        <span> <button class = "like-btn"> 💔 </button></span>
                         {% endif %}
                     </div>
 

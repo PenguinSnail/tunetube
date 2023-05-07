@@ -1,15 +1,5 @@
-const button = document.createElement('button')
-
-// Set the button text to 'Can you click me?'
-button.innerText = 'Can you click me?'
-
-button.id = 'mainButton'
-
-// Attach the "click" event to your button
-button.addEventListener('click', () => {
-  // When there is a "click"
-  // it shows an alert in the browser
-  alert('Oh, you clicked me!')
+document.querySelectorAll('like-btn').forEach(item => {
+  item.addEventListener('click', event => {
+    console.log("Like button has been clicked")
+  })
 })
-
-document.body.appendChild(button)
