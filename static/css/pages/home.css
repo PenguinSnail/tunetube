@@ -28,7 +28,7 @@
 
 /* card for each post on the home page */
 
-div.card {
+.card {
     outline: 2px solid black;
     padding: 5%;
     background: #f1f1f1;
@@ -38,7 +38,7 @@ div.card {
 
 .card-title {
     font-size: xx-large;
-    color: black !important;
+    padding-bottom: 1%;
 }
 
 /* Code for the comment box */
@@ -51,6 +51,7 @@ div.card {
     font-size: small;
 }
 
+
 /* code for button format */
 
 .like-btn {
@@ -62,4 +63,10 @@ div.card {
     user-select: none;
     border: 0;
     font-size: medium;
+}
+
+.userName {
+    text-align: right;
+    padding-top: 50px;
+
 }

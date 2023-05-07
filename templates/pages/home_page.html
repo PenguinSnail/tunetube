@@ -23,23 +23,30 @@
                 <div class="card" onclick = "">
                     
                     <!-- Post Title -->
-                    <h2 class = "card-title"><href="/post/{{ post.getID()}}">{{post.getTitle()}}</h2>
+                    <div class = "card-title"><href="/post/{{ post.getID()}}">{{post.getTitle()}}</div>
                     
                     <!-- Post Creator -->
-                    <h4>{{ post.getUsername()}}</h4>
+                    <div class = "creator">{{ post.getUsername()}}</div>
                     <!-- Music Player -->
+                    <p></p>
+
                     <div>
-                        <p>Music player thingy</p>
-
+                        <span>Music player</span>
+                        
                         <!-- Shows if the user likes the post -->
-                        <button type = "button" > 💔 </button>
-
+                        {%if user_info.isLiked(post.getID()) == True: %}
+                        <span><button type = "button" onclick = "/like/{{post.getID()}}/unlike"> 💖 </button></span>
+                        {%else%}
+                        <span> <button type = "button" formaction = "/like/{{post.getID()}}/like"> 💔 </button></span>
+                        {% endif %}
                     </div>
-                    
-                    <a href="/post/{{ post.getID() }}" class ="underline small-font">View more comments</a>
+
+                    <p></p>
+
+                    <a href="/post/{{ post.getID() }}" class ="underline small-font small-padding">View more comments</a>
 
                     <form action = "/post/{{ post.getID()}}" method = "POST">
-                        <input type = "text" name = "create-comment" placeholder="Leave a comment" />
+                        <input class = "comment-box" type = "text" name = "create-comment" placeholder="Leave a comment" />
                     </form>
                 </div>
 
@@ -50,7 +57,7 @@
             <!-- Link to your profile -->
             <a>
                 <div>
-                    <h4>UserName!</h4>
+                    <h4 class = "userName", id = "currentUser" >Hello {{user_info.getName()}}!</h4>
                 </div>
             </a>
         </div>

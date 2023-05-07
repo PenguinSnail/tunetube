@@ -11,14 +11,20 @@
 {% block body %}
 <div class = "card">
     <h1>{{post_info.getTitle() }}</h1>
-    <h4>{{post_info.getUsername()}}</h4>
+    <p class = "creator">{{post_info.getUsername()}}</p>
     
     <div>
-        <p>Music player thingy</p>
+        <span>Music player</span>
+        
+        <!-- Shows if the user likes the post -->
+        {%if user_info.isLiked(post_info.getID()) == True: %}
+        <span><button type = "button" onclick = "/like/{{post_info.getID()}}/unlike"> 💖 </button></span>
+        {%else%}
+        <span> <button type = "button" formaction = "/like/{{post_info.getID()}}/like"> 💔 </button></span>
+        {% endif %}
     </div>
 
-    <button type = "button"> 💔 {{post_info.likeCount()}}</button>
-
+    <div>
 </div>
 
 <form action = "/post/{{ post_info.getID()}}" method = "POST">

@@ -1,4 +1,4 @@
-from src.models import Post,Comment, User, LikedBy, db
+from src.models import User, LikedBy
 
 class UserInfo:
     def __init__(self, id, name, likes) -> None:
@@ -8,7 +8,15 @@ class UserInfo:
         
     def getID(self):
         return self.id
-        
+
+    def getName(self):
+        return self.name
+    
+    def isLiked(self, post_id):
+        for post in self.likes:
+            if post.getPost_id == post_id:
+                return True
+        return False               
     
 class UserRepository:
     def get_user_info(self,username):

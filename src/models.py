@@ -141,6 +141,13 @@ class LikedBy(db.Model):
         self.post_id = post_id
         self.user_id = user_id
         
+    def getPost_ID(self):
+        return self.post_id
+    
+            
+    def getUser_id(self):
+        return self.user_id
+        
         
 class FollowedBy(db.Model):
     user_id = db.Column(

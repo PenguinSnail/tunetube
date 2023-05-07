@@ -1,17 +1,7 @@
-div.card {
+card {
     outline: 2px solid black;
     padding: 5%;
     background: #f1f1f1;
     border-radius: 10px;
     margin-bottom: 10%;
-}
-
-
-div.comment {
-    outline: 2px solid black;
-}
-
-span.likes-display{
-    display: inline !important; 
-
 }
