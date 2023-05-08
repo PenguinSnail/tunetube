@@ -5,7 +5,8 @@
     height: 501px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 80px;
+    color: var(--eerie-color);
 }
 
 .center-div {
@@ -13,7 +14,7 @@
     max-height: 100vh;
     margin-left: 25%;
     margin-right: 25%;
-    top: 20;
+    top: 20px;
     position: relative;
 }
 
@@ -22,18 +23,18 @@
     height: 501px;
     position: fixed;
     right: 0;
-    top: 0;
-    background-color: aquamarine;
+    top: 80px;
+    color: var(--eerie-color);
 }
 
 /* card for each post on the home page */
 
-div.card {
-    outline: 2px solid black;
+.card {
     padding: 5%;
-    background: #f1f1f1;
+    background: var(--gray1-color);
     border-radius: 10px;
     margin-bottom: 5%;
+    box-shadow: 3px 3px 3px var(--charcoal-color);
 }
 
 .comment-box {
@@ -43,4 +44,18 @@ div.card {
 
 .small-font {
     font-size: 12px;
+    color: var(--white-color);
+}
+
+.medium-font {
+    font-size: 24px;
+    color: var(--beige-color);
+}
+
+.large-font {
+    font-size: 32px;
+    color: var(--white-color);
+}
+.playback {
+    margin: 0;
 }
