@@ -28,16 +28,15 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    height: 70vh;
+    height: 50vh;
     background-color: #151515;
 }
 
 .button {
-    /* background-color: #2C8A3B; */
     border: none;
-    /* color: white; */
     padding: 15px;
     text-align: center;
+    font-family: 'Montserrat'; 
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -54,4 +53,15 @@
 .button-login {
     background-color: #7f7b82;
     color: white;
+}
+
+.title {
+    display: flex;
+    align-items:normal;
+    font-size: xx-large;
+    font-family: 'Jura'; 
+    background-color: #151515;
+    color: white;
+    padding-left: 15vw;
+    padding-top: 5vh;
 }
