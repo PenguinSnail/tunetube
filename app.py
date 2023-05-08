@@ -120,7 +120,18 @@ def account_page():
 def get_followed_page(user_id):
     user = User.query.filter_by(id=user_id).first()
 
-    return render_template("pages/followed_page.html", user=user)
+    current_userid = User.query.filter_by(
+        username=session["user"].get("username")
+    ).first()
+    current_userid = current_userid.id
+
+    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+
+    for followers in followers_list:
+        if current_userid == followers.user_id and user.id == followers.followed_id:
+            followed = 1
+
+    return render_template("pages/followed_page.html", user=user, followed=followed)
 
 
 @app.post("/account/logout")
@@ -129,6 +140,30 @@ def log_out():
         return redirect("/landing")
     session.clear()
     return redirect("/landing")
+
+
+@app.post("/account/unfollow")
+def unfollow():
+    if "user" not in session:
+        return redirect("/landing")
+
+    # gets follower id
+    followed = User.query.filter_by(request.form.get("user.id")).first
+    followed = followed.id
+
+    # gets session user id
+    current_userid = User.query.filter_by(
+        username=session["user"].get("username")
+    ).first()
+    current_userid = current_userid.id
+
+    # gets folowers.
+    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+    for followers in followers_list:
+        if current_userid == followers.user_id and followed == followers.followed_id:
+            db.session.delete(followers)
+    db.session.commit()
+    return redirect("/account/{{ user.id }}")
 
 
 @app.route("/account/register", methods=["GET", "POST"])
