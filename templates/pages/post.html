@@ -4,42 +4,66 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="static/css/pages/post.css"/>
+    <link rel="stylesheet" href="/static/css/pages/post.css"/>
+    <script src="/static/js/post.js" defer></script>
 
 {% endblock %}
 
 {% block body %}
-    <!-- Post Title -->
-    <div class = "card-title"><href="/post/{{ post_info.getID()}}">{{post_info.getTitle()}}</div>
-        
-    <!-- Post Creator -->
-    <div class = "creator">{{ post_info.getUsername()}}</div>
-        
-    <p></p>
+<div class = 'center-div'>
+    <!-- The post information -->
+    <div class = "card">
+        <!-- Post Title -->
+        <div class = "card-title"><href="/post/{{ post_info.getID()}}">{{post_info.getTitle()}}</div>
+            
+        <!-- Post Creator -->
+        <div class = "creator">{{ post_info.getUsername()}}</div>
+            
+        <p></p>
 
-    <!-- Music Player -->
-    <div>
-        <span>Music player</span>
-        
-        <!-- Shows if the user likes the post -->
-        {%if user_info.isLiked(post_info.getID()) == True: %}
-        <span><button class = "like-btn"> 💖 </button></span>
-        {%else%}
-        <span> <button class = "like-btn"> 💔 </button></span>
-        {% endif %}
+        <!-- Music Player -->
+        <div>
+            <span>Music player</span>
+            
+            <!-- Shows if the user likes the post -->
+            {%if user_info.isLiked(post_info.getID()) == True: %}
+            <span><button class = "like-btn"> 💖 </button></span>
+            {%else%}
+            <span> <button class = "like-btn"> 💔 </button></span>
+            {% endif %}
+        </div>
     </div>
-
+    <!-- The post information -->
+    <h3>Comments</h3>
     <p></p>
 
-    <form action = "/post/{{ post_info.getID()}}" method = "POST">
-        <input type = "text" name = "create-comment" placeholder="Leave a comment" />
+    <form id = "comment-form" action = "/post/{{ post_info.getID()}}" method = "POST">
+        <span>
+            <div class = "commenter"> {{user_info.getUsername()}}</div> 
+            <textarea name = "create-comment" 
+                        placeholder="Leave a comment" 
+                        class = "comment-box" 
+                        maxlength = "1000" 
+                        wrap = "soft"
+                        id = "post-comment"
+                        onclick = 
+                        ></textarea>
+        </span>
     </form>
+    <hr>
 
     {% for comment in post_info.getComments()|reverse %}
-    <div class = "comment">
-        <h4>{{ comment.getUsername()}}</h4>
-        <p>{{ comment.getComment() }}</p>
+    <div class = "comment-card">
+        <span>
+            <div class = "commenter">{{ comment.getUsername()}}</div> 
+            <div class = "time-stamp">{{comment.getPost_Time()}}</div>
+        </span>
+        <p></p>
+        <div class = "comment">{{ comment.getComment() }}</div>
+        <hr>
     </div>
     {% endfor %}
-    
+
+<div>
+
 {% endblock %}

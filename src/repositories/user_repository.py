@@ -8,7 +8,7 @@ class UserInfo:
     def getID(self):
         return self.user.getID()
 
-    def getName(self):
+    def getUsername(self):
         return self.user.getUsername()
     
     def isLiked(self, post_id):

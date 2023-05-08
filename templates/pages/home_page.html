@@ -13,9 +13,6 @@
 
     <!-- Container for user feed -->
     <div id="master">
-        <!-- Empty Column -->
-        <div class="left-div"></div>
-
         <!-- Feed Column -->
         <div class="center-div">
             {% for post in posts %}
@@ -46,7 +43,7 @@
                     <a href="/post/{{ post.getID() }}" class ="underline small-font small-padding">View more comments</a>
 
                     <form action = "/post/{{ post.getID()}}" method = "POST">
-                        <input class = "comment-box" type = "text" name = "create-comment" placeholder="Leave a comment" />
+                        <input type = "text" name = "create-comment" placeholder="Leave a comment" class = "comment-box" maxlength = "1000"/>
                     </form>
                 </div>
 
@@ -57,7 +54,7 @@
         <!-- Profile Column -->
         <div class="right-div">
             <div>
-                <h4 class = "userName", id = "currentUser" >Hello {{user_info.getName()}}!</h4>
+                <h4 class = "userName", id = "currentUser" >Hello {{user_info.getUsername()}}!</h4>
             </div>
         </div>
     </div>
