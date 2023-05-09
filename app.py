@@ -162,17 +162,12 @@ def account_page():
     if "user" not in session:
         return redirect("/landing")
 
-    # get username of curent session user
-    name = session["user"].get("username")
-
     # get session user id
-    current_userid = User.query.filter_by(
-        username=session["user"].get("username")
-    ).first()
-    current_userid = current_userid.id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
 
     # get list of all followers for user id
-    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
 
     # get users for all followed accounts
     followed = []
@@ -180,7 +175,10 @@ def account_page():
         followed += User.query.filter_by(id=follower.follower_id).all()
 
     return render_template(
-        "pages/account_page.html", account_active=True, name=name, followed=followed
+        "pages/account_page.html",
+        account_active=True,
+        name=user_info.username,
+        followed=followed,
     )
 
 
@@ -188,15 +186,13 @@ def account_page():
 def get_followed_page(user_id):
     user = User.query.filter_by(id=user_id).first()
 
-    current_userid = User.query.filter_by(
-        username=session["user"].get("username")
-    ).first()
-    current_userid = current_userid.id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
 
-    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
 
     for followers in followers_list:
-        if current_userid == followers.user_id and user.id == followers.followed_id:
+        if user_info.id == followers.user_id and user.id == followers.follower_id:
             followed = 1
 
     return render_template("pages/followed_page.html", user=user, followed=followed)
@@ -216,22 +212,20 @@ def unfollow():
         return redirect("/landing")
 
     # gets follower id
-    followed = User.query.filter_by(request.form.get("user.id")).first
-    followed = followed.id
+    other_account_id = request.form.get("user")
+    followed = User.query.filter_by(id=other_account_id).first()
 
     # gets session user id
-    current_userid = User.query.filter_by(
-        username=session["user"].get("username")
-    ).first()
-    current_userid = current_userid.id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
 
     # gets folowers.
-    followers_list = FollowedBy.query.filter_by(user_id=current_userid).all()
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
     for followers in followers_list:
-        if current_userid == followers.user_id and followed == followers.followed_id:
+        if user_info.id == followers.user_id and followed == followers.follower_id:
             db.session.delete(followers)
-    db.session.commit()
-    return redirect("/account/{{ user.id }}")
+            db.session.commit()
+    return redirect("/account")
 
 
 @app.route("/account/register", methods=["GET", "POST"])
