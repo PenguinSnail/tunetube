@@ -180,16 +180,15 @@ def sign_up():
         db.session.commit()
         return redirect("/")
     # get request
-    return render_template("pages/sign_up_page.html")
+    return render_template("pages/sign_up_page.html", no_layout=True)
 
-
-# @app.route("/login", methods=["GET", "POST"])
 @app.post("/login")
 def login_info():
     name = request.form.get("name")
     password = request.form.get("password")
 
     if not password or not name:
+        
         return redirect("/login")
 
     confirm_user = User.query.filter(User.username.ilike(name)).first()
@@ -207,4 +206,4 @@ def login_info():
 
 @app.get("/login")
 def login_page():
-    return render_template("pages/login.html")
+    return render_template("pages/login.html", no_layout=True)
