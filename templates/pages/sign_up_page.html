@@ -10,7 +10,9 @@
         <h1 class="title">Do you want to make and share Tunes with your friends?</h1>
     </div>
 
-    <!--TODO add profile image (maybe)-->
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
 
     <div class="center-div-box">
         <div class="box">

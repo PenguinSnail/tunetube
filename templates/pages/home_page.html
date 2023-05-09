@@ -13,8 +13,21 @@
 
     <!-- Container for user feed -->
     <div id="master">
+        <!-- Empty Column -->
+        <div class="left-div"></div>
+
         <!-- Feed Column -->
         <div class="center-div">
+            <!--Flashed Messages-->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
             {% for post in posts %}
                 <!-- Link to the Post -->
                 <div class="card" onclick = "">
