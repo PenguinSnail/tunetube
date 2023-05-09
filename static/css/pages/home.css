@@ -35,11 +35,17 @@
     border-radius: 10px;
     margin-bottom: 5%;
     box-shadow: 3px 3px 3px var(--charcoal-color);
+    color: var(--white-color);
+}
+
+.card-link{
+    text-decoration: none;
 }
 
 .card-title {
     font-size: xx-large;
     padding-bottom: 1%;
+    color: var(--white-color);
 }
 
 /* Code for the comment box */
@@ -48,20 +54,6 @@
     height: 24px;
 }
 
-.small-font {
-    font-size: 12px;
-    color: var(--white-color);
-}
-
-.medium-font {
-    font-size: 24px;
-    color: var(--beige-color);
-}
-
-.large-font {
-    font-size: 32px;
-    color: var(--white-color);
-}
 .playback {
     margin: 0;
 }
@@ -70,8 +62,19 @@
     text-align: right;
 }
 
+.play-btn{
+    background: none;
+    border: none;
+    color: var(--coral-color);
+    font-size: 2em;
+}
+
 .like-btn{
     background: none;
     border: none;
     font-size: medium;
+}
+
+.creator{
+    color: var(--white-color);
 }

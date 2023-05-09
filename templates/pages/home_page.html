@@ -17,40 +17,34 @@
         <div class="center-div">
             {% for post in posts %}
                 <!-- Link to the Post -->
-                <div class="card" onclick = "">
-                    
-                    <!-- Post Title -->
-                    <div class = "card-title"><href="/post/{{ post.getID()}}">{{post.getTitle()}}</div>
-                    
-                    <!-- Post Creator -->
-                    <div class = "creator">{{ post.getUsername()}}</div>
-                    <!-- Music Player -->
-                    <p></p>
+                <a href="/post/{{ post.getID()}}" class="card-link">
+                    <div class="card">
+                        
+                        <!-- Post Title -->
+                        <div class = "card-title">{{post.getTitle()}}</div>
+                        
+                        <!-- Post Creator -->
+                        <div class = "creator">{{ post.getUsername()}}</div>
+                        <!-- Music Player -->
 
-                    <div>
-                        <figure class="playback"> <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio -->
-                            <audio
-                                controls
-                                src="AUDIOPATHHERE"> <!--TODO add audio path here-->
-                            </audio>
-                        </figure>
-                                                
-                        <!-- Shows if the user likes the post -->
-                        {%if user_info.isLiked(post.getID()) == True: %}
-                        <span><button class = "like-btn" onclick ="likeFunc()"> 💖 </button></span>
-                        {%else%}
-                        <span> <button class = "like-btn" onclick ="unlikeFunc()"> 💔 </button></span>
-                        {% endif %}
+                        <div>
+                            <button class="play-btn">
+                                <i class="fa-solid fa-circle-play"></i>
+                            </button>                       
+                            <!-- Shows if the user likes the post -->
+                            {%if user_info.isLiked(post.getID()) == True: %}
+                            <span><button class = "like-btn" onclick ="likeFunc()"> 💖 </button></span>
+                            {%else%}
+                            <span> <button class = "like-btn" onclick ="unlikeFunc()"> 💔 </button></span>
+                            {% endif %}
+                        </div>
+
+                        <form action = "/post/{{ post.getID()}}" method = "POST">
+                            <input type = "text" name = "create-comment" placeholder="Leave a comment" class = "comment-box" maxlength = "1000"/>
+                        </form>
                     </div>
-
-                    <p></p>
-
-                    <a href="/post/{{ post.getID() }}" class ="underline small-font small-padding">View more comments</a>
-
-                    <form action = "/post/{{ post.getID()}}" method = "POST">
-                        <input type = "text" name = "create-comment" placeholder="Leave a comment" class = "comment-box" maxlength = "1000"/>
-                    </form>
-                </div>
+                </a>
+                
 
             {% endfor %}
         </div>
