@@ -43,26 +43,29 @@ def landing_page():
 
 
 @app.get("/")
-def home_page():
+def post_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
 
     all_posts = Post.query.all()
     
-    # new_like = LikedBy(1,1)
-    # db.session.add(new_like)
-    # db.session.commit()
-            
-    # gets the current user and their info
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
     return render_template("pages/home_page.html", home_active=True, posts=all_posts, user_info = user_info)
-    # def __init__(self,title,song,user_id) -> None:
-    #     self.title = title
-    #     self.song = song
-    #     self.user_id = user_id
+
+@app.get("/<int:user_id>")
+def my_Post_page(user_id:int):
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
+    user_posts = Post.query.filter_by(user_id)
     
+    current_user = session["user"]["user_id"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    return render_template("pages/home_page.html", home_active=True, user_posts = user_posts, user_info = user_info)
+
 
 @app.route('/post/<int:post_id>', methods = ["GET", "POST"])
 def single_post(post_id: int):
