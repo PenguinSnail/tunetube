@@ -2,7 +2,14 @@ import os
 from dotenv import load_dotenv
 
 from src.models import db, Post, User
-from flask import Flask, render_template, redirect, request, abort, session
+from flask import (
+    Flask,
+    flash,
+    render_template,
+    redirect,
+    request,
+    session,
+)
 from flask_bcrypt import Bcrypt
 
 
@@ -106,29 +113,38 @@ def account_page():
 
 @app.route("/account/register", methods=["GET", "POST"])
 def sign_up():
+    error = None
     if request.method == "POST":  # actually making account
         name = request.form.get("name")
         password = request.form.get("password")
         confirm_password = request.form.get("confirm_password")
 
         if not password or not name or not confirm_password:
-            abort(400)
-            # TODO change these aborts to proper error messages
+            error = "Please fill in all fields"
 
         if password != confirm_password:
-            abort(400)
+            error = "Passwords must match"
 
         if User.query.filter(User.username.ilike(name)).first() is not None:
-            abort(400)
-
-        # all fields filled out
+            error = "name already taken"
 
         hashed_password = bcrypt.generate_password_hash(password).decode()
 
-        user = User(username=name, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        return redirect("/")
+        if not error:
+            # creates new user
+            user = User(username=name, password=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+
+            # logs you in
+            session["user"] = {"user_id": user.id}
+
+            # flashing before redirecting
+            flash("you were successfully logged in!")
+            return redirect("/")
+        else:
+            return render_template("pages/sign_up_page.html", error=error)
+
     # get request
     return render_template("pages/sign_up_page.html")
 
@@ -151,6 +167,7 @@ def login_info():
         return redirect("/login")
 
     session["user"] = {"user_id": confirm_user.id}
+    flash("you were successfully logged in!")
     return redirect("/")
     # rediret tot he correct page if everything checks out.
 

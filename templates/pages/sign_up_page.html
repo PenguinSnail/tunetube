@@ -3,7 +3,9 @@
 {% block body %}
     <h1>Create Account</h1>
 
-    <!--TODO add profile image (maybe)-->
+    {% if error %}
+        <p class="error"><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
 
     <h2>Sign-Up Below</h2>
 
