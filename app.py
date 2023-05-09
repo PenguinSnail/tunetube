@@ -149,29 +149,29 @@ def sign_up():
     return render_template("pages/sign_up_page.html")
 
 
-# @app.route("/login", methods=["GET", "POST"])
-@app.post("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login_info():
-    name = request.form.get("name")
-    password = request.form.get("password")
+    error = None
+    if request.method == "POST":  # actually logging in
+        name = request.form.get("name")
+        password = request.form.get("password")
 
-    if not password or not name:
-        return redirect("/login")
+        if not password or not name:
+            error = "please fill in all fields"
+            return render_template("pages/login.html", error=error)
 
-    confirm_user = User.query.filter(User.username.ilike(name)).first()
+        confirm_user = User.query.filter(User.username.ilike(name)).first()
 
-    if not confirm_user:
-        return redirect("/login")
+        if not confirm_user:
+            error = "user not found"
+            return render_template("pages/login.html", error=error)
 
-    if not bcrypt.check_password_hash(confirm_user.password, password):
-        return redirect("/login")
+        if not bcrypt.check_password_hash(confirm_user.password, password):
+            error = "incorrect password"
+            return render_template("pages/login.html", error=error)
 
-    session["user"] = {"user_id": confirm_user.id}
-    flash("you were successfully logged in!")
-    return redirect("/")
-    # rediret tot he correct page if everything checks out.
-
-
-@app.get("/login")
-def login_page():
+        session["user"] = {"user_id": confirm_user.id}
+        flash("you were successfully logged in!")
+        return redirect("/")
+        # rediret tot he correct page if everything checks out.
     return render_template("pages/login.html")
