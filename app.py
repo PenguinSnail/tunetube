@@ -49,56 +49,78 @@ def post_page():
         return redirect("/landing")
 
     all_posts = Post.query.all()
-    
+
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-    return render_template("pages/home_page.html", home_active=True, posts=all_posts, user_info = user_info)
+    return render_template(
+        "pages/home_page.html", home_active=True, posts=all_posts, user_info=user_info
+    )
+
 
 @app.get("/<int:user_id>")
-def my_Post_page(user_id:int):
+def my_Post_page(user_id: int):
     # Authentication
     if "user" not in session:
         return redirect("/landing")
 
     user_posts = Post.query.filter_by(user_id)
-    
+
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-    return render_template("pages/home_page.html", home_active=True, user_posts = user_posts, user_info = user_info)
+    return render_template(
+        "pages/home_page.html",
+        home_active=True,
+        user_posts=user_posts,
+        user_info=user_info,
+    )
 
 
-@app.route('/post/<int:post_id>', methods = ["GET", "POST"])
+@app.route("/post/<int:post_id>", methods=["GET", "POST"])
 def single_post(post_id: int):
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-    
-    if request.method == "POST" :
-        comment = request.form.get("create-comment","")
-        
-        if comment == '':
-           pass
-        
-        new_comment = Comment(current_user,post_id, comment)
+
+    if request.method == "POST":
+        comment = request.form.get("create-comment", "")
+
+        if comment == "":
+            pass
+
+        new_comment = Comment(current_user, post_id, comment)
         db.session.add(new_comment)
         db.session.commit()
         pass
-    
+
     post_info = post_repository_singleton.get_post_info(post_id)
-    return render_template('pages/post.html', post_info = post_info, user_info = user_info)
+    return render_template("pages/post.html", post_info=post_info, user_info=user_info)
 
 
-app.route('/like/<int:post_id>/<action>')
+@app.route("/post/<int:post_id>/data", methods=["GET"])
+def post_data(post_id: int):
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
+    post_info = post_repository_singleton.get_post_info(post_id)
+
+    return post_info.post.getSong()
+
+
+app.route("/like/<int:post_id>/<action>")
+
+
 def like_action(post_id, action):
     current_user = session["user"]["username"]
     user_info = user_repository_singleton.get_user_info(current_user)
-    
-    if action == 'like':
+
+    if action == "like":
         newLike = LikedBy(user_info.getID, post_id)
         db.session.commit(newLike)
-        
-    if action == 'unlike':
-        LikedBy.query.filter_by(post_id = post_id, user_id = user_info.getID()).delete()
+
+    if action == "unlike":
+        LikedBy.query.filter_by(post_id=post_id, user_id=user_info.getID()).delete()
         db.session.commit()
+
 
 @app.get("/tunes/new")
 def new_page():
@@ -182,13 +204,13 @@ def sign_up():
     # get request
     return render_template("pages/sign_up_page.html", no_layout=True)
 
+
 @app.post("/login")
 def login_info():
     name = request.form.get("name")
     password = request.form.get("password")
 
     if not password or not name:
-        
         return redirect("/login")
 
     confirm_user = User.query.filter(User.username.ilike(name)).first()

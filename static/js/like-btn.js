@@ -1,7 +1,0 @@
-function likeFunc(){
-
-}
-
-function unlikeFunc(){
-  
-}

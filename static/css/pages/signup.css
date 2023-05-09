@@ -23,7 +23,7 @@ form input {
 .title {
     display: flex;
     justify-content: center;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
 }
 
 .center-div-box {
@@ -52,10 +52,11 @@ form input {
     justify-content: center;
 }
 
-input[type=text], select {
+input[type="text"],
+select {
     width: 30vw;
     padding: 12px 15px;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -63,10 +64,11 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-input[type=password], select {
+input[type="password"],
+select {
     width: 30vw;
     padding: 12px 15px;
-    font-family: 'Montserrat';
+    font-family: "Montserrat";
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -78,7 +80,7 @@ input[type=password], select {
     border: none;
     padding: 15px;
     text-align: center;
-    font-family: 'Montserrat'; 
+    font-family: "Montserrat";
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
@@ -91,4 +93,3 @@ input[type=password], select {
     background-color: #674174;
     color: white;
 }
-

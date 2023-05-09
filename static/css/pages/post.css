@@ -24,7 +24,6 @@
     top: 0;
 }
 
-
 .card-title {
     font-size: xx-large;
     padding-bottom: 1%;
@@ -44,8 +43,8 @@ div.comment-card {
     content: center;
 }
 
-div.decorator{
-    width: 50%
+div.decorator {
+    width: 50%;
 }
 
 .like-btn {
@@ -57,7 +56,7 @@ div.decorator{
 
 .commenter {
     color: black;
-    font-size:medium;
+    font-size: medium;
     font-weight: bold;
     display: inline;
 }
@@ -68,17 +67,16 @@ div.decorator{
     display: inline;
 }
 
-.comment{
+.comment {
     font-size: medium;
     overflow-wrap: break-word;
     margin-top: 1%;
 }
 
-.user-profile{
-
+.user-profile {
 }
 
-.create-comment{
+.create-comment {
     width: fit-content;
     border: none;
     font-size: medium;
@@ -90,11 +88,11 @@ div.decorator{
     overflow-wrap: break-word;
     margin-top: 1%;
     border: none;
-    resize:vertical;
+    resize: vertical;
     font-family: Arial, Helvetica, sans-serif;
-
 }
 
-textarea:focus, input:focus{
+textarea:focus,
+input:focus {
     outline: none;
 }

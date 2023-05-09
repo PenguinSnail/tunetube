@@ -134,7 +134,7 @@ export class Recorder {
 
 /* -------------------------------------------------------------------------- */
 
-export default class Player {
+export class Player {
     /**
      * @param {AudioContext} context AudioContext to play audio to
      */
@@ -155,12 +155,7 @@ export default class Player {
      * @returns {boolean} load succeeded or failed
      */
     load(data) {
-        try {
-            this.data = JSON.parse(data);
-        } catch {
-            alert("Error parsing tune data!");
-            return false;
-        }
+        this.data = data;
 
         // for each event in the data
         this.data.forEach((event) => {
@@ -170,8 +165,6 @@ export default class Player {
                 this.notes.set(event.frequency, new Note(this.context, event.frequency));
             }
         });
-
-        return true;
     }
 
     /**
@@ -200,6 +193,7 @@ export default class Player {
             });
 
             // get the timestamp of the last event
+            console.log(this.data);
             const endTime = this.data[this.data.length - 1].time;
             // create a timer for the last event timestamp
             this.timers.push(

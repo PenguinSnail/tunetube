@@ -38,7 +38,7 @@
     color: var(--white-color);
 }
 
-.card-link{
+.card-link {
     text-decoration: none;
 }
 
@@ -58,23 +58,23 @@
     margin: 0;
 }
 
-.username{
+.username {
     text-align: right;
 }
 
-.play-btn{
+.play-btn {
     background: none;
     border: none;
     color: var(--coral-color);
     font-size: 2em;
 }
 
-.like-btn{
+.like-btn {
     background: none;
     border: none;
     font-size: medium;
 }
 
-.creator{
+.creator {
     color: var(--white-color);
 }
