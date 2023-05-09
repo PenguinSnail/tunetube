@@ -138,6 +138,7 @@ def login_info():
     password = request.form.get("password")
 
     if not password or not name:
+        
         return redirect("/login")
 
     confirm_user = User.query.filter(User.username.ilike(name)).first()
