@@ -43,6 +43,10 @@ body {
     user-select: none;
 }
 
+.nav {
+    z-index: 9999;
+}
+
 /* Fonts ---------------------------- */
 
 body {

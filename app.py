@@ -85,6 +85,13 @@ def library_page():
 
 @app.post("/tunes")
 def create_tune():
+    song = request.form.get("data")
+    if song:
+        title = request.form.get("title")
+        post = Post(title=title, song=song, user_id=session["user"]["user_id"])
+        db.session.add(post)
+        db.session.commit()
+
     return redirect("/tunes")
 
 
@@ -141,7 +148,7 @@ def login_info():
     if not bcrypt.check_password_hash(confirm_user.password, password):
         return redirect("/login")
 
-    session["user"] = {"username": name}
+    session["user"] = {"user_id": confirm_user.id}
     return redirect("/")
     # rediret tot he correct page if everything checks out.
 
