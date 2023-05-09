@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS "photo" (
     id    SERIAL PRIMARY KEY,
-    photo BYTEA
+    photo varChar(255)
 );
 
 CREATE TABLE IF NOT EXISTS "user" (
@@ -11,7 +11,6 @@ CREATE TABLE IF NOT EXISTS "user" (
     FOREIGN KEY (photo_id) REFERENCES "photo"(id)
 );
 
-
 CREATE TABLE IF NOT EXISTS "post" (
     id      SERIAL       PRIMARY KEY,
     title   VARCHAR(100) NOT NULL,
@@ -19,6 +18,10 @@ CREATE TABLE IF NOT EXISTS "post" (
     user_id INTEGER      NOT NULL,
 
     FOREIGN KEY (user_id) REFERENCES "user"(id)
+);
+
+INSERT INTO "post" (
+    (1, "post1", "",1),
 );
 
 
@@ -42,7 +45,6 @@ CREATE TABLE IF NOT EXISTS "liked_by" (
     FOREIGN KEY (post_id) REFERENCES "post"(id),
     FOREIGN KEY (user_id) REFERENCES "user"(id)
 );
-
 
 CREATE TABLE IF NOT EXISTS "followed_by" (
     user_id     INTEGER NOT NULL,

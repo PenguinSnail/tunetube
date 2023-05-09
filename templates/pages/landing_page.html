@@ -2,6 +2,8 @@
 {% block title %}TuneTube{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/pages/landing.css" />
+    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 {% endblock %}
 {% block body %}
     <div class="keyboard-container">
@@ -38,6 +40,9 @@
         </div>
         <div class="gradient"></div>
     </div>
+    <div class="title">
+        <h1>TuneTube</h1>
+    </div>
     <div class="button-container">
         <form action="/account/register" method="get">
             <button class="button button-signup" type="submit">Get Started</button>
@@ -45,7 +50,5 @@
         <form action="/login" method="post">
             <button class="button button-login" href="/login">Login</button>
         </form>
-        <!-- <a href="/login" type="button" class="btn btn-success">Login</a> -->
-        <!-- <a href="/account/register" type="button" class="btn btn-success">Sign Up</a> -->
     </div>
 {% endblock %}
