@@ -1,9 +1,18 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, User
-from flask import Flask, render_template, redirect, request, abort, session
+from src.models import db, Post, User, Comment, LikedBy
+from flask import (
+    Flask,
+    flash,
+    render_template,
+    redirect,
+    request,
+    session,
+)
 from flask_bcrypt import Bcrypt
+from src.repositories.post_repository import post_repository_singleton
+from src.repositories.user_repository import user_repository_singleton
 
 
 # Environment variables
@@ -41,14 +50,62 @@ def landing_page():
 
 
 @app.get("/")
-def home_page():
+def post_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
 
     all_posts = Post.query.all()
-    return render_template("pages/home_page.html", home_active=True, posts=all_posts)
+    
+    current_user = session["user"]["user_id"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    return render_template("pages/home_page.html", home_active=True, posts=all_posts, user_info = user_info)
 
+@app.get("/<int:user_id>")
+def my_Post_page(user_id:int):
+    # Authentication
+    if "user" not in session:
+        return redirect("/landing")
+
+    user_posts = Post.query.filter_by(user_id)
+    
+    current_user = session["user"]["user_id"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    return render_template("pages/home_page.html", home_active=True, user_posts = user_posts, user_info = user_info)
+
+
+@app.route('/post/<int:post_id>', methods = ["GET", "POST"])
+def single_post(post_id: int):
+    current_user = session["user"]["user_id"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    
+    if request.method == "POST" :
+        comment = request.form.get("create-comment","")
+        
+        if comment == '':
+           pass
+        
+        new_comment = Comment(current_user,post_id, comment)
+        db.session.add(new_comment)
+        db.session.commit()
+        pass
+    
+    post_info = post_repository_singleton.get_post_info(post_id)
+    return render_template('pages/post.html', post_info = post_info, user_info = user_info)
+
+
+app.route('/like/<int:post_id>/<action>')
+def like_action(post_id, action):
+    current_user = session["user"]["username"]
+    user_info = user_repository_singleton.get_user_info(current_user)
+    
+    if action == 'like':
+        newLike = LikedBy(user_info.getID, post_id)
+        db.session.commit(newLike)
+        
+    if action == 'unlike':
+        LikedBy.query.filter_by(post_id = post_id, user_id = user_info.getID()).delete()
+        db.session.commit()
 
 @app.get("/tunes/new")
 def new_page():
@@ -106,54 +163,65 @@ def account_page():
 
 @app.route("/account/register", methods=["GET", "POST"])
 def sign_up():
+    error = None
     if request.method == "POST":  # actually making account
         name = request.form.get("name")
         password = request.form.get("password")
         confirm_password = request.form.get("confirm_password")
 
         if not password or not name or not confirm_password:
-            abort(400)
-            # TODO change these aborts to proper error messages
+            error = "Please fill in all fields"
 
         if password != confirm_password:
-            abort(400)
+            error = "Passwords must match"
 
         if User.query.filter(User.username.ilike(name)).first() is not None:
-            abort(400)
-
-        # all fields filled out
+            error = "name already taken"
 
         hashed_password = bcrypt.generate_password_hash(password).decode()
 
-        user = User(username=name, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        return redirect("/")
+        if not error:
+            # creates new user
+            user = User(username=name, password=hashed_password)
+            db.session.add(user)
+            db.session.commit()
+
+            # logs you in
+            session["user"] = {"user_id": user.id}
+
+            # flashing before redirecting
+            flash("you were successfully logged in!")
+            return redirect("/")
+        else:
+            return render_template("pages/sign_up_page.html", error=error)
+
     # get request
     return render_template("pages/sign_up_page.html", no_layout=True)
 
-@app.post("/login")
+
+@app.route("/login", methods=["GET", "POST"])
 def login_info():
-    name = request.form.get("name")
-    password = request.form.get("password")
+    error = None
+    if request.method == "POST":  # actually logging in
+        name = request.form.get("name")
+        password = request.form.get("password")
 
-    if not password or not name:
-        
-        return redirect("/login")
+        if not password or not name:
+            error = "please fill in all fields"
+            return render_template("pages/login.html", error=error)
 
-    confirm_user = User.query.filter(User.username.ilike(name)).first()
+        confirm_user = User.query.filter(User.username.ilike(name)).first()
 
-    if not confirm_user:
-        return redirect("/login")
+        if not confirm_user:
+            error = "user not found"
+            return render_template("pages/login.html", error=error)
 
-    if not bcrypt.check_password_hash(confirm_user.password, password):
-        return redirect("/login")
+        if not bcrypt.check_password_hash(confirm_user.password, password):
+            error = "incorrect password"
+            return render_template("pages/login.html", error=error)
 
-    session["user"] = {"user_id": confirm_user.id}
-    return redirect("/")
-    # rediret tot he correct page if everything checks out.
-
-
-@app.get("/login")
-def login_page():
-    return render_template("pages/login.html", no_layout=True)
+        session["user"] = {"user_id": confirm_user.id}
+        flash("you were successfully logged in!")
+        return redirect("/")
+        # rediret tot he correct page if everything checks out.
+    return render_template("pages/login.html")

@@ -2,48 +2,77 @@
 {% block title %}
     TuneTube
 {% endblock %}
+
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
+    <script src="/static/js/like-btn.js" defer></script>
+
 {% endblock %}
+
 {% block body %}
+
     <!-- Container for user feed -->
     <div id="master">
         <!-- Empty Column -->
-        <div class="left-div">
-        </div>
+        <div class="left-div"></div>
 
         <!-- Feed Column -->
         <div class="center-div">
-            {% for i in range(20) %}
+            <!--Flashed Messages-->
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class="flashes">
+                        {% for message in messages %}
+                            <p>{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endwith %}
+            {% for post in posts %}
                 <!-- Link to the Post -->
-                <a>
-                    <div class="card">
-                        <h1 class="large-font">Friend Song Title</h1>
-                        <h4 class="medium-font">Friend Name</h4>
-                        <div></div>
+                <div class="card" onclick = "">
+                    
+                    <!-- Post Title -->
+                    <div class = "card-title"><href="/post/{{ post.getID()}}">{{post.getTitle()}}</div>
+                    
+                    <!-- Post Creator -->
+                    <div class = "creator">{{ post.getUsername()}}</div>
+                    <!-- Music Player -->
+                    <p></p>
 
+                    <div>
                         <figure class="playback"> <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio -->
                             <audio
                                 controls
                                 src="AUDIOPATHHERE"> <!--TODO add audio path here-->
                             </audio>
                         </figure>
-
-                        <p>&#128151;</p>
-                        <a href="" class="underline small-font">View more comments</a>
-                        <input type="text" id="comment" placeholder="Leave a comment" class="comment-box" />
+                                                
+                        <!-- Shows if the user likes the post -->
+                        {%if user_info.isLiked(post.getID()) == True: %}
+                        <span><button class = "like-btn" onclick ="likeFunc()"> 💖 </button></span>
+                        {%else%}
+                        <span> <button class = "like-btn" onclick ="unlikeFunc()"> 💔 </button></span>
+                        {% endif %}
                     </div>
-                </a>
+
+                    <p></p>
+
+                    <a href="/post/{{ post.getID() }}" class ="underline small-font small-padding">View more comments</a>
+
+                    <form action = "/post/{{ post.getID()}}" method = "POST">
+                        <input type = "text" name = "create-comment" placeholder="Leave a comment" class = "comment-box" maxlength = "1000"/>
+                    </form>
+                </div>
+
             {% endfor %}
         </div>
+        
         <!-- Profile Column -->
         <div class="right-div">
-            <!-- Link to your profile -->
-            <a href="/account">
-                <div>
-                    <h1>username!</h1>
-                </div>
-            </a>
+            <div>
+                <h4 class = "username", id = "currentUser" >Hello {{user_info.getUsername()}}!  </h4>
+            </div>
         </div>
     </div>
 {% endblock %}

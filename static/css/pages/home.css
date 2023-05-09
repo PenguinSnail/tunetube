@@ -37,6 +37,12 @@
     box-shadow: 3px 3px 3px var(--charcoal-color);
 }
 
+.card-title {
+    font-size: xx-large;
+    padding-bottom: 1%;
+}
+
+/* Code for the comment box */
 .comment-box {
     width: 100%;
     height: 24px;
@@ -58,4 +64,14 @@
 }
 .playback {
     margin: 0;
+}
+
+.username{
+    text-align: right;
+}
+
+.like-btn{
+    background: none;
+    border: none;
+    font-size: medium;
 }
