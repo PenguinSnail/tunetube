@@ -28,13 +28,18 @@
                     <p></p>
 
                     <div>
-                        <span>Music player</span>
-                        
+                        <figure class="playback"> <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio -->
+                            <audio
+                                controls
+                                src="AUDIOPATHHERE"> <!--TODO add audio path here-->
+                            </audio>
+                        </figure>
+                                                
                         <!-- Shows if the user likes the post -->
                         {%if user_info.isLiked(post.getID()) == True: %}
-                        <span><button class = "like-btn"> 💖 </button></span>
+                        <span><button class = "like-btn" onclick ="likeFunc()"> 💖 </button></span>
                         {%else%}
-                        <span> <button class = "like-btn"> 💔 </button></span>
+                        <span> <button class = "like-btn" onclick ="unlikeFunc()"> 💔 </button></span>
                         {% endif %}
                     </div>
 
@@ -49,12 +54,11 @@
 
             {% endfor %}
         </div>
-
         
         <!-- Profile Column -->
         <div class="right-div">
             <div>
-                <h4 class = "userName", id = "currentUser" >Hello {{user_info.getUsername()}}!</h4>
+                <h4 class = "username", id = "currentUser" >Hello {{user_info.getUsername()}}!  </h4>
             </div>
         </div>
     </div>

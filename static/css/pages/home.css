@@ -5,7 +5,8 @@
     height: 501px;
     position: fixed;
     left: 0;
-    top: 0;
+    top: 80px;
+    color: var(--eerie-color);
 }
 
 .center-div {
@@ -13,7 +14,7 @@
     max-height: 100vh;
     margin-left: 25%;
     margin-right: 25%;
-    top: 20;
+    top: 20px;
     position: relative;
 }
 
@@ -22,18 +23,18 @@
     height: 501px;
     position: fixed;
     right: 0;
-    top: 0;
-
+    top: 80px;
+    color: var(--eerie-color);
 }
 
 /* card for each post on the home page */
 
 .card {
-    outline: 2px solid black;
     padding: 5%;
-    background: #f1f1f1;
+    background: var(--gray1-color);
     border-radius: 10px;
     margin-bottom: 5%;
+    box-shadow: 3px 3px 3px var(--charcoal-color);
 }
 
 .card-title {
@@ -48,18 +49,29 @@
 }
 
 .small-font {
-    font-size: small;
+    font-size: 12px;
+    color: var(--white-color);
 }
 
-/* code for button format */
-.like-btn {
-    background-color: none; /* Blue background */
-    border: none; /* Remove borders */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
+.medium-font {
+    font-size: 24px;
+    color: var(--beige-color);
 }
 
-.userName{
+.large-font {
+    font-size: 32px;
+    color: var(--white-color);
+}
+.playback {
+    margin: 0;
+}
+
+.username{
     text-align: right;
-    padding-top: 40px;
+}
+
+.like-btn{
+    background: none;
+    border: none;
+    font-size: medium;
 }
