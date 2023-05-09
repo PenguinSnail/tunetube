@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 @import url("/static/css/vars.css");
 
 body {
@@ -82,52 +81,3 @@ input, select {
     background-color: #674174;
     color: white;
 }
-
-=======
-@import url("/static/css/vars.css");
-
-.body {
-    background-color: #e5d0cc;
-}
-
-.form-containter {
-    margin-bottom: 25%;
-    margin-top: 25%;
-}
-
-.center-div-box {
-    background-color: white;
-    padding: 50px;
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20;
-    position: relative;
-}
-
-.center-div-title {
-    text-align: center;
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20;
-    position: relative;
-}
-
-.form-align {
-    display: flex;
-    justify-content: center;
-}
-
-input[type=text], select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
->>>>>>> Stashed changes

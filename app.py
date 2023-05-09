@@ -224,4 +224,4 @@ def login_info():
         flash("you were successfully logged in!")
         return redirect("/")
         # rediret tot he correct page if everything checks out.
-    return render_template("pages/login.html")
+    return render_template("pages/login.html", no_layout=True)
