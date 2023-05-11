@@ -82,21 +82,10 @@ def my_Post_page(user_id: int):
     )
 
 
-@app.route("/post/<int:post_id>", methods=["GET", "POST"])
+@app.route("/post/<int:post_id>", methods=["GET"])
 def single_post(post_id: int):
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-
-    if request.method == "POST":
-        comment = request.form.get("create-comment", "")
-
-        if comment == "":
-            pass
-
-        new_comment = Comment(current_user, post_id, comment)
-        db.session.add(new_comment)
-        db.session.commit()
-        pass
 
     post_info = post_repository_singleton.get_post_info(post_id)
     return render_template(
@@ -105,6 +94,23 @@ def single_post(post_id: int):
         post=post_info.post,
         user_info=user_info,
     )
+
+
+@app.route("/post/<int:post_id>/comment", methods=["POST"])
+def comment_post(post_id: int):
+    current_user = session["user"]["user_id"]
+
+    comment = request.form.get("comment", "")
+
+    if comment == "":
+        pass
+
+    new_comment = Comment(current_user, post_id, comment)
+    db.session.add(new_comment)
+    db.session.commit()
+    pass
+
+    return redirect(f"/post/{post_id}")
 
 
 @app.route("/post/<int:post_id>/data", methods=["GET"])

@@ -1,5 +1,6 @@
 @import url("/static/css/vars.css");
 @import url("/static/css/components/post-card.css");
+@import url("/static/css/components/comment-card.css");
 
 .post-container {
     max-width: 600px;
@@ -17,44 +18,34 @@
     width: 100%;
 }
 
-/*
-.commenter {
-    color: black;
-    font-size: medium;
-    font-weight: bold;
-    display: inline;
-}
-
-.time-stamp {
-    color: gray;
-    font-size: small;
-    display: inline;
-}
-
-.comment {
-    font-size: medium;
-    overflow-wrap: break-word;
-    margin-top: 1%;
-}
-
-.create-comment {
-    width: fit-content;
-    border: none;
-    font-size: medium;
-}
-
-.comment-box {
+.comment-form {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    font-size: medium;
-    overflow-wrap: break-word;
-    margin-top: 1%;
-    border: none;
-    resize: vertical;
-    font-family: Arial, Helvetica, sans-serif;
+    gap: 0.5rem;
 }
 
-textarea:focus,
-input:focus {
-    outline: none;
+.comment-form label {
+    color: var(--charcoal-color);
 }
-*/
+
+.comment-form textarea {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    font-family: inherit;
+    font-size: small;
+}
+
+.comment-form button {
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--white-color);
+    background-color: var(--purple-color);
+    font-size: large;
+}
+
+.comment-form button:hover {
+    background-color: #4d3056;
+}
