@@ -22,6 +22,15 @@
     margin-bottom: 0.5rem;
 }
 
+.post-header h3 {
+    margin-right: 0.5rem;
+}
+
+.post-header h3,
+.delete-button {
+    display: inline;
+}
+
 @media screen and (min-width: 500px) {
     .post-header {
         display: flex;
@@ -46,7 +55,7 @@
     gap: 0.5rem;
 }
 
-.post-action {
+button {
     background: none;
     border: none;
     cursor: pointer;
@@ -62,4 +71,14 @@
 .like-button {
     font-size: 2em;
     color: var(--white-color);
+}
+
+.delete-button {
+    font-size: 1em;
+    color: var(--white-color);
+}
+
+.like-button:hover,
+.delete-button:hover {
+    color: var(--coral-color);
 }

@@ -82,12 +82,18 @@ def my_Post_page(user_id: int):
     )
 
 
-@app.route("/tunes/<int:post_id>", methods=["GET"])
+@app.route("/tunes/<int:post_id>", methods=["GET", "DELETE"])
 def single_post(post_id: int):
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-
     post_info = post_repository_singleton.get_post_info(post_id)
+
+    if request.method == "DELETE":
+        if post_info.post.user_id == user_info.getID():
+            Post.query.filter_by(id=post_id).delete()
+            db.session.commit()
+        return ("", 204)
+
     return render_template(
         "pages/post_page.html",
         post_info=post_info,
@@ -267,8 +273,3 @@ def login_info():
         return redirect("/")
         # redirect tot he correct page if everything checks out.
     return render_template("pages/login_page.html", no_layout=True)
-
-@app.post('/library_page/<int:id>/delete')
-def delete_post(post_id: int):
-    post_repository_singleton.delete_post(post_id)
-    return redirect('/library_page')

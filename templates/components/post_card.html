@@ -1,7 +1,14 @@
 <div class="post-card" data-id="{{ post.getID() }}">
     <div class="post-header">
         <h2 class="post-title">{{ post.getTitle() }}</h2>
-        <h3 class="post-author">{{ post.getUsername() }}</h3>
+        <div>
+            <h3 class="post-author">{{ post.getUsername() }}</h3>
+            {% if post.user_id == user_info.getID() %}
+                <button class="delete-button">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            {% endif %}
+        </div>
     </div>
 
     <div class="post-actions">
@@ -16,13 +23,6 @@
                 %}0{% endif %}{{ (post.getDuration() % 60000 / 1000)|round|int }}
             </p>
         </div>
-        <div>
-            <form method="post" action="/library_page/{{ post.getID() }}/delete">
-                <button type="submit">
-                    <img class="img-responsive center-block" src="/static/trashcan.svg" alt="Delete" height="24px">
-                </button>
-            </form>
-        </div>
         <button class="post-action like-button">
             {% if user_info.isLiked(post.getID()) == True: %}
                 <i class="fa-solid fa-heart"></i>
@@ -30,6 +30,5 @@
                 <i class="fa-regular fa-heart"></i>
             {% endif %}
         </button>
-
     </div>
 </div>

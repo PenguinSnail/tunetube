@@ -1,9 +1,7 @@
-from flask import Flask
 from flask.testing import FlaskClient
 from src.models import db, User
-from flask_bcrypt import Bcrypt
-from src.repositories.user_repository import user_repository_singleton
 from tests.utils import refresh_db
+
 
 def test_login_page(test_client: FlaskClient):
     refresh_db()
@@ -12,16 +10,14 @@ def test_login_page(test_client: FlaskClient):
 
     assert "<title>Login</title>" in response_data
 
-    user = User(username='bob', password='1234')
+    user = User(username="bob", password="1234")
     db.session.add(user)
     db.session.commit()
 
-    response = test_client.post('/login', query_string={
-        'name': 'user2', 'password': '1234' 
-    }, follow_redirects=True)
+    response = test_client.post(
+        "/login",
+        query_string={"name": "user2", "password": "1234"},
+        follow_redirects=True,
+    )
 
     assert response.request.path == "/login"
-
-
-
-
