@@ -1,4 +1,5 @@
 @import url("/static/css/vars.css");
+
 .user-container {
     display: flex;
     background-color: var(--gray1-color);
