@@ -41,6 +41,7 @@
 .post-action {
     background: none;
     border: none;
+    cursor: pointer;
 }
 
 .play-button {

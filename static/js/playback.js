@@ -1,5 +1,10 @@
+/**
+ * @param {HTMLElement} button
+ * @param {Player} player
+ */
 export const generatePlaybackHandler = (button, player) =>
-    button.addEventListener("click", async () => {
+    button.addEventListener("click", async (event) => {
+        event.stopPropagation();
         const icon = button.querySelector("i");
 
         const currentlyPlaying = document.querySelector(".fa-circle-pause");

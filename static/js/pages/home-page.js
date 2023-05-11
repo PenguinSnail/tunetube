@@ -4,5 +4,10 @@ import { generatePlaybackHandler } from "../playback.js";
 const context = new AudioContext();
 const player = new Player(context);
 
-const playButtons = document.querySelectorAll("button.play-button");
-playButtons.forEach((button) => generatePlaybackHandler(button, player));
+const postCards = document.querySelectorAll(".post-card");
+postCards.forEach((post) => {
+    generatePlaybackHandler(post.querySelector(".play-button"), player);
+    post.addEventListener("click", () => {
+        window.location.href = `/post/${post.dataset.id}`;
+    });
+});
