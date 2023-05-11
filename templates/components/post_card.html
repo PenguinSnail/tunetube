@@ -1,7 +1,9 @@
 <div class="post-card" data-id="{{ post.getID() }}">
     <div class="post-header">
         <h2 class="post-title">{{ post.getTitle() }}</h2>
-        <h3 class="post-author">{{ post.getUsername() }}</h3>
+        <h3 class="post-author">
+            <a href="/account/{{ post.user_id }}">{{ post.getUsername() }}</a>
+        </h3>
     </div>
 
     <div class="post-actions">

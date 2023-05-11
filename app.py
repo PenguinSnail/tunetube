@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 
-from src.models import db, Post, User, Comment, LikedBy
+from src.models import db, Post, User, Comment, LikedBy, FollowedBy
 from flask import (
     Flask,
     flash,
@@ -200,7 +200,95 @@ def account_page():
     if "user" not in session:
         return redirect("/landing")
 
-    return render_template("pages/account_page.html", account_active=True)
+    # get session user id
+    current_user = session["user"]["user_id"]  # noqa
+    user_info = User.query.filter_by(id=current_user).first()
+
+    # get list of all followers for user id
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
+
+    # get users for all followed accounts
+    followed = []
+    for follower in followers_list:
+        followed += User.query.filter_by(id=follower.follower_id).all()
+
+    return render_template(
+        "pages/account_page.html",
+        account_active=True,
+        name=user_info.username,
+        followed=followed,
+    )
+
+
+@app.get("/account/<int:user_id>")
+def get_followed_page(user_id):
+    followed = 0
+    user = User.query.filter_by(id=user_id).first()
+
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
+
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
+
+    for followers in followers_list:
+        if user_info.id == followers.user_id and user.id == followers.follower_id:
+            followed = 1
+
+    return render_template("pages/followed_page.html", user=user, followed=followed)
+
+
+@app.post("/account/logout")
+def log_out():
+    if "user" not in session:
+        return redirect("/landing")
+    session.clear()
+    return redirect("/landing")
+
+
+@app.post("/account/unfollow")
+def unfollow():
+    if "user" not in session:
+        return redirect("/landing")
+
+    # gets follower id
+    other_account_id = request.form.get("user")
+    followed = User.query.filter_by(id=other_account_id).first()
+    print(followed.id)
+
+    # gets session user id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
+    print(user_info.id)
+
+    # gets folowers.
+    followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
+    for followers in followers_list:
+        if followers.follower_id == followed.id:
+            db.session.delete(followers)
+            db.session.commit()
+    return redirect("/account")
+
+
+@app.post("/account/follow")
+def follow():
+    if "user" not in session:
+        return redirect("/landing")
+
+    # gets follower id
+    other_account_id = request.form.get("user")
+    followed = User.query.filter_by(id=other_account_id).first()
+    print(followed.id)
+
+    # gets session user id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
+    print(user_info.id)
+
+    # gets folowers.
+    new_follow = FollowedBy(user_id=user_info.id, follower_id=followed.id)
+    db.session.add(new_follow)
+    db.session.commit()
+    return redirect("/")
 
 
 @app.route("/account/register", methods=["GET", "POST"])

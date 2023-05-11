@@ -63,3 +63,19 @@
     font-size: 2em;
     color: var(--white-color);
 }
+
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {
+    color: var(--purple-color);
+    background-color: transparent;
+    text-decoration: none;
+}
