@@ -11,7 +11,7 @@
     {% if followed == 1 %}
         <form action="/account/unfollow" method="post">
             <label for="">unfollow:</label>
-            <input type="hidden" user="{{ user.id }}" />
+            <input type="hidden" id="user" name="user" value="{{ user.id }}" />
             <input type="submit" class="logout-button" value="unfollow" />
         </form>
     {% elif followed == 0 %}

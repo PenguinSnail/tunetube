@@ -214,15 +214,17 @@ def unfollow():
     # gets follower id
     other_account_id = request.form.get("user")
     followed = User.query.filter_by(id=other_account_id).first()
+    print(followed.id)
 
     # gets session user id
     current_user = session["user"]["user_id"]
     user_info = User.query.filter_by(id=current_user).first()
+    print(user_info.id)
 
     # gets folowers.
     followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
     for followers in followers_list:
-        if user_info.id == followers.user_id and followed == followers.follower_id:
+        if followers.follower_id == followed.id:
             db.session.delete(followers)
             db.session.commit()
     return redirect("/account")
