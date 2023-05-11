@@ -163,8 +163,17 @@ def library_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
+    current_user = session["user"]["user_id"]
 
-    return render_template("pages/library_page.html", library_active=True)
+    user_posts = Post.query.filter_by(user_id=current_user)
+    user_info = user_repository_singleton.get_user_info(current_user)
+
+    return render_template(
+        "pages/library_page.html",
+        posts=user_posts,
+        user_info=user_info,
+        library_active=True,
+    )
 
 
 @app.post("/tunes")
