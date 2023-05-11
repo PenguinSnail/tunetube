@@ -82,7 +82,7 @@ def my_Post_page(user_id: int):
     )
 
 
-@app.route("/post/<int:post_id>", methods=["GET"])
+@app.route("/tunes/<int:post_id>", methods=["GET"])
 def single_post(post_id: int):
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
@@ -96,7 +96,7 @@ def single_post(post_id: int):
     )
 
 
-@app.route("/post/<int:post_id>/comment", methods=["POST"])
+@app.route("/tunes/<int:post_id>/comment", methods=["POST"])
 def comment_post(post_id: int):
     current_user = session["user"]["user_id"]
 
@@ -110,10 +110,10 @@ def comment_post(post_id: int):
     db.session.commit()
     pass
 
-    return redirect(f"/post/{post_id}")
+    return redirect(f"/tunes/{post_id}")
 
 
-@app.route("/post/<int:post_id>/data", methods=["GET"])
+@app.route("/tunes/<int:post_id>/data", methods=["GET"])
 def post_data(post_id: int):
     # Authentication
     if "user" not in session:
@@ -124,20 +124,20 @@ def post_data(post_id: int):
     return post_info.post.getSong()
 
 
-app.route("/like/<int:post_id>/<action>")
+@app.route("/tunes/<int:post_id>/like", methods=["POST", "DELETE"])
+def like_action(post_id):
+    current_user = session["user"]["user_id"]
 
-
-def like_action(post_id, action):
-    current_user = session["user"]["username"]
-    user_info = user_repository_singleton.get_user_info(current_user)
-
-    if action == "like":
-        newLike = LikedBy(user_info.getID, post_id)
-        db.session.commit(newLike)
-
-    if action == "unlike":
-        LikedBy.query.filter_by(post_id=post_id, user_id=user_info.getID()).delete()
+    if request.method == "POST":
+        new_like = LikedBy(current_user, post_id)
+        db.session.add(new_like)
         db.session.commit()
+
+    if request.method == "DELETE":
+        LikedBy.query.filter_by(post_id=post_id, user_id=current_user).delete()
+        db.session.commit()
+
+    return ("", 204)
 
 
 @app.get("/tunes/new")

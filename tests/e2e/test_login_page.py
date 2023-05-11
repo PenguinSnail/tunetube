@@ -17,10 +17,7 @@
 #     db.session.commit()
 
 #     response = test_app.post('/login', query_string={
-#         'name': 'user2', 'password': '1234' 
+#         'name': 'user2', 'password': '1234'
 #     }, follow_redirects=True)
 
 #     assert response.request.path == "/"
-
-
-
