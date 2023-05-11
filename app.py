@@ -235,7 +235,7 @@ def sign_up():
             flash("you were successfully logged in!")
             return redirect("/")
         else:
-            return render_template("pages/sign_up_page.html", error=error)
+            return render_template("pages/signup_page.html", error=error)
 
     # get request
     return render_template("pages/signup_page.html", no_layout=True)

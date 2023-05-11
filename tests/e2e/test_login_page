@@ -1,0 +1,28 @@
+from flask.testing import FlaskClient
+from src.repositories.user_repository import get_user_info
+from src.models import db, User
+from flask_bcrypt import bcrypt
+from src.repositories.user_repository import user_repository_singleton
+
+
+
+def test_login_page(test_app: FlaskClient):
+    response = test_app.get("/login", follow_redirects=True)
+    response_data = response.data.decode("utf-8")
+
+    assert "<title>Login Below:</title>" in response_data
+    assert "submit</button>" in response_data
+
+    hashed_password = bcrypt.generate_password_hash('1234').decode()
+
+    user = User(username="bob", password=hashed_password)
+    db.session.add(user)
+    db.session.commit()
+
+    response = test_app.get('/login', query_string={
+        'name': 'bob', 'password': '1234' 
+    }, follow_redirects=True)
+
+    assert response.request.path == "/"
+
+
