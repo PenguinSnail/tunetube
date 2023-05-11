@@ -1,24 +1,31 @@
 {% extends "layout.html" %}
-{% block title %}TuneTube - Account{% endblock %}
+{% block title %}TuneTube - followed page{% endblock %}
 {% block head %}
-    <link rel="stylesheet" href="static/css/pages/account.css" />
+    <link rel="stylesheet" href="/static/css/pages/account.css" />
 {% endblock %}
 {% block body %}
     <div class="leftbox">
-        {{ user.id }}
-        {{ user.username }}
+        <div class="user-container">
+            <div class="account-name">
+                <h1>
+                    {{ user.username }}
+                </h1>
+            </div>
+        </div>
+        <div class="settings-box">
+            {% if followed == 1 %}
+                <form action="/account/unfollow" method="post">
+                    <label for="">unfollow:</label>
+                    <input type="hidden" id="user" name="user" value="{{ user.id }}" />
+                    <input type="submit" class="logout-button" value="unfollow" />
+                </form>
+            {% elif followed == 0 %}
+                <form action="/account/follow" method="post">
+                    <label for="">follow:</label>
+                    <input type="hidden" id="user" name="user" value="{{ user.id }}" />
+                    <input type="submit" class="logout-button" value="follow" />
+                </form>
+            {% endif %}
+        </div>
     </div>
-    {% if followed == 1 %}
-        <form action="/account/unfollow" method="post">
-            <label for="">unfollow:</label>
-            <input type="hidden" id="user" name="user" value="{{ user.id }}" />
-            <input type="submit" class="logout-button" value="unfollow" />
-        </form>
-    {% elif followed == 0 %}
-        <form action="/account/follow" method="post">
-            <label for="">follow:</label>
-            <input type="hidden" id="user" name="user" value="{{ user.id }}" />
-            <input type="submit" class="logout-button" value="follow" />
-        </form>
-    {% endif %}
 {% endblock %}
