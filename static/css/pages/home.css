@@ -1,80 +1,14 @@
-/* three column divs for homepage*/
-.left-div {
-    width: 25%;
-    opacity: 10%;
-    height: 501px;
-    position: fixed;
-    left: 0;
-    top: 80px;
-    color: var(--eerie-color);
-}
+@import url("/static/css/vars.css");
+@import url("/static/css/components/post-card.css");
 
-.center-div {
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20px;
-    position: relative;
-}
-
-.right-div {
-    width: 25%;
-    height: 501px;
-    position: fixed;
-    right: 0;
-    top: 80px;
-    color: var(--eerie-color);
-}
-
-/* card for each post on the home page */
-
-.card {
-    padding: 5%;
-    background: var(--gray1-color);
-    border-radius: 10px;
-    margin-bottom: 5%;
-    box-shadow: 3px 3px 3px var(--charcoal-color);
-    color: var(--white-color);
-}
-
-.card-link {
-    text-decoration: none;
-}
-
-.card-title {
-    font-size: xx-large;
-    padding-bottom: 1%;
-    color: var(--white-color);
-}
-
-/* Code for the comment box */
-.comment-box {
+.feed-container {
+    max-width: 600px;
     width: 100%;
-    height: 24px;
-}
+    margin-inline: auto;
+    padding: 1rem;
 
-.playback {
-    margin: 0;
-}
-
-.username {
-    text-align: right;
-}
-
-.play-btn {
-    background: none;
-    border: none;
-    color: var(--coral-color);
-    font-size: 2em;
-}
-
-.like-btn {
-    background: none;
-    border: none;
-    font-size: medium;
-}
-
-.creator {
-    color: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }

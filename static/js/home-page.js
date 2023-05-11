@@ -3,39 +3,40 @@ import { Player } from "./classes.js";
 const context = new AudioContext();
 const player = new Player(context);
 
-const playButtons = document.querySelectorAll("button.play-btn");
+const playButtons = document.querySelectorAll("button.play-button");
 playButtons.forEach((button) =>
     button.addEventListener("click", async () => {
-        player.stop();
+        const icon = button.querySelector("i");
 
-        const oldBtn = document.querySelector(".fa-circle-pause");
-        if (oldBtn) {
-            oldBtn.classList.remove("fa-circle-pause");
-            oldBtn.classList.add("fa-circle-play");
+        const currentlyPlaying = document.querySelector(".fa-circle-pause");
+        if (currentlyPlaying && currentlyPlaying != icon) {
+            currentlyPlaying.classList.remove("fa-circle-pause");
+            currentlyPlaying.classList.add("fa-circle-play");
+            player.stop();
         }
 
-        const i = button.querySelector("i");
-        if (i.classList.contains("fa-circle-play")) {
-            i.classList.remove("fa-circle-play");
-            i.classList.add("fa-circle-pause");
+        if (icon.classList.contains("fa-circle-play")) {
+            icon.classList.remove("fa-circle-play");
+            icon.classList.add("fa-circle-pause");
 
             try {
-                const response = await fetch(`/post/${button.id}/data`);
+                const response = await fetch(`/post/${button.dataset.id}/data`);
                 const data = await response.json();
 
                 player.load(data);
+                player.setProgressOutput(button.parentElement.querySelector("span"));
                 await player.start();
-                i.classList.remove("fa-circle-pause");
-                i.classList.add("fa-circle-play");
+                icon.classList.remove("fa-circle-pause");
+                icon.classList.add("fa-circle-play");
             } catch (e) {
                 console.error(e);
-                i.classList.remove("fa-circle-pause");
-                i.classList.add("fa-circle-play");
+                icon.classList.remove("fa-circle-pause");
+                icon.classList.add("fa-circle-play");
             }
         } else {
             player.stop();
-            i.classList.remove("fa-circle-pause");
-            i.classList.add("fa-circle-play");
+            icon.classList.remove("fa-circle-pause");
+            icon.classList.add("fa-circle-play");
         }
     })
 );

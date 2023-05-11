@@ -7,51 +7,17 @@
     <script src="/static/js/home-page.js" type="module" defer></script>
 {% endblock %}
 {% block body %}
-    <!-- Container for user feed -->
-    <div id="master">
-        <!-- Feed Column -->
-        <div class="center-div">
-            {% for post in posts %}
-                <!-- Link to the Post -->
-                <!--                <a href="/post/{{ post.getID() }}" class="card-link">-->
-                <div class="card">
-                    <!-- Post Title -->
-                    <div class="card-title">{{ post.getTitle() }}</div>
-
-                    <!-- Post Creator -->
-                    <div class="creator">{{ post.getUsername() }}</div>
-                    <!-- Music Player -->
-
-                    <div>
-                        <button id="{{ post.getID() }}" class="play-btn">
-                            <i class="fa-solid fa-circle-play"></i>
-                        </button>
-                        <!-- Shows if the user likes the post -->
-                        {% if user_info.isLiked(post.getID()) == True: %}
-                            <span><button class="like-btn" onclick="likeFunc()">💖</button></span>
-                        {% else %}
-                            <span> <button class="like-btn" onclick="unlikeFunc()">💔</button></span>
-                        {% endif %}
-                    </div>
-
-                    <form action="/post/{{ post.getID() }}" method="POST">
-                        <input
-                            type="text"
-                            name="create-comment"
-                            placeholder="Leave a comment"
-                            class="comment-box"
-                            maxlength="1000" />
-                    </form>
-                </div>
-                <!--                </a>-->
-            {% endfor %}
-        </div>
-
-        <!-- Profile Column -->
+    <!-- Feed Column -->
+    <div class="feed-container">
+        {% for post in posts %}
+            {% include 'components/post_card.html' %}
+        {% endfor %}
+    </div>
+    <!--
         <div class="right-div">
             <div>
                 <h4 class="username" , id="currentUser">Hello {{ user_info.getUsername() }}!</h4>
             </div>
         </div>
-    </div>
+-->
 {% endblock %}

@@ -147,6 +147,8 @@ export class Player {
         this.data = [];
         /** Timers for each event */
         this.timers = [];
+        /** Span to write playback time to */
+        this.progress;
     }
 
     /**
@@ -192,8 +194,20 @@ export class Player {
                 );
             });
 
+            // update the progress text
+            for (let ms = 0; ms < this.data[this.data.length - 1].time; ms += 500) {
+                this.timers.push(
+                    setTimeout(() => {
+                        if (this.progress) {
+                            this.progress.textContent = `${Math.floor(ms / 60000)}:${
+                                Math.round((ms % 60000) / 1000) < 10 ? "0" : ""
+                            }${Math.round((ms % 60000) / 1000)}`;
+                        }
+                    }, ms)
+                );
+            }
+
             // get the timestamp of the last event
-            console.log(this.data);
             const endTime = this.data[this.data.length - 1].time;
             // create a timer for the last event timestamp
             this.timers.push(
@@ -213,5 +227,14 @@ export class Player {
         this.timers.forEach((timer) => clearTimeout(timer));
         // stop playing all notes
         this.notes.forEach((note) => note.stop());
+        if (this.progress) {
+            this.progress.textContent = "0:00";
+            delete this.progress;
+        }
+    }
+
+    /** Set an HTML element to write progress to */
+    setProgressOutput(node) {
+        this.progress = node;
     }
 }

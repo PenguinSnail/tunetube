@@ -1,0 +1,54 @@
+@import url("/static/css/vars.css");
+
+.post-card {
+    width: 100%;
+    border-radius: 0.5rem;
+    padding: 1rem;
+
+    background-color: var(--gray1-color);
+    color: var(--white-color);
+    box-shadow: 3px 3px 3px var(--charcoal-color);
+}
+
+.post-header {
+    margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 500px) {
+    .post-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.post-header * {
+    margin: 0;
+}
+
+.post-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.playback-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-action {
+    background: none;
+    border: none;
+}
+
+.play-button {
+    font-size: 3em;
+    color: var(--coral-color);
+}
+
+.like-button {
+    font-size: 2em;
+    color: var(--white-color);
+}

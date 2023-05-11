@@ -1,3 +1,4 @@
+import json
 from datetime import datetime, timezone
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.postgresql import (
@@ -84,6 +85,9 @@ class Post(db.Model, sharedMethods):
 
     def setUserID(self, user_id):
         self.user_id = user_id
+
+    def getDuration(self):
+        return json.loads(self.song)[-1]["time"]
 
 
 class Comment(db.Model, sharedMethods):
