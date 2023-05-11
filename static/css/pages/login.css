@@ -3,6 +3,19 @@
 body {
     background-color: #e5d0cc;
     height: 100%;
+    width: 100%;
+    padding: 1rem;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main > * {
+    max-width: 500px;
+    width: 100%;
 }
 
 .form-containter {
@@ -15,35 +28,21 @@ form div {
     padding-bottom: 10px;
     flex-direction: column;
 }
-form input {
-    width: 100%;
-}
 
 .title {
     display: flex;
+    max-width: fit-content;
     justify-content: center;
     font-family: "Montserrat";
 }
 
-.center-div-box {
+.box {
     background-color: white;
-    padding: 50px;
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20;
-    position: relative;
+    padding: 1rem 2rem 2rem;
 }
 
 .center-div-title {
     text-align: center;
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20;
-    position: relative;
 }
 
 .form-align {
@@ -51,28 +50,19 @@ form input {
     justify-content: center;
 }
 
-input[type="text"],
-select {
-    width: 30vw;
-    padding: 12px 15px;
-    font-family: "Montserrat";
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+form {
+    width: 100%;
 }
 
-input[type="password"],
+input,
 select {
-    width: 30vw;
     padding: 12px 15px;
     font-family: "Montserrat";
     margin: 8px 0;
-    display: inline-block;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    width: 100%;
 }
 
 .button {
