@@ -1,6 +1,10 @@
 @import url("/static/css/vars.css");
 @import url("/static/css/components/piano.css");
 
+body {
+    background-color: #151515;
+}
+
 .keyboard-container {
     position: relative;
     width: 100%;
@@ -28,18 +32,27 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    height: 50vh;
-    background-color: #151515;
+}
+
+@media screen and (max-width: 650px) {
+    .button-container {
+        flex-direction: column;
+    }
+}
+
+form {
+    width: 200px;
 }
 
 .button {
+    width: 100%;
     border: none;
     padding: 15px;
     text-align: center;
     font-family: "Montserrat";
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 1.2em;
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 8px;
@@ -51,7 +64,7 @@
     color: white;
 }
 
-.button-signup:hoover {
+.button-signup:hover {
     background-color: #c95a14;
     color: white;
 }
@@ -61,12 +74,31 @@
     color: white;
 }
 
+.button-login:hover {
+    background-color: #c95a14;
+    color: white;
+}
+
 .title {
     display: flex;
-    align-items: normal;
-    font-size: 40px;
     font-family: "Jura";
     background-color: #151515;
     color: white;
-    padding-left: 15vw;
+    font-size: 2em;
+}
+
+.title h1 {
+    width: 100%;
+    text-align: center;
+}
+
+@media screen and (min-width: 650px) {
+    .title {
+        padding-left: 15vw;
+        font-size: 3em;
+    }
+
+    .title h1 {
+        text-align: left;
+    }
 }
