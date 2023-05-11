@@ -1,4 +1,5 @@
 @import url("/static/css/vars.css");
+
 .user-container {
     background-color: var(--gray1-color);
     border-radius: 5px;

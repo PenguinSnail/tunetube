@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
 {% block title %}Login{% endblock %}
 {% block head %}
-<link rel="stylesheet" href="static/css/pages/login.css" />
-<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/pages/login.css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
 {% endblock %}
 {% block body %}
-<div class="body">
     <div class="center-div-title">
         <h1 class="title">Are you ready to get back to your Tunes?</h1>
     </div>
     <div class="center-div-box">
+        {% if error %}
+            <p class="error"><strong>Error:</strong> {{ error }}</p>
+        {% endif %}
         <div class="box">
             <h2 class="title">Login Below:</h2>
             <div class="form-align">
@@ -27,5 +29,4 @@
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

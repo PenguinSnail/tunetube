@@ -1,5 +1,14 @@
 {% extends 'layout.html' %}
 {% block title %}Note Library{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="static/css/pages/home.css" />
+    <script src="/static/js/pages/home-page.js" type="module" defer></script>
+{% endblock %}
 {% block body %}
-    <h1>welcome to the tune library</h1>
+    <!-- Feed Column -->
+    <div class="feed-container">
+        {% for post in posts %}
+            {% include 'components/post_card.html' %}
+        {% endfor %}
+    </div>
 {% endblock %}

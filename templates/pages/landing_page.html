@@ -2,8 +2,8 @@
 {% block title %}TuneTube{% endblock %}
 {% block head %}
     <link rel="stylesheet" href="/static/css/pages/landing.css" />
-    <link href='https://fonts.googleapis.com/css?family=Jura' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" />
 {% endblock %}
 {% block body %}
     <div class="keyboard-container">
@@ -47,7 +47,7 @@
         <form action="/account/register" method="get">
             <button class="button button-signup" type="submit">Get Started</button>
         </form>
-        <form action="/login" method="post">
+        <form action="/login" method="get">
             <button class="button button-login" href="/login">Login</button>
         </form>
     </div>

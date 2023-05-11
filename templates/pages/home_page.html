@@ -2,64 +2,15 @@
 {% block title %}
     TuneTube
 {% endblock %}
-
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
-    <script src="/static/js/like-btn.js" defer></script>
-
+    <script src="/static/js/pages/home-page.js" type="module" defer></script>
 {% endblock %}
-
 {% block body %}
-
-    <!-- Container for user feed -->
-    <div id="master">
-        <!-- Feed Column -->
-        <div class="center-div">
-            {% for post in posts %}
-                <!-- Link to the Post -->
-                <div class="card" onclick = "">
-                    
-                    <!-- Post Title -->
-                    <div class = "card-title"><href="/post/{{ post.getID()}}">{{post.getTitle()}}</div>
-                    
-                    <!-- Post Creator -->
-                    <div class = "creator">{{ post.getUsername()}}</div>
-                    <!-- Music Player -->
-                    <p></p>
-
-                    <div>
-                        <figure class="playback"> <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio -->
-                            <audio
-                                controls
-                                src="AUDIOPATHHERE"> <!--TODO add audio path here-->
-                            </audio>
-                        </figure>
-                                                
-                        <!-- Shows if the user likes the post -->
-                        {%if user_info.isLiked(post.getID()) == True: %}
-                        <span><button class = "like-btn" onclick ="likeFunc()"> 💖 </button></span>
-                        {%else%}
-                        <span> <button class = "like-btn" onclick ="unlikeFunc()"> 💔 </button></span>
-                        {% endif %}
-                    </div>
-
-                    <p></p>
-
-                    <a href="/post/{{ post.getID() }}" class ="underline small-font small-padding">View more comments</a>
-
-                    <form action = "/post/{{ post.getID()}}" method = "POST">
-                        <input type = "text" name = "create-comment" placeholder="Leave a comment" class = "comment-box" maxlength = "1000"/>
-                    </form>
-                </div>
-
-            {% endfor %}
-        </div>
-        
-        <!-- Profile Column -->
-        <div class="right-div">
-            <div>
-                <h4 class = "username", id = "currentUser" >Hello {{user_info.getUsername()}}!  </h4>
-            </div>
-        </div>
+    <!-- Feed Column -->
+    <div class="feed-container">
+        {% for post in posts %}
+            {% include 'components/post_card.html' %}
+        {% endfor %}
     </div>
 {% endblock %}

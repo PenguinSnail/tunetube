@@ -134,7 +134,7 @@ export class Recorder {
 
 /* -------------------------------------------------------------------------- */
 
-export default class Player {
+export class Player {
     /**
      * @param {AudioContext} context AudioContext to play audio to
      */
@@ -147,6 +147,8 @@ export default class Player {
         this.data = [];
         /** Timers for each event */
         this.timers = [];
+        /** Span to write playback time to */
+        this.progress;
     }
 
     /**
@@ -155,12 +157,7 @@ export default class Player {
      * @returns {boolean} load succeeded or failed
      */
     load(data) {
-        try {
-            this.data = JSON.parse(data);
-        } catch {
-            alert("Error parsing tune data!");
-            return false;
-        }
+        this.data = data;
 
         // for each event in the data
         this.data.forEach((event) => {
@@ -170,8 +167,6 @@ export default class Player {
                 this.notes.set(event.frequency, new Note(this.context, event.frequency));
             }
         });
-
-        return true;
     }
 
     /**
@@ -199,6 +194,19 @@ export default class Player {
                 );
             });
 
+            // update the progress text
+            for (let ms = 0; ms < this.data[this.data.length - 1].time; ms += 500) {
+                this.timers.push(
+                    setTimeout(() => {
+                        if (this.progress) {
+                            this.progress.textContent = `${Math.floor(ms / 60000)}:${
+                                Math.round((ms % 60000) / 1000) < 10 ? "0" : ""
+                            }${Math.round((ms % 60000) / 1000)}`;
+                        }
+                    }, ms)
+                );
+            }
+
             // get the timestamp of the last event
             const endTime = this.data[this.data.length - 1].time;
             // create a timer for the last event timestamp
@@ -219,5 +227,14 @@ export default class Player {
         this.timers.forEach((timer) => clearTimeout(timer));
         // stop playing all notes
         this.notes.forEach((note) => note.stop());
+        if (this.progress) {
+            this.progress.textContent = "0:00";
+            delete this.progress;
+        }
+    }
+
+    /** Set an HTML element to write progress to */
+    setProgressOutput(node) {
+        this.progress = node;
     }
 }

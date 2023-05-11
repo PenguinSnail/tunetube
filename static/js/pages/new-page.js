@@ -1,4 +1,4 @@
-import { Note, Key, Recorder } from "./classes.js";
+import { Note, Key, Recorder } from "../classes.js";
 
 const context = new AudioContext();
 const recorder = new Recorder();
