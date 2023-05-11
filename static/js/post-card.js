@@ -6,6 +6,8 @@
  */
 export function setupCard(card, player, link) {
     const playButton = card.querySelector(".play-button");
+    const likeButton = card.querySelector(".like-button");
+
     playButton.addEventListener("click", async (event) => {
         event.stopPropagation();
         const icon = playButton.querySelector("i");
@@ -22,7 +24,7 @@ export function setupCard(card, player, link) {
             icon.classList.add("fa-circle-pause");
 
             try {
-                const response = await fetch(`/post/${card.dataset.id}/data`);
+                const response = await fetch(`/tunes/${card.dataset.id}/data`);
                 const data = await response.json();
 
                 player.load(data);
@@ -42,8 +44,28 @@ export function setupCard(card, player, link) {
         }
     });
 
+    likeButton.addEventListener("click", async (event) => {
+        event.stopPropagation();
+        const icon = likeButton.querySelector("i");
+
+        try {
+            const response = await fetch(`/tunes/${card.dataset.id}/like`, {
+                method: icon.classList.contains("fa-solid") ? "DELETE" : "POST",
+            });
+
+            if (response.ok) {
+                icon.classList.toggle("fa-solid");
+                icon.classList.toggle("fa-regular");
+            } else {
+                alert("Error liking post!");
+            }
+        } catch (e) {
+            console.error(e);
+        }
+    });
+
     if (link)
         card.addEventListener("click", () => {
-            window.location.href = `/post/${card.dataset.id}`;
+            window.location.href = `/tunes/${card.dataset.id}`;
         });
 }

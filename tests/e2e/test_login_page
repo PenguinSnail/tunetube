@@ -20,9 +20,7 @@ def test_login_page(test_app: FlaskClient):
     db.session.commit()
 
     response = test_app.get('/login', query_string={
-        'name': 'bob', 'password': '1234' 
+        'name': 'bob', 'password': '1234'
     }, follow_redirects=True)
 
     assert response.request.path == "/"
-
-
