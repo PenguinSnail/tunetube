@@ -31,6 +31,15 @@ class PostRepository:
 
         return SingularPostInfo(post, comments, likes)
 
+    def delete_post(self, post_id: int):
+            """Delete a post"""
+            # Make sure the post exists
+            old_post = self.get_post_info
+            # Complain if we did not find the post
+            if not old_post:
+                raise ValueError(f'post with id {post_id} not found')
+            # Remove the post from the dict
+            del self.post[post_id]
 
 # Singleton to be used in other modules
 post_repository_singleton = PostRepository()

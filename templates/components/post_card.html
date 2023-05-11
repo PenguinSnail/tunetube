@@ -16,6 +16,13 @@
                 %}0{% endif %}{{ (post.getDuration() % 60000 / 1000)|round|int }}
             </p>
         </div>
+        <div>
+            <form method="post" action="/library_page/{{ post.getID() }}/delete">
+                <button type="submit">
+                    <img class="img-responsive center-block" src="/static/trashcan.svg" alt="Delete" height="24px">
+                </button>
+            </form>
+        </div>
         <button class="post-action like-button">
             {% if user_info.isLiked(post.getID()) == True: %}
                 <i class="fa-solid fa-heart"></i>
@@ -23,5 +30,6 @@
                 <i class="fa-regular fa-heart"></i>
             {% endif %}
         </button>
+
     </div>
 </div>

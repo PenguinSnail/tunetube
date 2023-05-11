@@ -267,3 +267,8 @@ def login_info():
         return redirect("/")
         # redirect tot he correct page if everything checks out.
     return render_template("pages/login_page.html", no_layout=True)
+
+@app.post('/library_page/<int:id>/delete')
+def delete_post(post_id: int):
+    post_repository_singleton.delete_post(post_id)
+    return redirect('/library_page')
