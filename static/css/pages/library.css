@@ -1,0 +1,14 @@
+@import url("/static/css/vars.css");
+@import url("/static/css/components/post-card.css");
+
+.feed-container {
+    max-width: 600px;
+    width: 100%;
+    margin-inline: auto;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}

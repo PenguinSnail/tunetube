@@ -13,6 +13,12 @@ body {
     height: 100%;
 }
 
+/* Fonts ---------------------------- */
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
 /* Utils ---------------------------- */
 
 .flex-row {
@@ -45,10 +51,4 @@ body {
 
 .nav {
     z-index: 9999;
-}
-
-/* Fonts ---------------------------- */
-
-body {
-    font-family: sans-serif;
 }

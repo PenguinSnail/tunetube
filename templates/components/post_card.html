@@ -6,7 +6,7 @@
 
     <div class="post-actions">
         <div class="playback-container">
-            <button data-id="{{ post.getID() }}" class="post-action play-button">
+            <button class="post-action play-button">
                 <i class="fa-solid fa-circle-play"></i>
             </button>
             <p>
@@ -16,7 +16,7 @@
                 %}0{% endif %}{{ (post.getDuration() % 60000 / 1000)|round|int }}
             </p>
         </div>
-        <button data-id="{{ post.getID() }}" class="post-action like-button">
+        <button class="post-action like-button">
             {% if user_info.isLiked(post.getID()) == True: %}
                 <i class="fa-solid fa-heart"></i>
             {% else %}
