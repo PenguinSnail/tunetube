@@ -92,7 +92,12 @@ def single_post(post_id: int):
         pass
 
     post_info = post_repository_singleton.get_post_info(post_id)
-    return render_template("pages/post.html", post_info=post_info, user_info=user_info)
+    return render_template(
+        "pages/post_page.html",
+        post_info=post_info,
+        post=post_info.post,
+        user_info=user_info,
+    )
 
 
 @app.route("/post/<int:post_id>/data", methods=["GET"])
@@ -202,7 +207,7 @@ def sign_up():
         db.session.commit()
         return redirect("/")
     # get request
-    return render_template("pages/sign_up_page.html", no_layout=True)
+    return render_template("pages/signup_page.html", no_layout=True)
 
 
 @app.post("/login")
@@ -228,4 +233,4 @@ def login_info():
 
 @app.get("/login")
 def login_page():
-    return render_template("pages/login.html", no_layout=True)
+    return render_template("pages/login_page.html", no_layout=True)

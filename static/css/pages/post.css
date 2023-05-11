@@ -1,59 +1,23 @@
-.left-div {
-    width: 25%;
-    opacity: 10%;
-    height: 501px;
-    position: fixed;
-    left: 0;
-    top: 0;
+@import url("/static/css/vars.css");
+@import url("/static/css/components/post-card.css");
+
+.post-container {
+    max-width: 600px;
+    width: 100%;
+    margin-inline: auto;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
 }
 
-.center-div {
-    width: 50%;
-    max-height: 100vh;
-    margin-left: 25%;
-    margin-right: 25%;
-    top: 20;
-    position: relative;
+.comments-container {
+    width: 100%;
 }
 
-.right-div {
-    width: 25%;
-    height: 501px;
-    position: fixed;
-    right: 0;
-    top: 0;
-}
-
-.card-title {
-    font-size: xx-large;
-    padding-bottom: 1%;
-}
-
-div.card {
-    background-color: var(--gray1-color);
-    border-radius: 6px;
-    box-shadow: 3px 3px 3px var(--charcoal-color);
-    position: relative;
-    padding: 2%;
-    color: white;
-}
-
-div.comment-card {
-    position: relative;
-    content: center;
-}
-
-div.decorator {
-    width: 50%;
-}
-
-.like-btn {
-    background: none; /* Blue background */
-    border: none; /* Remove borders */
-    font-size: 16px; /* Set a font size */
-    cursor: pointer; /* Mouse pointer on hover */
-}
-
+/*
 .commenter {
     color: black;
     font-size: medium;
@@ -71,9 +35,6 @@ div.decorator {
     font-size: medium;
     overflow-wrap: break-word;
     margin-top: 1%;
-}
-
-.user-profile {
 }
 
 .create-comment {
@@ -96,3 +57,4 @@ textarea:focus,
 input:focus {
     outline: none;
 }
+*/

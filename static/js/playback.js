@@ -1,10 +1,4 @@
-import { Player } from "./classes.js";
-
-const context = new AudioContext();
-const player = new Player(context);
-
-const playButtons = document.querySelectorAll("button.play-button");
-playButtons.forEach((button) =>
+export const generatePlaybackHandler = (button, player) =>
     button.addEventListener("click", async () => {
         const icon = button.querySelector("i");
 
@@ -38,5 +32,4 @@ playButtons.forEach((button) =>
             icon.classList.remove("fa-circle-pause");
             icon.classList.add("fa-circle-play");
         }
-    })
-);
+    });

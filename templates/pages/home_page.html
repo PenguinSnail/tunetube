@@ -4,7 +4,7 @@
 {% endblock %}
 {% block head %}
     <link rel="stylesheet" href="static/css/pages/home.css" />
-    <script src="/static/js/home-page.js" type="module" defer></script>
+    <script src="/static/js/pages/home-page.js" type="module" defer></script>
 {% endblock %}
 {% block body %}
     <!-- Feed Column -->
@@ -13,11 +13,4 @@
             {% include 'components/post_card.html' %}
         {% endfor %}
     </div>
-    <!--
-        <div class="right-div">
-            <div>
-                <h4 class="username" , id="currentUser">Hello {{ user_info.getUsername() }}!</h4>
-            </div>
-        </div>
--->
 {% endblock %}
