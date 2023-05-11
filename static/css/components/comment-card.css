@@ -13,10 +13,6 @@
 }
 
 .comment-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: 1rem;
 }
 
@@ -26,6 +22,15 @@
 
 .comment-timestamp {
     font-size: 0.9em;
+}
+
+@media screen and (min-width: 500px) {
+    .comment-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
 }
 
 .comment-content {
