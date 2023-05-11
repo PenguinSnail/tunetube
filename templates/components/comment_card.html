@@ -1,0 +1,9 @@
+<div class="comment-card">
+    <div class="comment-header">
+        <p class="comment-author">{{ comment.getUsername() }}</p>
+        <p class="comment-timestamp">{{ comment.getPost_Time().strftime("%a. %B %-d, %Y - %-I:%M %p") }}</p>
+    </div>
+    <div class="comment-content">
+        <p>{{ comment.getComment() }}</p>
+    </div>
+</div>

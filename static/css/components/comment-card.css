@@ -1,0 +1,39 @@
+.comment-card {
+    width: 100%;
+    margin: 2rem 0;
+    padding: 1rem 1rem;
+    border-radius: 0.5rem;
+    color: var(--charcoal-color);
+    background-color: var(--beige-color);
+    box-shadow: 3px 3px 5px 2px var(--gray2-color);
+}
+
+.comment-card p {
+    margin: 0;
+}
+
+.comment-header {
+    margin-bottom: 1rem;
+}
+
+.comment-author {
+    font-size: 1.2em;
+}
+
+.comment-timestamp {
+    font-size: 0.9em;
+}
+
+@media screen and (min-width: 500px) {
+    .comment-header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.comment-content {
+    width: 95%;
+    margin-inline: auto;
+}

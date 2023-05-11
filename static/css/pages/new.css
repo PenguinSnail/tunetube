@@ -2,15 +2,14 @@
 @import url("/static/css/components/piano.css");
 
 form {
-    display: flex;
-    flex-direction: row;
-    gap: 2rem;
-    padding: 2rem;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    max-width: 500px;
 }
 
 .form-element {
-    max-width: 500px;
+    grid-column: 1/3;
 }
 
 .form-element input {
@@ -48,5 +47,6 @@ form button {
 
 .keyboard-container {
     width: 100%;
-    height: 60%;
+    height: 70%;
+    padding: 2rem 1rem;
 }

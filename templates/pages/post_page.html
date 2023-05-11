@@ -12,26 +12,21 @@
 
         <div class="comments-container">
             <h3>Comments</h3>
+            <form class="comment-form" action="/tunes/{{ post_info.getID() }}/comment" method="POST">
+                <label for="comment">Commenting as <span class="commenter">{{ user_info.getUsername() }}</span></label>
+                <textarea
+                    id="comment-input"
+                    name="comment"
+                    placeholder="Leave a comment"
+                    rows="3"
+                    maxlength="1000"
+                    wrap="soft"
+                    required></textarea>
+                <button type="submit">Comment</button>
+            </form>
             {% for comment in post_info.getComments()|reverse %}
-                <div class="comment-card">
-                    <div class="comment-header">
-                        <p class="comment-author">{{ comment.getUsername() }}</p>
-                        <p class="comment-timestamp">{{ comment.getPost_Time() }}</p>
-                    </div>
-                    <div class="comment-content">
-                        <p>{{ comment.getComment() }}</p>
-                    </div>
-                </div>
+                {% include 'components/comment_card.html' %}
             {% endfor %}
         </div>
-
-        <!--
-    <form id="comment-form" action="/post/{{ post_info.getID() }}" method="POST">
-        <span>
-            <div class="commenter">{{ user_info.getUsername() }}</div>
-            <textarea name="create-comment" placeholder="Leave a comment" class="comment-box" maxlength="1000"
-                wrap="soft" id="post-comment"></textarea>
-        </span>
-    </form>
---></div>
+    </div>
 {% endblock %}

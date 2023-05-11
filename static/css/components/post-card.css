@@ -14,16 +14,24 @@
     margin-bottom: 1rem;
 }
 
+.post-header * {
+    margin: 0;
+}
+
+.post-header h2 {
+    margin-bottom: 0.5rem;
+}
+
 @media screen and (min-width: 500px) {
     .post-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
-}
 
-.post-header * {
-    margin: 0;
+    .post-header h2 {
+        margin-bottom: 0;
+    }
 }
 
 .post-actions {
@@ -42,6 +50,8 @@
     background: none;
     border: none;
     cursor: pointer;
+    margin: 0;
+    padding: 0;
 }
 
 .play-button {
