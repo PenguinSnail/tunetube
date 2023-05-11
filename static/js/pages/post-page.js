@@ -1,10 +1,10 @@
 import { Player } from "../classes.js";
-import { generatePlaybackHandler } from "../playback.js";
+import { setupCard } from "../post-card.js";
 
 const context = new AudioContext();
 const player = new Player(context);
 
-generatePlaybackHandler(document.querySelector("button.play-button"), player);
+setupCard(document.querySelector("button.play-button"), player, false);
 
 /*
 const postComment = document.getElementById("post-comment");

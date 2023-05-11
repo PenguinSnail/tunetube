@@ -1,11 +1,14 @@
 /**
- * @param {HTMLElement} button
- * @param {Player} player
+ * Setup event handlers on a post card
+ * @param {HTMLElement} card post card div element
+ * @param {Player} player tune player object
+ * @param {Boolean} link whether or not to link to the post page
  */
-export const generatePlaybackHandler = (button, player) =>
-    button.addEventListener("click", async (event) => {
+export function setupCard(card, player, link) {
+    const playButton = card.querySelector(".play-button");
+    playButton.addEventListener("click", async (event) => {
         event.stopPropagation();
-        const icon = button.querySelector("i");
+        const icon = playButton.querySelector("i");
 
         const currentlyPlaying = document.querySelector(".fa-circle-pause");
         if (currentlyPlaying && currentlyPlaying != icon) {
@@ -19,11 +22,11 @@ export const generatePlaybackHandler = (button, player) =>
             icon.classList.add("fa-circle-pause");
 
             try {
-                const response = await fetch(`/post/${button.dataset.id}/data`);
+                const response = await fetch(`/post/${card.dataset.id}/data`);
                 const data = await response.json();
 
                 player.load(data);
-                player.setProgressOutput(button.parentElement.querySelector("span"));
+                player.setProgressOutput(playButton.parentElement.querySelector("span"));
                 await player.start();
                 icon.classList.remove("fa-circle-pause");
                 icon.classList.add("fa-circle-play");
@@ -38,3 +41,9 @@ export const generatePlaybackHandler = (button, player) =>
             icon.classList.add("fa-circle-play");
         }
     });
+
+    if (link)
+        card.addEventListener("click", () => {
+            window.location.href = `/post/${card.dataset.id}`;
+        });
+}
