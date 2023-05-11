@@ -4,21 +4,39 @@
     <link rel="stylesheet" href="static/css/pages/account.css" />
 {% endblock %}
 {% block body %}
-    <div class="user-container">
-        <div class="account-name">
-            <h1>{{ test_user }}</h1>
+    <div class="leftbox">
+        <div class="user-container">
+            <div class="account-name">
+                <h1>{{ name }}</h1>
+            </div>
+
+            <div class="profile-photo">
+                <img class="profile-photo" src="static/profile_pictures/default.png" />
+            </div>
         </div>
 
-        <div class="profile-photo">
-            <img class="profile-photo" src="static/css/components/profile pic.png" />
+        <div class="settings-box">
+            <form action="/account/logout" method="post">
+                <label class="settings-text" for=""><h3>Log out:</h3></label>
+
+                <button class="logout-button" type="submit">Log out</button>
+            </form>
         </div>
     </div>
 
-    <form>
-        <label for="name">Display name:</label><br />
-        <input type="text" id="name" name="name" placeholder="Your display name" /><br />
-        <label for="bio">Bio:</label><br />
-        <input type="text" id="bio" name="bio" placeholder="Your bio" /><br />
-        <input type="submit" value="Submit" />
-    </form>
+    <div class="rightbox">
+        <div class="followed-header">
+            <h2 class="account-name">Followed Accounts</h2>
+        </div>
+
+        <div class="followed-box">
+            {% for follow in followed %}
+                <div class="followed-cards">
+                    <div class="followed-text">
+                        <a href="/account/{{ follow.id }}"><h3>{{ follow.username }}</h3></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
