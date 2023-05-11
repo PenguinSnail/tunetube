@@ -17,7 +17,7 @@
     {% elif followed == 0 %}
         <form action="/account/follow" method="post">
             <label for="">follow:</label>
-            <input type="hidden" user="{{ user.id }}" />
+            <input type="hidden" id="user" name="user" value="{{ user.id }}" />
             <input type="submit" class="logout-button" value="follow" />
         </form>
     {% endif %}

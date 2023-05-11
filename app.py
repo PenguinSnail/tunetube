@@ -216,6 +216,7 @@ def account_page():
 
 @app.get("/account/<int:user_id>")
 def get_followed_page(user_id):
+    followed = 0
     user = User.query.filter_by(id=user_id).first()
 
     current_user = session["user"]["user_id"]
@@ -260,6 +261,28 @@ def unfollow():
             db.session.delete(followers)
             db.session.commit()
     return redirect("/account")
+
+
+@app.post("/account/follow")
+def follow():
+    if "user" not in session:
+        return redirect("/landing")
+
+    # gets follower id
+    other_account_id = request.form.get("user")
+    followed = User.query.filter_by(id=other_account_id).first()
+    print(followed.id)
+
+    # gets session user id
+    current_user = session["user"]["user_id"]
+    user_info = User.query.filter_by(id=current_user).first()
+    print(user_info.id)
+
+    # gets folowers.
+    new_follow = FollowedBy(user_id=user_info.id, follower_id=followed.id)
+    db.session.add(new_follow)
+    db.session.commit()
+    return redirect("/")
 
 
 @app.route("/account/register", methods=["GET", "POST"])
