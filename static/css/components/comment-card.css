@@ -22,6 +22,13 @@
 
 .comment-timestamp {
     font-size: 0.9em;
+    padding-right: 0.5rem;
+}
+
+.comment-timestamp,
+.comment-header .delete-button {
+    display: inline;
+    color: var(--charcoal-color);
 }
 
 @media screen and (min-width: 500px) {

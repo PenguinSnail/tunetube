@@ -82,12 +82,18 @@ def my_Post_page(user_id: int):
     )
 
 
-@app.route("/tunes/<int:post_id>", methods=["GET"])
+@app.route("/tunes/<int:post_id>", methods=["GET", "DELETE"])
 def single_post(post_id: int):
     current_user = session["user"]["user_id"]
     user_info = user_repository_singleton.get_user_info(current_user)
-
     post_info = post_repository_singleton.get_post_info(post_id)
+
+    if request.method == "DELETE":
+        if post_info.post.user_id == user_info.getID():
+            Post.query.filter_by(id=post_id).delete()
+            db.session.commit()
+        return ("", 204)
+
     return render_template(
         "pages/post_page.html",
         post_info=post_info,
@@ -96,7 +102,7 @@ def single_post(post_id: int):
     )
 
 
-@app.route("/tunes/<int:post_id>/comment", methods=["POST"])
+@app.route("/tunes/<int:post_id>/comments", methods=["POST"])
 def comment_post(post_id: int):
     current_user = session["user"]["user_id"]
 
@@ -111,6 +117,19 @@ def comment_post(post_id: int):
     pass
 
     return redirect(f"/tunes/{post_id}")
+
+
+@app.route("/tunes/<int:post_id>/comments/<int:comment_id>", methods=["DELETE"])
+def delete_comment(post_id: int, comment_id: int):
+    current_user = session["user"]["user_id"]
+    selected_comment = Comment.query.filter_by(id=comment_id)
+
+    if selected_comment.first().user_id == current_user:
+        selected_comment.delete()
+        db.session.commit()
+        return ("", 204)
+    else:
+        return ("", 403)
 
 
 @app.route("/tunes/<int:post_id>/data", methods=["GET"])
@@ -164,12 +183,22 @@ def new_page():
     return render_template("pages/new_page.html", new_active=True, keys=keys)
 
 
-@app.get("/tunes")
-def library_page():
+@app.route("/tunes", methods=["GET", "POST"])
+def tunes_page():
     # Authentication
     if "user" not in session:
         return redirect("/landing")
+
     current_user = session["user"]["user_id"]
+
+    if request.method == "POST":
+        song = request.form.get("data")
+        title = request.form.get("title")
+        if song:
+            post = Post(title=title, song=song, user_id=current_user)
+            db.session.add(post)
+            db.session.commit()
+        return redirect("/tunes")
 
     user_posts = Post.query.filter_by(user_id=current_user)
     user_info = user_repository_singleton.get_user_info(current_user)
@@ -180,18 +209,6 @@ def library_page():
         user_info=user_info,
         library_active=True,
     )
-
-
-@app.post("/tunes")
-def create_tune():
-    song = request.form.get("data")
-    if song:
-        title = request.form.get("title")
-        post = Post(title=title, song=song, user_id=session["user"]["user_id"])
-        db.session.add(post)
-        db.session.commit()
-
-    return redirect("/tunes")
 
 
 @app.get("/account")
@@ -260,7 +277,7 @@ def unfollow():
     user_info = User.query.filter_by(id=current_user).first()
     print(user_info.id)
 
-    # gets folowers.
+    # gets followers.
     followers_list = FollowedBy.query.filter_by(user_id=user_info.id).all()
     for followers in followers_list:
         if followers.follower_id == followed.id:
@@ -344,11 +361,11 @@ def login_info():
 
         if not confirm_user:
             error = "user not found"
-            return render_template("pages/login.html", error=error)
+            return render_template("pages/login_page.html", error=error)
 
         if not bcrypt.check_password_hash(confirm_user.password, password):
             error = "incorrect password"
-            return render_template("pages/login.html", error=error)
+            return render_template("pages/login_page.html", error=error)
 
         session["user"] = {"user_id": confirm_user.id}
         flash("you were successfully logged in!")

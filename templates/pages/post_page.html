@@ -12,7 +12,7 @@
 
         <div class="comments-container">
             <h3>Comments</h3>
-            <form class="comment-form" action="/tunes/{{ post_info.getID() }}/comment" method="POST">
+            <form class="comment-form" action="/tunes/{{ post_info.getID() }}/comments" method="POST">
                 <label for="comment">Commenting as <span class="commenter">{{ user_info.getUsername() }}</span></label>
                 <textarea
                     id="comment-input"
