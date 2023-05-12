@@ -13,10 +13,10 @@ def test_post_pages(test_client: FlaskClient):
         test_user = create_user()
 
         session['user'] = {
-            'user_id' : test_user.getID
+            'user_id' : test_user.getID()
         }
 
-    test_post = create_post(post=session['user_id'])
+    test_post = create_post(post=session['user']['user_id'])
 
     # Now you should be able to go into the test files. 
 
