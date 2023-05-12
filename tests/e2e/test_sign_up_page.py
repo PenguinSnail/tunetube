@@ -16,11 +16,11 @@ def test_sign_up_page(test_client: FlaskClient):
 
     response = test_client.post(
         "/account/register",
-        query_string={"name": "bob", "password": "1234", "confirm_password":"1234"},
+        data={"name": "bob", "password": "1234", "confirm_password":"1234"},
         follow_redirects=True,
     )
   
-    assert response.status_code == 500
+    assert response.status_code == 200
     assert response.request.path == "/account/register"
 
     # Testing if the password do not match
@@ -30,11 +30,11 @@ def test_sign_up_page(test_client: FlaskClient):
 
     response = test_client.post(
         "/account/register",
-        query_string={"name": "bob", "password": "1234", "confirm_password":"1"},
+        data={"name": "bob", "password": "1234", "confirm_password":"1"},
         follow_redirects=True,
     )
-  
-    assert response.status_code == 500
+    
+    assert response.status_code == 200
     assert response.request.path == "/account/register"
 
     # Testing that the user is created
@@ -44,7 +44,7 @@ def test_sign_up_page(test_client: FlaskClient):
 
     response = test_client.post(
         "/account/register",
-        query_string={"name": "bob", "password": "1234", "confirm_password":"1234"},
+        data={"name": "bob", "password": "1234", "confirm_password":"1234"},
         follow_redirects=True,
     )
   
