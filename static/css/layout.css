@@ -94,6 +94,11 @@ header nav a {
     text-decoration: none;
 }
 
+header a:hover {
+    color: white;
+    text-decoration: none;
+}
+
 header nav a:hover,
 header nav a.active {
     color: var(--coral-color);
