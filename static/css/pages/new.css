@@ -50,3 +50,20 @@ form button {
     height: 70%;
     padding: 2rem 1rem;
 }
+header nav a {
+    color: white;
+    text-decoration: none;
+}
+
+header a,
+header a:active,
+header a:visited,
+header a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+header nav a:hover,
+header nav a.active {
+    color: var(--coral-color);
+}
