@@ -1,7 +1,14 @@
-<div class="comment-card">
+<div data-id="{{ comment.id }}" class="comment-card">
     <div class="comment-header">
         <p class="comment-author">{{ comment.getUsername() }}</p>
-        <p class="comment-timestamp">{{ comment.getPost_Time().strftime("%a. %B %-d, %Y - %-I:%M %p") }}</p>
+        <div>
+            <p class="comment-timestamp">{{ comment.getPost_Time().strftime("%a. %B %-d, %Y - %-I:%M %p") }}</p>
+            {% if comment.user_id == user_info.getID() %}
+                <button class="delete-button">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
+            {% endif %}
+        </div>
     </div>
     <div class="comment-content">
         <p>{{ comment.getComment() }}</p>
