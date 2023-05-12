@@ -20,4 +20,4 @@ def test_login_page(test_client: FlaskClient):
         follow_redirects=True,
     )
 
-    assert response.request.path == "/login"
+    assert response.request.path == "/"
