@@ -1,23 +1,123 @@
 @import url("/static/css/vars.css");
 
 .user-container {
-    display: flex;
     background-color: var(--gray1-color);
-    border-radius: 6px;
-    width: 25%;
-    box-shadow: 3px 3px 3px var(--charcoal-color);
+    border-radius: 5px;
+    width: 100%;
+    height: 120px;
+    box-shadow: 2px 2px 2px var(--charcoal-color);
+    margin-bottom: 5px;
+}
+.followed-header {
+    background-color: var(--gray1-color);
+    border-radius: 5px;
+    width: 100%;
+    height: 80px;
+    box-shadow: 2px 2px 2px var(--charcoal-color);
+    margin-bottom: 5px;
+}
+.followed-cards {
+    background-color: var(--gray1-color);
+    border-radius: 5px;
+    width: 75%;
+    float: left;
+    height: 80px;
+    box-shadow: 2px 2px 2px var(--charcoal-color);
+    margin-bottom: 5px;
 }
 
 .account-name {
     color: var(--white-color);
     margin-left: 10px;
-    text-shadow: 1px 1px 1px;
+    float: left;
+}
+.followed-text {
+    color: var(--white-color);
+    margin: 15px;
+    float: left;
+}
+.settings-text {
+    color: var(--eerie-color);
 }
 .profile-photo {
     height: 100px;
     width: 100px;
-
     margin: 10px;
     padding-bottom: 10px;
     object-fit: contain;
+    float: right;
+}
+.settings-box {
+    background-color: var(--beige-color);
+    border-color: var(--gray1-color);
+    width: 100%;
+    flex-grow: 1;
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 5px;
+}
+.followed-box {
+    background-color: var(--beige-color);
+    border-color: var(--gray1-color);
+    width: 100%;
+    height: 500px;
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 5px;
+    overflow: auto;
+}
+.leftbox {
+    float: left;
+    width: 40%; /* three boxes (use 25% for four, and 50% for two, etc) */
+    height: 100%;
+    padding: 10px; /* if you want space between the images */
+    background-color: var(--purple-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+.rightbox {
+    float: right;
+    width: 58%; /* three boxes (use 25% for four, and 50% for two, etc) */
+    height: 100%;
+    padding: 10px; /* if you want space between the images */
+    background-color: var(--purple-color);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.logout-button {
+    border: none;
+    background-color: var(--gray1-color);
+    color: white;
+    text-align: center;
+    border-radius: 0.5rem;
+    font-size: 1.2em;
+    transition-duration: 0.4s;
+    padding: 0.25rem 1rem;
+}
+.logout-button:hover {
+    background-color: var(--coral-color);
+}
+
+a:link {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:visited {
+    color: white;
+    background-color: transparent;
+    text-decoration: none;
+}
+a:hover {
+    color: var(--purple-color);
+    background-color: transparent;
+    text-decoration: none;
+}
+form {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
 }

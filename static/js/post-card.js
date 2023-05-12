@@ -7,6 +7,7 @@
 export function setupCard(card, player, link) {
     const playButton = card.querySelector(".play-button");
     const likeButton = card.querySelector(".like-button");
+    const deleteButton = card.querySelector(".delete-button");
 
     playButton.addEventListener("click", async (event) => {
         event.stopPropagation();
@@ -63,6 +64,22 @@ export function setupCard(card, player, link) {
             console.error(e);
         }
     });
+
+    if (deleteButton)
+        deleteButton.addEventListener("click", async (event) => {
+            event.stopPropagation();
+            try {
+                const response = await fetch(`/tunes/${card.dataset.id}`, { method: "DELETE" });
+
+                if (response.ok) {
+                    window.location.href = "/tunes";
+                } else {
+                    alert("Error deleting post!");
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        });
 
     if (link)
         card.addEventListener("click", () => {
