@@ -29,19 +29,15 @@
 .account-name {
     color: var(--white-color);
     margin-left: 10px;
-    text-shadow: 1px 1px 1px;
     float: left;
 }
 .followed-text {
     color: var(--white-color);
     margin: 15px;
-    text-shadow: 1px 1px 1px;
     float: left;
 }
 .settings-text {
     color: var(--eerie-color);
-    margin: 15px;
-    float: left;
 }
 .profile-photo {
     height: 100px;
@@ -92,15 +88,14 @@
 }
 
 .logout-button {
+    border: none;
     background-color: var(--gray1-color);
     color: white;
     text-align: center;
-    height: 30px;
-    width: 100px;
-    padding: 10px;
-    margin-top: 32px;
-    border-radius: 5px;
+    border-radius: 0.5rem;
+    font-size: 1.2em;
     transition-duration: 0.4s;
+    padding: 0.25rem 1rem;
 }
 .logout-button:hover {
     background-color: var(--coral-color);
@@ -120,4 +115,9 @@ a:hover {
     color: var(--purple-color);
     background-color: transparent;
     text-decoration: none;
+}
+form {
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
 }
