@@ -340,7 +340,9 @@ def sign_up():
             flash("you were successfully logged in!")
             return redirect("/")
         else:
-            return render_template("pages/signup_page.html", error=error)
+            return render_template(
+                "pages/signup_page.html", no_layout=True, error=error
+            )
 
     # get request
     return render_template("pages/signup_page.html", no_layout=True)
@@ -355,17 +357,17 @@ def login_info():
 
         if not password or not name:
             error = "please fill in all fields"
-            return render_template("pages/login_page.html", error=error)
+            return render_template("pages/login_page.html", no_layout=True, error=error)
 
         confirm_user = User.query.filter(User.username.ilike(name)).first()
 
         if not confirm_user:
             error = "user not found"
-            return render_template("pages/login_page.html", error=error)
+            return render_template("pages/login_page.html", no_layout=True, error=error)
 
         if not bcrypt.check_password_hash(confirm_user.password, password):
             error = "incorrect password"
-            return render_template("pages/login_page.html", error=error)
+            return render_template("pages/login_page.html", no_layout=True, error=error)
 
         session["user"] = {"user_id": confirm_user.id}
         flash("you were successfully logged in!")
